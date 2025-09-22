@@ -7,11 +7,15 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
+
 export class InicioComponent {
 
-  constructor(private router: Router){}
+  constructor(private ruta:Router){
 
-  redi(){
-    this.router.navigate(['/quienes'])
   }
+
+  irA(arg:string){
+    this.ruta.navigate([arg])
+  }
+
 }
