@@ -1,5 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
+import {ref as refStorage, getStorage, uploadString, getDownloadURL} from "firebase/storage"
+import { Route, Router } from "@angular/router";
+import { Injectable } from "@angular/core";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,3 +21,47 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth();
+
+@Injectable({
+  providedIn:'root'
+})
+
+export class ControladorR {
+  constructor(private ruta:Router){}
+
+async login(arg1:any,arg2:any){
+
+    try{
+      const userCredential = await signInWithEmailAndPassword(auth, arg1, arg2)
+
+      const uid = userCredential.user?.uid;
+
+      if (uid){
+        this.writeUserId(uid);
+      }
+
+      this.ruta.navigate([''])
+
+    }
+    catch(error:any){
+    }
+  }
+
+  writeUserId(userId:any) {
+      const db = getDatabase();
+      const reference = ref(db, 'users/' + userId);
+
+  update(reference, {
+        id: userId
+      })
+  }
+
+}
+
+
+  
+
+
+
