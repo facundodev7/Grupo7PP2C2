@@ -47,4 +47,3 @@ const routeConfig: Routes = [
 ];
 
 export default routeConfig
-
