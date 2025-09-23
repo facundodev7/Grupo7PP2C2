@@ -24,6 +24,8 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 
+export var currentUserId:any
+
 @Injectable({
   providedIn:'root'
 })
@@ -40,6 +42,7 @@ async login(arg1:any,arg2:any){
 
       if (uid){
         this.writeUserId(uid);
+        currentUserId = uid
       }
 
       this.ruta.navigate([''])
@@ -57,7 +60,6 @@ async login(arg1:any,arg2:any){
         id: userId
       })
   }
-
 }
 
 

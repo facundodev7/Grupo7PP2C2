@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { ControladorR } from '../../database';
+import { currentUserId } from '../../database';
 
 @Component({
   selector: 'app-inicio',
@@ -10,12 +12,18 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 
 export class InicioComponent {
 
-  constructor(private ruta:Router){
+
+
+  constructor(private ruta:Router, private controlador:ControladorR){
 
   }
 
   irA(arg:string){
     this.ruta.navigate([arg])
+  }
+
+  test1(){
+    console.log(currentUserId)
   }
 
 }
