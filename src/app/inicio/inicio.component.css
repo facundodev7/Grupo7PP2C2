@@ -4,9 +4,7 @@
 }
 
 .title {
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
+    text-align: center;
     padding: 2%;
     background-color: green;
     width: 100%;
@@ -41,4 +39,10 @@
 
 button {
     color: black;
+}
+
+#userP{
+    width: 4%;
+    height: auto;
+    margin-left: 75%;
 }

@@ -12,10 +12,15 @@ import { currentUserId } from '../../database';
 
 export class InicioComponent {
 
+  correo:any
 
+  constructor(private ruta:Router, private controlador:ControladorR)
+  {
+    this.cargar()
+  }
 
-  constructor(private ruta:Router, private controlador:ControladorR){
-
+  async cargar(){
+    this.correo = await this.controlador.getEmail(currentUserId)
   }
 
   irA(arg:string){

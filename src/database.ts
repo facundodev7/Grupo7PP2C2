@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, update, get, child } from "firebase/database";
 import {ref as refStorage, getStorage, uploadString, getDownloadURL} from "firebase/storage"
 import { Route, Router } from "@angular/router";
 import { Injectable } from "@angular/core";
@@ -43,6 +43,7 @@ async login(arg1:any,arg2:any){
       if (uid){
         this.writeUserId(uid);
         currentUserId = uid
+        this.writeEmail(uid,arg1)
       }
 
       this.ruta.navigate([''])
@@ -60,10 +61,31 @@ async login(arg1:any,arg2:any){
         id: userId
       })
   }
+
+  writeEmail(userId:any, email:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+
+    update(reference, {
+      correo:email
+    })
+  }
+  async getEmail(userId:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `correo`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
 }
-
-
-  
-
-
-
