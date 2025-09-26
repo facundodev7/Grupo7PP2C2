@@ -66,11 +66,11 @@ async login(arg1:any,arg2:any){
     const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
 
-
     update(reference, {
       correo:email
     })
   }
+  
   async getEmail(userId:any){
     const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
