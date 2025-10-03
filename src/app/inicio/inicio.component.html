@@ -1,19 +1,27 @@
 <body>
-    <div class="title">
-        <img src="assets/user.png" id="userP">
-        <p id="userP">{{correo}}</p>
-        <p>Patitas Felices</p>
+    <div class="top">
+        
+        <div class="title">
+            <h1>Patitas Felices</h1>
+        </div>
+        <div class="usuario">
+            <img src="assets/user.png" id="userP" *ngIf="correo">
+            <small >{{correo}}</small>
+        </div>
+        
+        
     </div>
 
     <div class="nav">
-        <button (click)="irA('quienes')">Quienes somos</button>
+        <button (click)="irA('quienes')">¿ Quienes somos ?</button>
         <button (click)="irA('contacto')">Contacto</button>
-        <button (click)="irA('ingresarM')">Ingresa tu Mascota</button>
-        <button (click)="irA('turno')">Agenda un turno</button>
-        <button (click)="irA('login')">Login</button>
-        <button (click)="irA('regis')">Registro</button>
+        <button *ngIf="correo" (click)="irA('ingresarM')">Ingresa tu mascota</button>
+        <button *ngIf="correo" (click)="irA('turno')">Agenda un turno</button>
+        <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
+        <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
+        <button (click)="logout()" *ngIf="correo">Cerrar Sesión</button>
     </div>
     <div class="divImage">
-        <img src="assets/photo1.jpg" id="perro1">
+        <img src="assets/photo1.jpg" id="perro1" >
     </div>
 </body>

@@ -7,6 +7,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { IngresaComponent } from './ingresa/ingresa.component';
 import { TurnoComponent } from './turno/turno.component';
 import { RegistroComponent } from './registro/registro.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routeConfig: Routes = [
   {
@@ -37,12 +38,14 @@ const routeConfig: Routes = [
   {
     path:'ingresarM',
     component:IngresaComponent,
-    title:'Ingresa tu Mascota'
+    title:'Ingresa tu Mascota',
+    canActivate: [AuthGuard]
   },
   {
     path:'turno',
     component:TurnoComponent,
-    title:'Saca un turno'
+    title:'Saca un turno',
+    canActivate: [AuthGuard]
   }
 ];
 
