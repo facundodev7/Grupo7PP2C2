@@ -111,15 +111,13 @@ async login(arg1:any,arg2:any){
       const uid = userCredential.user?.uid;
 
       if (uid){
-        this.writeUserId(uid);
-        currentUserId = uid
-        this.writeEmail(uid,arg1)
+        window.alert('Login exitoso')
+        this.ruta.navigate([''])
       }
-
-      this.ruta.navigate([''])
 
     }
     catch(error:any){
+      window.alert('Login fallido')
     }
   }
 
