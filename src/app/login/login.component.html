@@ -1,12 +1,15 @@
-<form id="formu">
+<form (ngSubmit)="subir()"id="formu">
     <label for="usuario">Usuario:</label>
     <br>
-    <input type="email" name="usuario" id="email">
+    <input type="text" name="usuario" [(ngModel)]="email">
     <br>
     <br>
     <label for="contra">Contraseña</label>
     <br>
-    <input type="password" name="contra" id="contraS">
+    <input type="password" name="contra" [(ngModel)]="contra">
+    <br>
+    <br>
+    <button type="submit">Subir</button>
 </form>
 
-<button (click)="subir()">Iniciar sesión</button>
+

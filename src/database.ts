@@ -1,10 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { getDatabase, ref, update, get, child } from "firebase/database";
 import {ref as refStorage, getStorage, uploadString, getDownloadURL} from "firebase/storage"
 import { Route, Router } from "@angular/router";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 
 
@@ -24,7 +25,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth();
+export const authH = getAuth();
 
 export var currentUserId:any
 
@@ -37,38 +38,25 @@ export var currentUserId:any
 //}
 
 export class ControladorR {
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+
   usuarioLogueado: boolean = false;
   correoUsuario: string | null = null;
 
   constructor(private ruta:Router){
-
-    //aca se sabe si esta logueado o no
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.usuarioLogueado = true;
-        this.correoUsuario = user.email;
-      } else {
-        this.usuarioLogueado = false;
-        this.correoUsuario = null;
-
-      // Redirigir a login si intenta entrar a páginas privadas
-      this.ruta.navigate(["/login"]);
-      }
-    });
+    onAuthStateChanged(authH, (user) => {
+      this.userSubject.next(user)
+      console.log(user?.uid)
+    })
   }
 // --------------------------------------------------------
 // esto es para poder cerrar sesión
 // 
-  async logout() {
-  const auth = getAuth();
-  await signOut(auth);
-
-  this.correoUsuario = null;
-  this.usuarioLogueado = false;
-
-  this.ruta.navigate(["/"]);
-}
+  singOut(){
+    authH.signOut()
+    
+  }
 
 
 //---------------------------------------------------------------
@@ -106,7 +94,7 @@ export class ControladorR {
 async login(arg1:any,arg2:any){
 
     try{
-      const userCredential = await signInWithEmailAndPassword(auth, arg1, arg2)
+      const userCredential = await signInWithEmailAndPassword(authH, arg1, arg2)
 
       const uid = userCredential.user?.uid;
 
@@ -166,7 +154,9 @@ async login(arg1:any,arg2:any){
     })
   }
 
-
+  getCurrentUid(){
+    return this.userSubject.value?.uid ?? null
+  }
   
   async getEmail(userId:any){
     const db = getDatabase();

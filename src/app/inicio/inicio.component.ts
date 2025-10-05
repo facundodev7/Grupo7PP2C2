@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { getAuth, signOut, onAuthStateChanged  } from "firebase/auth";
 import { ControladorR } from '../../database';
 import { currentUserId } from '../../database';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 
 
@@ -17,53 +18,34 @@ import { CommonModule } from '@angular/common';
 
 export class InicioComponent {
 
+  user$!: Observable<any>;
   correo:any
-  usuarioLogueado: boolean = true;
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
-    this.cargar()
+    this.user$ = this.controlador.user$;
   }
 
   async cargar(){
-    this.correo = await this.controlador.getEmail(currentUserId)
+    this.correo = await this.controlador.getEmail(await this.controlador.getCurrentUid())
   }
 
   irA(arg:string){
     this.ruta.navigate([arg])
   }
 
-  test1(){
-    console.log(currentUserId)
+  out(){
+    this.controlador.singOut()
   }
 
-  async logout() {
-    const auth = getAuth();
-    await signOut(auth);
-  
-    this.correo = null;
-    this.usuarioLogueado = false;
-  
-    this.ruta.navigate(["/"]);
+  async ngOnInit(){
+    this.controlador.user$.subscribe(async (user) =>{
+      if (user){
+        this.correo = await this.controlador.getEmail(user.uid)
+      } else {
+        this.correo = null
+      }
+    })
   }
-
-  ngOnInit() {
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // Usuario logueado
-      this.usuarioLogueado= true;
-      this.correo = user.email;
-    } else {
-      // Usuario NO logueado
-      this.usuarioLogueado = false;
-      this.correo = null;
-
-      // Redirigir a login si intenta entrar a páginas privadas
-      this.ruta.navigate(["/"]);
-    }
-  });
-}
 
 }

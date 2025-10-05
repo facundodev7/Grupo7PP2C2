@@ -1,6 +1,5 @@
 <body>
     <div class="top">
-        
         <div class="title">
             <h1>Patitas Felices</h1>
         </div>
@@ -8,8 +7,6 @@
             <img src="assets/user.png" id="userP" *ngIf="correo">
             <small >{{correo}}</small>
         </div>
-        
-        
     </div>
 
     <div class="nav">
@@ -19,7 +16,7 @@
         <button *ngIf="correo" (click)="irA('turno')">Agenda un turno</button>
         <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
         <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
-        <button (click)="logout()" *ngIf="correo">Cerrar Sesión</button>
+        <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
     <div class="divImage">
         <img src="assets/photo1.jpg" id="perro1" >
