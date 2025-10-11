@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, User } from "firebase/auth";
-import { getDatabase, ref, update, get, child } from "firebase/database";
+import { getDatabase, ref, update, get, child, set, push } from "firebase/database";
 import {ref as refStorage, getStorage, uploadString, getDownloadURL} from "firebase/storage"
 import { Route, Router } from "@angular/router";
 import { Injectable } from "@angular/core";
@@ -26,6 +26,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const authH = getAuth();
+
+const db = getDatabase();
 
 export var currentUserId:any
 
@@ -110,7 +112,6 @@ async login(arg1:any,arg2:any){
   }
 
   writeUserId(userId:any) {
-      const db = getDatabase();
       const reference = ref(db, 'users/' + userId);
 
   update(reference, {
@@ -137,7 +138,6 @@ async login(arg1:any,arg2:any){
   }
 
   writeEmail(userId:any, email:any){
-    const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
 
     update(reference, {
@@ -146,7 +146,6 @@ async login(arg1:any,arg2:any){
   }
 
   writeTelefono(userId:any, telefono:any){
-    const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
 
     update(reference, {
@@ -159,7 +158,6 @@ async login(arg1:any,arg2:any){
   }
   
   async getEmail(userId:any){
-    const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
 
       try {
@@ -174,5 +172,20 @@ async login(arg1:any,arg2:any){
     catch (error) {
     return null;
   }
+  }
+
+  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any){
+    const refMascota = ref(db, `users/${userId}/mascotas`)
+    const nuevaMascota = push(refMascota)
+
+    set(nuevaMascota, {
+      tipo: arg1,
+      nombre:arg2,
+      edad: arg3,
+      raza: arg4,
+      motivo: arg5,
+    })
+    window.alert('Mascota subida')
+    this.ruta.navigate([''])
   }
 }

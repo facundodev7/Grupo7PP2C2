@@ -1,1 +1,35 @@
-<h1>Componente Ingresar Mascota</h1>
+<h1>Ingresa tu mascota</h1>
+<br>
+<br>
+<form id="formu" (ngSubmit)="subir()">
+    <label for="usuario" name="tipo">Tipo: {{tipo}}</label>
+    <br>
+    <br>
+    <img src="/assets/perro.jpg" (click)="setAnimalPerro()"> <img src="/assets/cat.jpg" (click)="setAnimalGato()">
+    <br>
+    <br>
+    <label for="nombre">Nombre</label>
+    <br>
+    <input type="text" name="nombre" [(ngModel)]="nombre">
+    <br>
+    <br>
+    <label for="contra">Edad</label>
+    <br>
+    <input type="text" name="edad" [(ngModel)]="edad">
+    <br>
+    <br>
+    <label for="contra">Raza</label>
+    <br>
+    <input type="text" name="raza" [(ngModel)]="raza">
+    <br>
+    <br>
+    <label>Motivo de consulta</label>
+    <br>
+    <input type="text" name="motivo" [(ngModel)]="motivo">
+    <br>
+    <br>
+    <button type="submit" style="color: black;">Subir Mascota</button>
+</form>
+
+
+(ngSubmit)="subir()"
