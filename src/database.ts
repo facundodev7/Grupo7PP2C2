@@ -61,7 +61,7 @@ export class ControladorR {
 
 //---------------------------------------------------------------
   // Registrarse
-  async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string) {
+  async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string, rol: any) {
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -76,6 +76,7 @@ export class ControladorR {
         this.writeNombre(uid,nombre);
         this.writeApellido(uid,apellido);
         this.writeTelefono(uid,telefono);
+        this.writeRol(uid,rol);
         
       }
 
@@ -154,6 +155,15 @@ async login(arg1:any,arg2:any){
     })
   }
 
+  writeRol(userId:any, rol:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+    update(reference, {
+      rol:rol
+    })
+  }
+
   getCurrentUid(){
     return this.userSubject.value?.uid ?? null
   }
@@ -175,4 +185,24 @@ async login(arg1:any,arg2:any){
     return null;
   }
   }
+
+  async getRol(userId:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `rol`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+
 }

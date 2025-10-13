@@ -20,6 +20,8 @@ export class InicioComponent {
 
   user$!: Observable<any>;
   correo:any
+  rol: any;
+  admin: boolean = false;
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -42,8 +44,17 @@ export class InicioComponent {
     this.controlador.user$.subscribe(async (user) =>{
       if (user){
         this.correo = await this.controlador.getEmail(user.uid)
+        this.rol = await this.controlador.getRol(user.uid);
+        this.admin = this.rol == 1;
       } else {
-        this.correo = null
+        this.correo = null;
+        this.rol = null;
+        this.admin = false;
+      }
+
+      if(this.rol == 5)
+      {
+         
       }
     })
   }
