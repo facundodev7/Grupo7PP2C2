@@ -12,10 +12,11 @@
     <div class="nav">
         <button (click)="irA('quienes')">¿ Quienes somos ?</button>
         <button (click)="irA('contacto')">Contacto</button>
-        <button *ngIf="correo" (click)="irA('ingresarM')">Ingresa tu mascota</button>
-        <button *ngIf="correo" (click)="irA('turno')">Agenda un turno</button>
+        <button *ngIf="correo && !admin" (click)="irA('ingresarM')">Ingresa tu mascota</button>
+        <button *ngIf="correo && !admin" (click)="irA('turno')">Agenda un turno</button>
         <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
         <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
+        <button (click)="irA('admin')" *ngIf="admin">Admin opciones</button>
         <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
     <div class="divImage">

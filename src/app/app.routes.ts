@@ -8,6 +8,7 @@ import { IngresaComponent } from './ingresa/ingresa.component';
 import { TurnoComponent } from './turno/turno.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminComponent } from './admin/admin.component';
 
 const routeConfig: Routes = [
   {
@@ -46,7 +47,14 @@ const routeConfig: Routes = [
     component:TurnoComponent,
     title:'Saca un turno',
     canActivate: [AuthGuard]
+  },
+  {
+    path:'admin',
+    component:AdminComponent,
+    title:'Administrador',
+    canActivate: [AuthGuard]
   }
+
 ];
 
 export default routeConfig
