@@ -1,25 +1,40 @@
+
+
+
 * {
     color:black;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.title {
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
-    padding: 2%;
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
     background-color: green;
     width: 100%;
+    min-height: 160px;
+}
+.title{
+    padding: 5%;
+    margin-left: 30%;
 }
 
-.title p {
-    font-size: 3vw;
+
+.usuario{
+    padding: 5%;
+    max-width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
 }
+
 
 .divImage {
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 #perro1 {
@@ -37,4 +52,13 @@
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 25%;
+}
+
+button {
+    color: black;
+}
+
+#userP{
+    width: 30%;
+    height: 8%;
 }

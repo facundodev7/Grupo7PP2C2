@@ -1,1 +1,15 @@
-<p>Pagina de login</p>
+<form (ngSubmit)="subir()"id="formu">
+    <label for="usuario">Usuario:</label>
+    <br>
+    <input type="text" name="usuario" [(ngModel)]="email">
+    <br>
+    <br>
+    <label for="contra">Contraseña</label>
+    <br>
+    <input type="password" name="contra" [(ngModel)]="contra">
+    <br>
+    <br>
+    <button type="submit">Subir</button>
+</form>
+
+

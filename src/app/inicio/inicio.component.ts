@@ -1,18 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { getAuth, signOut, onAuthStateChanged  } from "firebase/auth";
+import { ControladorR } from '../../database';
+import { currentUserId } from '../../database';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
+
 export class InicioComponent {
 
-  constructor(private router: Router){}
+  user$!: Observable<any>;
+  correo:any
 
-  redi(){
-    this.router.navigate(['/quienes'])
-    
+  constructor(private ruta:Router, private controlador:ControladorR)
+  {
+    this.user$ = this.controlador.user$;
   }
+
+  async cargar(){
+    this.correo = await this.controlador.getEmail(await this.controlador.getCurrentUid())
+  }
+
+  irA(arg:string){
+    this.ruta.navigate([arg])
+  }
+
+  out(){
+    this.controlador.singOut()
+  }
+
+  async ngOnInit(){
+    this.controlador.user$.subscribe(async (user) =>{
+      if (user){
+        this.correo = await this.controlador.getEmail(user.uid)
+      } else {
+        this.correo = null
+      }
+    })
+  }
+
 }
