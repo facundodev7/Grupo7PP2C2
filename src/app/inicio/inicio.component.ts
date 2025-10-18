@@ -13,5 +13,6 @@ export class InicioComponent {
 
   redi(){
     this.router.navigate(['/quienes'])
+    
   }
 }
