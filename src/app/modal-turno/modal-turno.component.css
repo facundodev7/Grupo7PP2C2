@@ -1,0 +1,78 @@
+.horarios, .mat-mdc-dialog-surface, .mdc-dialog__surface{
+    box-shadow: none !important;
+    color: rgb(0, 0, 0);
+    background-color: rgb(101, 101, 101) !important;
+    padding: 10%;
+}
+
+.tabla-horarios{
+    max-height: 300px; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.renglon-hora{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border: solid 1px;
+    border-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 2% 5%;
+}
+
+.disponibilidad button{
+  background-color: #497285;
+  margin: 0% -40%;
+  padding: 20% 30%;
+  border: none;
+  font-size: 16px;
+  
+}
+
+.seleccionado {
+  background-color: #57998f !important;
+  color: white;
+}
+
+.disponibilidad button:hover{
+  background-color: #3b535e;
+}
+
+
+.actions {
+  bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.919);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.actions button {
+  background: none;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 3px;
+  padding: 20px 0;
+  text-transform: uppercase;
+  width: 50%;
+}
+
+.actions button:first-of-type {
+  border-right: 1px solid rgba(162, 162, 162, 0.931);;
+}
+
+.actions button:hover {
+  background: #497285;
+  cursor: pointer;
+}
+
+
+
