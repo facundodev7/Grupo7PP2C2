@@ -199,4 +199,23 @@ async login(arg1:any,arg2:any){
     window.alert('Mascota subida')
     this.ruta.navigate([''])
   }
+
+  async getRol(userId:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `rol`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+  
 }
