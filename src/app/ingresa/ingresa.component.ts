@@ -12,13 +12,14 @@ import { ControladorR } from '../../database';
 })
 export class IngresaComponent {
 
-  tipo:string = ''
-  perro:boolean = false
-  gato:boolean = false
-  nombre:any
-  edad:any
-  raza:any
-  motivo:any
-  constructor(private controlador:ControladorR){}
+
+  animal = new Animal('','','',0,'','')
+
+  constructor(private controlador:ControladorR){
+  }
+
+  enviar(){
+    this.controlador.agregarMascota(this.controlador.getCurrentUid(), this.animal.Nombre, this.animal.Animal, this.animal.Domicilio, this.animal.Telefono, this.animal.PrimeraVez, this.animal.Motivo)
+    }
   }
 
