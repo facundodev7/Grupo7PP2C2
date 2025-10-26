@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit   } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog  } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
+import { ControladorR } from '../../database';
 
 @Component({
   selector: 'app-modal-turno',
@@ -12,6 +13,10 @@ import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.co
 export class ModalTurnoComponent {
 
   turnoSeleccionado: number | null = null;
+
+  turnoClickeado = {}
+
+  turnosOcupados:string[] = []
 
   turnos = [
   { hora: '9:00 a 9:30 Hs', aceptado: false },
@@ -39,10 +44,24 @@ export class ModalTurnoComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ModalTurnoComponent>,
-    private dialog: MatDialog 
+    private dialog: MatDialog,
+    private controlador:ControladorR
   ) {}
 
+
+  async ngOnInit() {
+    console.log('ejecutado')
+    await this.loadTurnosOcupados(this.data.fecha)
+  }
+
+  async loadTurnosOcupados(fecha:string){
+    this.turnosOcupados = await this.controlador.turnosOcupados(fecha)
+    console.log('Turnos ocupados cargados:', this.turnosOcupados);
+
+  }
+
   seleccionarTurno(index: number) {
+    if (this.turnos[index].aceptado) return;
     this.turnoSeleccionado = index;
     
   }

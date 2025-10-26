@@ -218,4 +218,61 @@ async login(arg1:any,arg2:any){
   }
   }
   
+  async reservarTurno(fecha:string, mes:string, userId:string, hora:string){
+    const db = getDatabase();
+
+    const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_'); // ej: 26-10-2025
+    const horaKey = mes.replace(/[: ]/g, '_'); // ej: 9_00_a_9_30_Hs
+
+    const refTurno = ref(db, `turnos/${fechaKey}/${horaKey}`);
+
+    await set(refTurno, {
+      fecha,
+      mes,
+      userId,
+      hora,
+      disponible:false
+    });
+    console.log(`Turno reservado para ${fecha} ${mes}`);
+  }
+
+async obtenerTurnosPorFecha(fecha: string) {
+  const db = getDatabase();
+  const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_');
+  const refFecha = ref(db, `turnos/${fechaKey}`);
+
+  const snapshot = await get(refFecha);
+  if (snapshot.exists()) {
+    return snapshot.val(); // Devuelve un objeto { "9_00_a_9_30_Hs": {fecha, hora, ...}, ... }
+  } else {
+    return {};
+  }
+}
+
+async turnosOcupados(fecha: string): Promise<string[]> {
+  const db = getDatabase();
+
+  const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_');
+  const refTurnos = ref(db, `turnos/${fechaKey}`);
+
+  try {
+    const snapshot = await get(refTurnos);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      // Filtrar los turnos que no están disponibles
+      const ocupados = Object.keys(data)
+        .filter(horaKey => data[horaKey].disponible === false)
+        .map(horaKey => data[horaKey].hora);
+
+      console.log('Turnos ocupados:', ocupados);
+      return ocupados;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error obteniendo turnos ocupados:', error);
+    return [];
+  }
+}
 }
