@@ -63,7 +63,7 @@ export class ControladorR {
 
 //---------------------------------------------------------------
   // Registrarse
-  async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string) {
+  async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string, rol: any) {
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -78,6 +78,7 @@ export class ControladorR {
         this.writeNombre(uid,nombre);
         this.writeApellido(uid,apellido);
         this.writeTelefono(uid,telefono);
+        this.writeRol(uid,rol);
         
       }
 
@@ -153,6 +154,15 @@ async login(arg1:any,arg2:any){
     })
   }
 
+  writeRol(userId:any, rol:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+    update(reference, {
+      rol:rol
+    })
+  }
+
   getCurrentUid(){
     return this.userSubject.value?.uid ?? null
   }
@@ -174,18 +184,38 @@ async login(arg1:any,arg2:any){
   }
   }
 
-  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any){
+  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
     const refMascota = ref(db, `users/${userId}/mascotas`)
     const nuevaMascota = push(refMascota)
 
     set(nuevaMascota, {
-      tipo: arg1,
-      nombre:arg2,
-      edad: arg3,
-      raza: arg4,
-      motivo: arg5,
+      nombre:arg1,
+      animal:arg2,
+      domicilio:arg3,
+      telefono:arg4,
+      primeraVez:arg5,
+      motivo:arg6,
     })
     window.alert('Mascota subida')
     this.ruta.navigate([''])
   }
+
+  async getRol(userId:any){
+    const db = getDatabase();
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `rol`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+  
 }

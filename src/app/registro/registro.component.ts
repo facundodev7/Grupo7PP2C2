@@ -22,10 +22,14 @@ export class RegistroComponent {
   telefono: string = '';
   password: string = '';
   confir: string = '';
+  
 
   constructor(private controlador: ControladorR) {}
 
   async registro() {
+
+    let rol = 0;
+
     if (!this.nombre) {
       console.log("Debe completar el nombre");
       return;
@@ -61,7 +65,15 @@ export class RegistroComponent {
       return;
     }
 
-    const resultado = await this.controlador.registroUsuario(this.nombre, this.apellido, this.email, this.telefono, this.password);
+    if(this.email == 'admin@admin.com')
+    {
+      rol = 1; // 1 es admin
+    }
+    else{
+      rol = 5; // 5 es usuario normal
+    }
+
+    const resultado = await this.controlador.registroUsuario(this.nombre, this.apellido, this.email, this.telefono, this.password, rol);
     if (resultado.success)  {
       console.log("Usuario registrado con UID:", resultado.uid);
     } else {

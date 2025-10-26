@@ -1,35 +1,75 @@
-<h1>Ingresa tu mascota</h1>
-<br>
-<br>
-<form id="formu" (ngSubmit)="subir()">
-    <label for="usuario" name="tipo">Tipo: {{tipo}}</label>
-    <br>
-    <br>
-    <img src="/assets/perro.jpg" (click)="setAnimalPerro()"> <img src="/assets/cat.jpg" (click)="setAnimalGato()">
-    <br>
-    <br>
-    <label for="nombre">Nombre</label>
-    <br>
-    <input type="text" name="nombre" [(ngModel)]="nombre">
-    <br>
-    <br>
-    <label for="contra">Edad</label>
-    <br>
-    <input type="text" name="edad" [(ngModel)]="edad">
-    <br>
-    <br>
-    <label for="contra">Raza</label>
-    <br>
-    <input type="text" name="raza" [(ngModel)]="raza">
-    <br>
-    <br>
-    <label>Motivo de consulta</label>
-    <br>
-    <input type="text" name="motivo" [(ngModel)]="motivo">
-    <br>
-    <br>
-    <button type="submit" style="color: black;">Subir Mascota</button>
-</form>
+
+<div>
+    <h1>Tu Mascota</h1> 
+</div>
 
 
-(ngSubmit)="subir()"
+
+<div class="container">
+    <div class="imagen">
+        <img src="assets/Fondo.png" alt="">
+    </div>    
+
+    <form (ngSubmit)="enviar()">
+        <div class="formulario"> 
+            <div class="box-1">
+                <div class="mb-3">
+                    <label for="Foto de la Mascota">Foto de la Mascota</label>
+                    <input  type="file" id="Foto de la Mascota" name="Fotode la mascota" placeholder="Foto de tu mascota">
+                </div>
+
+                <div class="mb-3">
+                    <label for="nombre" >Nombre</label>
+                    <input id="nombre" name="nombre" placeholder="nombre" type="text" [(ngModel)]="animal.Nombre">
+                </div>
+
+                <!--  Animal  --> 
+                <div class="mb-3">
+                    <label for="animal" class="form-label">Animal</label>
+                    <div class="form-floating">
+                        <select class="form-select" id="animal" name="animal" [(ngModel)]="animal.Animal">
+                            <option value="Perro" >Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="otro">otros</option>
+                    </select>
+                        <label for="floatingSelect">Elija una de las opciones</label>
+                    </div>
+                </div>
+                    
+                
+
+                <div class="mb-3">
+                    <label for="Domicilio">Domicilio</label>
+                    <input id="Domicilio" name="domicilio" placeholder="Domicilio" type="text" [(ngModel)]="animal.Domicilio">
+
+                </div>
+                <div class="mb-3">
+                    <label for="Telefono">Telefono</label>
+                    <input id="Telefono" name="telefono" placeholder="Telefono" maxlength="10" type="number" [(ngModel)]="animal.Telefono">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="primeraVez"  class="form-label">Primera Vez</label>
+                    <div class="form-floating">
+                        <select class="form-select" id="primeraVez" name="selectt" [(ngModel)]="animal.PrimeraVez">
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="Motivo">Motivo de la consulta</label>
+                    <textarea cols="40" rows="5"  name="motivo" id="Motivo" maxlength="200" placeholder="Motivo de la consulta" [(ngModel)]="animal.Motivo"></textarea>
+                </div>
+            
+
+
+            </div>
+        </div>
+<button type="submit">Subir</button>
+    </form>
+</div>
+
