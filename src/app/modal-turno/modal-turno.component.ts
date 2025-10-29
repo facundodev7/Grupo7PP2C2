@@ -4,17 +4,24 @@ import { CommonModule } from '@angular/common';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
 import { ControladorR } from '../../database';
 
+export var horaSeleccionada = ''
+
 @Component({
   selector: 'app-modal-turno',
   templateUrl: './modal-turno.component.html',
   styleUrls: ['./modal-turno.component.css'],
   imports: [CommonModule],      // <--- necesario para *ngFor, *ngIf
 })
+
+
+
 export class ModalTurnoComponent {
 
   turnoSeleccionado: number | null = null;
 
   turnoClickeado = {}
+
+
 
   turnosOcupados:string[] = []
 
@@ -63,6 +70,8 @@ export class ModalTurnoComponent {
   seleccionarTurno(index: number) {
     if (this.turnos[index].aceptado) return;
     this.turnoSeleccionado = index;
+    horaSeleccionada = this.turnos[index].hora
+    console.log(horaSeleccionada)
     
   }
 

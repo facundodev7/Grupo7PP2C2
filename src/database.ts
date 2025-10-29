@@ -218,19 +218,19 @@ async login(arg1:any,arg2:any){
   }
   }
   
-  async reservarTurno(fecha:string, mes:string, userId:string, hora:string){
+  async reservarTurno(mes:string, fecha:string, hora:string, userId:any){
     const db = getDatabase();
 
     const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_'); // ej: 26-10-2025
-    const horaKey = mes.replace(/[: ]/g, '_'); // ej: 9_00_a_9_30_Hs
+    const horaKey = hora.replace(/[: ]/g, '_'); // ej: 9_00_a_9_30_Hs
 
-    const refTurno = ref(db, `turnos/${fechaKey}/${horaKey}`);
+    const refTurno = ref(db, `turnos/${mes}/${fechaKey}/${horaKey}`);
 
     await set(refTurno, {
-      fecha,
       mes,
-      userId,
+      fecha,
       hora,
+      userId,
       disponible:false
     });
     console.log(`Turno reservado para ${fecha} ${mes}`);

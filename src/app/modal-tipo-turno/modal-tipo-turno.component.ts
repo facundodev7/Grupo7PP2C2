@@ -3,6 +3,7 @@
   import { FormsModule } from '@angular/forms';
   import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   import { ControladorR } from '../../database';
+  import { horaSeleccionada } from '../modal-turno/modal-turno.component';
 
   @Component({
     selector: 'app-modal-tipo-turno',
@@ -22,38 +23,34 @@
       private controlador:ControladorR
     ) {}
 
-    async confirmar() {
-    try {
-      const userId = this.controlador.getCurrentUid();
-      if (!userId) {
-        alert('Debes iniciar sesión para reservar un turno.');
-        return;
-      }
+  async confirmar() {
 
-      const fechaCompleta = this.data.fecha; // viene desde el modal anterior
-      const [fecha, hora] = fechaCompleta.split(' '); // separa fecha y hora
+    const { fecha } = this.data; // viene del modal anterior
 
-      // Guardar turno en Firebase
-      await this.controlador.reservarTurno(
-        hora,
-        fecha,
-        userId
-      );
+    var fechaCompletaTraidaTodoInsanoMal = fecha.split(' ')
 
-      // Además, guardar tipo de turno y mascota
-      console.log('Turno reservado en Firebase:');
-      console.log('Fecha:', fecha);
-      console.log('Hora: a', hora);
-      console.log('Tipo:', this.tipoTurno);
-      console.log('Mascota:', this.mascota);
+    var anho = fechaCompletaTraidaTodoInsanoMal[2]
 
-      alert('¡Turno confirmado correctamente!');
-      this.dialogRef.close();
-    } catch (error) {
-      console.error('Error al confirmar turno:', error);
-      alert('Ocurrió un error al guardar el turno.');
-    }
-  }
+    var mes = fechaCompletaTraidaTodoInsanoMal[1]
+
+    var dia = fechaCompletaTraidaTodoInsanoMal[0]
+
+    var hora = fechaCompletaTraidaTodoInsanoMal[3]
+
+    console.log('Const fecha:', fecha)
+    console.log('Año: ', fechaCompletaTraidaTodoInsanoMal[2])
+    console.log('Mes: ', fechaCompletaTraidaTodoInsanoMal[1])
+    console.log('Dia: ', fechaCompletaTraidaTodoInsanoMal[0])
+    console.log('Hora: ', fechaCompletaTraidaTodoInsanoMal[3])
+    console.log(this.mascota)
+    console.log(this.tipoTurno)
+
+    this.controlador.reservarTurno(mes,dia,hora,this.controlador.getCurrentUid())
+
+    this.dialogRef.close();
+
+}
+
 
   cerrar() {
     this.dialogRef.close();
