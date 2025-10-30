@@ -1,9 +1,13 @@
-button {
-    color: black;
-
+* {
+    color: white;
+    background-color: rgb(27, 27, 27);
 }
 
-.texto{
-        color: black;
+input{
+    color: white;
+}
 
+button {
+    background-color: white;
+    color: black;
 }

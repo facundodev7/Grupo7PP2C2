@@ -1,7 +1,15 @@
 * {
-    color: black;
+    color: white;
+    background-color: rgb(27, 27, 27);
+    padding: 0px;
+    margin: 0px;
 }
 
-input, button{
+input{
+    color: white;
+}
+
+button {
+    background-color: white;
     color: black;
 }

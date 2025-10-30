@@ -6,6 +6,18 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    background-color: rgb(27, 27, 27);
+}
+
+h1 {
+    color: white;
+}
+
+.usuario small {
+    color: white;
+}
+
 .top {
     display: flex;
     flex-direction: row;
