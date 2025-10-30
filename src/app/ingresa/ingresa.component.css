@@ -1,3 +1,13 @@
 * {
+    color: white;
+    background-color: rgb(27, 27, 27)
+}
+
+input {
+    color: white;
+}
+
+button {
+    background-color: white;
     color: black;
 }
