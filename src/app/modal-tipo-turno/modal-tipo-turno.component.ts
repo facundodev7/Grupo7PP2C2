@@ -2,6 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { getDatabase, ref, push, set } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+
 
 @Component({
   selector: 'app-modal-tipo-turno',
@@ -11,6 +14,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./modal-tipo-turno.component.css']
 })
 export class ModalTipoTurnoComponent {
+
+
   tipoTurno: string = 'Primera consulta';
   mascota: string = 'Sin definir';
 
@@ -19,11 +24,31 @@ export class ModalTipoTurnoComponent {
     private dialogRef: MatDialogRef<ModalTipoTurnoComponent>
   ) {}
 
+
   confirmar() {
-    console.log('Fecha completa:', this.data.fecha);
-    console.log('Tipo de turno:', this.tipoTurno);
-    console.log('Mascota:', this.mascota);
-    this.dialogRef.close();
+    const db = getDatabase();
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const turno = {
+      usuario: user ? user.uid : 'sin_usuario',
+      fechaOriginal: this.data.fechaTurno,
+      hora: this.data.horaTurno,
+      tipo: this.tipoTurno,
+      mascota: this.mascota,
+      creadoEn: new Date().toISOString()
+    };
+
+    // Guardar por fecha y hora
+    const turnoRef = ref(db, `turnos/${this.data.fechaTurno}/${this.data.horaTurno}`);
+    set(turnoRef, turno)
+      .then(() => {
+        console.log('Turno guardado correctamente:', turno);
+        this.dialogRef.close();
+      })
+      .catch((err) => {
+        console.error('Error al guardar turno:', err);
+      });
   }
 
   cerrar() {

@@ -1,7 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog  } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
+import { getDatabase, ref, get } from 'firebase/database';
+import { ControladorR } from '../../database';
+
 
 @Component({
   selector: 'app-modal-turno',
@@ -11,12 +14,17 @@ import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.co
 })
 export class ModalTurnoComponent {
 
+    ngOnInit() {
+  
+  this.cargarTurnosOcupados();
+}
+
   turnoSeleccionado: number | null = null;
 
   turnos = [
-  { hora: '9:00 a 9:30 Hs', aceptado: false },
-  { hora: '9:30 a 10:00 Hs', aceptado: false },
-  { hora: '10:00 a 10:30 Hs', aceptado: true }, //para probar
+  { hora: '09:00 a 9:30 Hs', aceptado: false },
+  { hora: '09:30 a 10:00 Hs', aceptado: false },
+  { hora: '10:00 a 10:30 Hs', aceptado: false },
   { hora: '10:30 a 11:00 Hs', aceptado: false },
   { hora: '11:00 a 11:30 Hs', aceptado: false },
   { hora: '11:30 a 12:00 Hs', aceptado: false },
@@ -36,31 +44,19 @@ export class ModalTurnoComponent {
 ];
 
 
+
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ModalTurnoComponent>,
-    private dialog: MatDialog 
+    private dialog: MatDialog,
+    private controlador: ControladorR
   ) {}
 
   seleccionarTurno(index: number) {
     this.turnoSeleccionado = index;
-    
   }
 
-  // confirmar() {
-  //   if (this.turnoSeleccionado !== null) {
-  //     const turno = this.turnos[this.turnoSeleccionado];
-  //     turno.aceptado = true;
-
-  //     const fecha = this.data.fecha;
-  //     const hora = turno.hora.split(' ')[0];
-  //     const fechaCompleta = `${fecha} ${hora}hs`;
-
-  //     console.log('Turno confirmado:', fechaCompleta);
-
-  //     this.dialogRef.close();
-  //   }
-  // }
 
   cerrar() {
     this.dialogRef.close();
@@ -72,14 +68,60 @@ export class ModalTurnoComponent {
   const turno = this.turnos[this.turnoSeleccionado];
   const hora = turno.hora.split(' ')[0];
   const fechaCompleta = `${this.data.fecha} ${hora}hs`;
+  const fechaTurno = `${this.data.fecha}`;
+  const horaTurno = `${hora}`;
 
   this.dialogRef.close();
 
   this.dialog.open(ModalTipoTurnoComponent, {
-    data: { fecha: fechaCompleta },
+    data: { fecha: fechaCompleta, fechaTurno: fechaTurno, horaTurno: horaTurno },
     width: '40%'
   });
 }
+
+mismoUsuario()
+{
+  const id = this.controlador.getCurrentUid()
+  console.log(id);
+}
+
+
+async cargarTurnosOcupados() {
+  const db = getDatabase();
+  const fechaRef = ref(db, `turnos/${this.data.fecha}`);
+  const snapshot = await get(fechaRef);
+
+  this.mismoUsuario();
+
+  if (snapshot.exists()) {
+    const turnosGuardados = snapshot.val();
+
+    for (const key in turnosGuardados) {
+      const horaOcupada = turnosGuardados[key].hora.substring(0, 5); // ej. "09:00"
+
+      const index = this.turnos.findIndex(t =>
+        t.hora.substring(0, 5) === horaOcupada
+      );
+
+      if (index !== -1) {
+        this.turnos[index].aceptado = true;
+        console.log('Ocupado:', this.turnos[index].hora);
+      } else {
+        console.log('No coincide:', horaOcupada);
+      }
+    }
+  }
+
+
+  if (this.turnos.some(t => t.aceptado)) {
+    alert('Ya tenés un turno reservado para este día.');
+  }
+}
+
+tieneTurnoAceptado(): boolean {
+  return this.turnos.some(t => t.aceptado);
+}
+
 
 
 

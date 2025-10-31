@@ -1,15 +1,49 @@
 * {
-    color: white;
-    background-color: rgb(27, 27, 27);
+    color: rgb(116, 116, 116);
     padding: 0px;
     margin: 0px;
 }
 
 input{
     color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
 }
 
 button {
+    margin-top: 20px;
     background-color: white;
     color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 15px;
+}
+
+button:hover{
+    
+    background-color: rgb(224, 222, 108);
+}
+
+.form{
+    background-color: rgb(59, 214, 139);
+    border-radius: 20px;
+    padding: 30px;
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 10%;
 }
