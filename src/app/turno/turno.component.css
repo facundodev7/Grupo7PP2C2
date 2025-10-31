@@ -4,7 +4,6 @@
   list-style: none;
   margin: 0;
   outline: none;
-  padding: 0;
 }
 
 
@@ -38,11 +37,13 @@ button{
   background: #2b4450;
   border-radius: 4px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-  height: 501px;
+  height: fit-content;
   perspective: 1000;
   transition: .9s;
   transform-style: preserve-3d;
   width: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 15%;
 }
 
 

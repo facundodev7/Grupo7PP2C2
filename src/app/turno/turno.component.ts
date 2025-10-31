@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalTurnoComponent } from '../modal-turno/modal-turno.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
 
 
 
@@ -105,6 +105,7 @@ export class TurnoComponent implements OnInit{
   if (selectedDate < today) {
     return; // no abrir modal si es fecha pasada
   }
+
 
   const fecha = `${day} ${this.monthNames[this.currentMonth]} ${this.currentYear}`;
   this.dialog.open(ModalTurnoComponent, {

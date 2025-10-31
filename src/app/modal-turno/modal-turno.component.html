@@ -7,12 +7,13 @@
       <div class="hora">{{ turno.hora }}</div>
       <div class="disponibilidad">
         <button
-        *ngIf="!turno.aceptado"
-        [class.seleccionado]="turnoSeleccionado === i"
-        (click)="seleccionarTurno(i)"
-      >
-        {{ turnoSeleccionado === i ? 'Aceptado &nbsp;' : 'Disponible' }}
-      </button>
+            *ngIf="!turno.aceptado"
+            [class.seleccionado]="turnoSeleccionado === i"
+            (click)="seleccionarTurno(i)"
+            [disabled]="tieneTurnoAceptado()"
+          >
+            {{ turnoSeleccionado === i ? 'Aceptado ' : 'Disponible' }}
+          </button>
         <span *ngIf="turno.aceptado">No disponible</span>
       </div>
     </div>

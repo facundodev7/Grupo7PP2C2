@@ -1,17 +1,19 @@
-  import { Component, Inject } from '@angular/core';
-  import { CommonModule } from '@angular/common';
-  import { FormsModule } from '@angular/forms';
-  import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-  import { ControladorR } from '../../database';
-  import { horaSeleccionada } from '../modal-turno/modal-turno.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { getDatabase, ref, push, set } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+import { ControladorR } from '../../database';
 
-  @Component({
-    selector: 'app-modal-tipo-turno',
-    standalone: true,
-    imports: [CommonModule, FormsModule],
-    templateUrl: './modal-tipo-turno.component.html', // referencia al HTML
-    styleUrls: ['./modal-tipo-turno.component.css']
-  })
+
+@Component({
+  selector: 'app-modal-tipo-turno',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './modal-tipo-turno.component.html', // referencia al HTML
+  styleUrls: ['./modal-tipo-turno.component.css']
+})
 
   export class ModalTipoTurnoComponent {
     tipoTurno: string = 'Primera consulta';
@@ -23,34 +25,32 @@
       private controlador:ControladorR
     ) {}
 
-  async confirmar() {
 
-    const { fecha } = this.data; // viene del modal anterior
+  confirmar() {
+    const db = getDatabase();
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-    var fechaCompletaTraidaTodoInsanoMal = fecha.split(' ')
+    const turno = {
+      usuario: user ? user.uid : 'sin_usuario',
+      fechaOriginal: this.data.fechaTurno,
+      hora: this.data.horaTurno,
+      tipo: this.tipoTurno,
+      mascota: this.mascota,
+      creadoEn: new Date().toISOString()
+    };
 
-    var anho = fechaCompletaTraidaTodoInsanoMal[2]
-
-    var mes = fechaCompletaTraidaTodoInsanoMal[1]
-
-    var dia = fechaCompletaTraidaTodoInsanoMal[0]
-
-    var hora = fechaCompletaTraidaTodoInsanoMal[3]
-
-    console.log('Const fecha:', fecha)
-    console.log('Año: ', fechaCompletaTraidaTodoInsanoMal[2])
-    console.log('Mes: ', fechaCompletaTraidaTodoInsanoMal[1])
-    console.log('Dia: ', fechaCompletaTraidaTodoInsanoMal[0])
-    console.log('Hora: ', fechaCompletaTraidaTodoInsanoMal[3])
-    console.log(this.mascota)
-    console.log(this.tipoTurno)
-
-    this.controlador.reservarTurno(mes,dia,hora,this.controlador.getCurrentUid())
-
-    this.dialogRef.close();
-
-}
-
+    // Guardar por fecha y hora
+    const turnoRef = ref(db, `turnos/${this.data.fechaTurno}/${this.data.horaTurno}`);
+    set(turnoRef, turno)
+      .then(() => {
+        console.log('Turno guardado correctamente:', turno);
+        this.dialogRef.close();
+      })
+      .catch((err) => {
+        console.error('Error al guardar turno:', err);
+      });
+  }
 
   cerrar() {
     this.dialogRef.close();
