@@ -1,1 +1,21 @@
-<p>admin works!</p>
+<body>
+    <div>
+        <h1>Turnos seleccionados por usuarios:</h1>
+
+        <div *ngFor="let turno of turnos">
+            <h4><ul>
+                <li>Mes: {{turno.mes}}</li>
+                <li>Dia: {{turno.dia}}</li>
+                <li>Hora: {{turno.hora}}</li>
+                <br>
+                <li>Nombre: {{turno.Nombre}}</li>
+                <li>Apellido: {{turno.Apellido}}</li>
+                <li>Email: {{turno.Email}}</li>
+                <li>Telefono: {{turno.Telefono}}</li>
+            </ul>    
+        </h4>
+        
+        </div>
+
+    </div>
+</body>

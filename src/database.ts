@@ -184,6 +184,57 @@ async login(arg1:any,arg2:any){
   }
   }
 
+  async getNombre(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `nombre`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+    async getApellido(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `apellido`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+  async getTelefono(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `telefono`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
   agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
     const refMascota = ref(db, `users/${userId}/mascotas`)
     const nuevaMascota = push(refMascota)
@@ -275,4 +326,36 @@ async turnosOcupados(fecha: string): Promise<string[]> {
     return [];
   }
 }
+
+async getTurnosAdmin(){
+  const db = getDatabase();
+  const reference = ref(db, 'turnos');
+
+  try {
+    const snapshot = await get(reference);
+    const turnos = snapshot.val()
+    const listaTurnos: any[] = [];
+
+    Object.keys(turnos).forEach(mes => {
+      Object.keys(turnos[mes]).forEach(dia => {
+        Object.keys(turnos[mes][dia]).forEach(horaKey => {
+          const turno = turnos[mes][dia][horaKey];
+          listaTurnos.push({
+            mes,
+            dia,
+            horaKey,
+            ...turno
+          });
+        });
+      });
+    });
+
+    return listaTurnos
+  }
+  catch{
+    console.log('no agarro')
+    return []
+  }  
+
+} 
 }
