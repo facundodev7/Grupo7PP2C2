@@ -14,9 +14,11 @@ import { ControladorR } from '../../database';
 })
 export class ModalTurnoComponent {
 
+  usuarioPidioTurno:any;
+
     ngOnInit() {
-  
   this.cargarTurnosOcupados();
+  this.mismoUsuario()
 }
 
   turnoSeleccionado: number | null = null;
@@ -42,9 +44,6 @@ export class ModalTurnoComponent {
   { hora: '17:30 a 18:00 Hs', aceptado: false },
   { hora: '18:00 a 18:30 Hs', aceptado: false }
 ];
-
-
-
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -79,19 +78,22 @@ export class ModalTurnoComponent {
   });
 }
 
-mismoUsuario()
-{
-  const id = this.controlador.getCurrentUid()
-  console.log(id);
+mismoUsuario(){
+  var pidioTurno = this.data.usuario
+  if (pidioTurno == this.controlador.getCurrentUid()){
+    this.usuarioPidioTurno = true
+  }
+  else {
+    this.usuarioPidioTurno = false
+  }
+  console.log(this.usuarioPidioTurno)
 }
-
 
 async cargarTurnosOcupados() {
   const db = getDatabase();
   const fechaRef = ref(db, `turnos/${this.data.fecha}`);
   const snapshot = await get(fechaRef);
 
-  this.mismoUsuario();
 
   if (snapshot.exists()) {
     const turnosGuardados = snapshot.val();
