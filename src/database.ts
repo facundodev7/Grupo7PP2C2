@@ -184,6 +184,57 @@ async login(arg1:any,arg2:any){
   }
   }
 
+  async getNombre(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `nombre`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+    async getApellido(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `apellido`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+  async getTelefono(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `telefono`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
   agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
     const refMascota = ref(db, `users/${userId}/mascotas`)
     const nuevaMascota = push(refMascota)
@@ -218,4 +269,143 @@ async login(arg1:any,arg2:any){
   }
   }
   
+  async reservarTurno(mes:string, fecha:string, hora:string, userId:any){
+    const db = getDatabase();
+
+    const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_'); // ej: 26-10-2025
+    const horaKey = hora.replace(/[: ]/g, '_'); // ej: 9_00_a_9_30_Hs
+
+    const refTurno = ref(db, `turnos/${mes}/${fechaKey}/${horaKey}`);
+
+    await set(refTurno, {
+      mes,
+      fecha,
+      hora,
+      userId,
+      disponible:false
+    });
+    console.log(`Turno reservado para ${fecha} ${mes}`);
+  }
+
+async obtenerTurnosPorFecha(fecha: string) {
+  const db = getDatabase();
+  const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_');
+  const refFecha = ref(db, `turnos/${fechaKey}`);
+
+  const snapshot = await get(refFecha);
+  if (snapshot.exists()) {
+    return snapshot.val(); // Devuelve un objeto { "9_00_a_9_30_Hs": {fecha, hora, ...}, ... }
+  } else {
+    return {};
+  }
+}
+
+async turnosOcupados(fecha: string): Promise<string[]> {
+  const db = getDatabase();
+
+  const fechaKey = fecha.replace(/\//g, '-').replace(/ /g, '_');
+  const refTurnos = ref(db, `turnos/${fechaKey}`);
+
+  try {
+    const snapshot = await get(refTurnos);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      // Filtrar los turnos que no están disponibles
+      const ocupados = Object.keys(data)
+        .filter(horaKey => data[horaKey].disponible === false)
+        .map(horaKey => data[horaKey].hora);
+
+      console.log('Turnos ocupados:', ocupados);
+      return ocupados;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error obteniendo turnos ocupados:', error);
+    return [];
+  }
+}
+
+async getTurnosAdmin(){
+  const db = getDatabase();
+  const reference = ref(db, 'turnos');
+
+  try {
+    const snapshot = await get(reference);
+    const turnos = snapshot.val()
+    const listaTurnos: any[] = [];
+
+    Object.keys(turnos).forEach(mes => {
+      Object.keys(turnos[mes]).forEach(dia => {
+        Object.keys(turnos[mes][dia]).forEach(horaKey => {
+          const turno = turnos[mes][dia][horaKey];
+          listaTurnos.push({
+            mes,
+            dia,
+            horaKey,
+            ...turno
+          });
+        });
+      });
+    });
+
+    return listaTurnos
+  }
+  catch{
+    console.log('no agarro')
+    return []
+  }  
+
+}
+
+async turnosAdminV2(){
+  const db = getDatabase();
+  const reference = ref(db, 'turnos');
+
+  var hoy = new Date()
+
+  const diaHoy = hoy.getDate().toString()
+  const mesHoy = hoy.toDateString().slice(4, 7); 
+
+  var stringAbuscar = ''
+
+  var turnosHoy: any[] = []
+
+  stringAbuscar = diaHoy + " " + mesHoy
+  console.log(stringAbuscar)
+
+  try {
+    const snapshot = await get(reference)
+    const turnos = snapshot.val()
+    
+    const buscar = Object.keys(turnos).find(key => {
+      const partes = key.split(' ')
+      if (partes.length < 2) return false
+
+      const [dia, mesString] = partes
+      return(
+        dia === diaHoy &&
+        mesString.toLowerCase().startsWith(mesHoy.toLowerCase())
+      )
+    })
+
+    if (buscar){
+      const diaTurnos = turnos[buscar]
+      Object.keys(diaTurnos).forEach(horaKey => {
+        const turno = diaTurnos[horaKey]
+        turnosHoy.push({
+          fecha:buscar,
+          horaKey,
+          ...turno
+        })
+      })
+    }
+    return turnosHoy
+  }
+  catch {
+    console.log('se rompio')
+    return turnosHoy
+  }
+}
 }

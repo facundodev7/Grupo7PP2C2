@@ -13,6 +13,9 @@ import { ControladorR } from '../../database';
   styleUrls: ['./modal-turno.component.css'],
   imports: [CommonModule],      // <--- necesario para *ngFor, *ngIf
 })
+
+
+
 export class ModalTurnoComponent {
 
    async ngOnInit() {
@@ -60,7 +63,12 @@ turnos: {
     private controlador: ControladorR
   ) {}
 
+
+
+
+
   seleccionarTurno(index: number) {
+    if (this.turnos[index].aceptado) return;
     this.turnoSeleccionado = index;
   }
 
