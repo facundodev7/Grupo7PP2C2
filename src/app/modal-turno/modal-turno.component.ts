@@ -13,6 +13,9 @@ import { ControladorR } from '../../database';
   styleUrls: ['./modal-turno.component.css'],
   imports: [CommonModule],      // <--- necesario para *ngFor, *ngIf
 })
+
+
+
 export class ModalTurnoComponent {
 
    async ngOnInit() {
@@ -31,6 +34,7 @@ turnos: {
   aceptado: boolean;
   usuario?: string;  
 }[] = [
+
   { hora: '09:00 a 9:30 Hs', aceptado: false },
   { hora: '09:30 a 10:00 Hs', aceptado: false },
   { hora: '10:00 a 10:30 Hs', aceptado: false },
@@ -60,7 +64,11 @@ turnos: {
     private controlador: ControladorR
   ) {}
 
+
+
+
   seleccionarTurno(index: number) {
+    if (this.turnos[index].aceptado) return;
     this.turnoSeleccionado = index;
   }
 
