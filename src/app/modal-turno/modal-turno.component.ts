@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog  } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
 import { getDatabase, ref, get } from 'firebase/database';
 import { ControladorR } from '../../database';
+
 
 
 @Component({
@@ -14,16 +15,22 @@ import { ControladorR } from '../../database';
 })
 export class ModalTurnoComponent {
 
-  usuarioPidioTurno:any;
+   async ngOnInit() {
+  await this.cargarTurnosOcupados();
 
-    ngOnInit() {
-  this.cargarTurnosOcupados();
-  this.mismoUsuario()
+  if (this.tieneTurnoAceptado()) {
+    alert('Ya tenés un turno reservado para este día.');
+  }
 }
+
 
   turnoSeleccionado: number | null = null;
 
-  turnos = [
+turnos: {
+  hora: string;
+  aceptado: boolean;
+  usuario?: string;  
+}[] = [
   { hora: '09:00 a 9:30 Hs', aceptado: false },
   { hora: '09:30 a 10:00 Hs', aceptado: false },
   { hora: '10:00 a 10:30 Hs', aceptado: false },
@@ -44,6 +51,7 @@ export class ModalTurnoComponent {
   { hora: '17:30 a 18:00 Hs', aceptado: false },
   { hora: '18:00 a 18:30 Hs', aceptado: false }
 ];
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -78,50 +86,41 @@ export class ModalTurnoComponent {
   });
 }
 
-mismoUsuario(){
-  var pidioTurno = this.data.usuario
-  if (pidioTurno == this.controlador.getCurrentUid()){
-    this.usuarioPidioTurno = true
-  }
-  else {
-    this.usuarioPidioTurno = false
-  }
-  console.log(this.usuarioPidioTurno)
-}
+
 
 async cargarTurnosOcupados() {
   const db = getDatabase();
   const fechaRef = ref(db, `turnos/${this.data.fecha}`);
   const snapshot = await get(fechaRef);
-
+  const uidActual = this.controlador.getCurrentUid(); // usuario actual
 
   if (snapshot.exists()) {
     const turnosGuardados = snapshot.val();
 
     for (const key in turnosGuardados) {
-      const horaOcupada = turnosGuardados[key].hora.substring(0, 5); // ej. "09:00"
-
-      const index = this.turnos.findIndex(t =>
-        t.hora.substring(0, 5) === horaOcupada
-      );
+      const turnoDB = turnosGuardados[key];
+      const horaOcupada = turnoDB.hora.substring(0, 5);
+      const index = this.turnos.findIndex(t => t.hora.substring(0, 5) === horaOcupada);
 
       if (index !== -1) {
         this.turnos[index].aceptado = true;
-        console.log('Ocupado:', this.turnos[index].hora);
-      } else {
-        console.log('No coincide:', horaOcupada);
+        this.turnos[index].usuario = turnoDB.usuario || null; // guardar quién lo pidió
       }
     }
   }
 
-
-  if (this.turnos.some(t => t.aceptado)) {
+  // Si hay algún turno aceptado por el mismo usuario actual
+  if (this.turnos.some(t => t.aceptado && t.usuario === uidActual)) {
     alert('Ya tenés un turno reservado para este día.');
   }
 }
 
+
 tieneTurnoAceptado(): boolean {
-  return this.turnos.some(t => t.aceptado);
+  const uid = this.controlador.getCurrentUid();
+  if (!uid) return false;
+
+  return this.turnos.some(t => t.usuario === uid && t.aceptado);
 }
 
 
@@ -129,3 +128,9 @@ tieneTurnoAceptado(): boolean {
 
 
 }
+
+
+
+
+
+
