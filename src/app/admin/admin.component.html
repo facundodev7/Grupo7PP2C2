@@ -1,21 +1,14 @@
 <body>
     <div>
-        <h1>Turnos seleccionados por usuarios:</h1>
+        <h1>Turnos seleccionados por usuarios para: {{hoyNumero}} {{hoyMes}}</h1>
+
+        <button (click)="test()">TEST</button>
 
         <div *ngFor="let turno of turnos">
-            <h4><ul>
-                <li>Mes: {{turno.mes}}</li>
-                <li>Dia: {{turno.dia}}</li>
-                <li>Hora: {{turno.hora}}</li>
-                <br>
-                <li>Nombre: {{turno.Nombre}}</li>
-                <li>Apellido: {{turno.Apellido}}</li>
-                <li>Email: {{turno.Email}}</li>
-                <li>Telefono: {{turno.Telefono}}</li>
-            </ul>    
-        </h4>
+            <li>{{turno.hora}}</li>
+
+        </div>
         
         </div>
 
-    </div>
 </body>

@@ -357,5 +357,55 @@ async getTurnosAdmin(){
     return []
   }  
 
-} 
+}
+
+async turnosAdminV2(){
+  const db = getDatabase();
+  const reference = ref(db, 'turnos');
+
+  var hoy = new Date()
+
+  const diaHoy = hoy.getDate().toString()
+  const mesHoy = hoy.toDateString().slice(4, 7); 
+
+  var stringAbuscar = ''
+
+  var turnosHoy: any[] = []
+
+  stringAbuscar = diaHoy + " " + mesHoy
+  console.log(stringAbuscar)
+
+  try {
+    const snapshot = await get(reference)
+    const turnos = snapshot.val()
+    
+    const buscar = Object.keys(turnos).find(key => {
+      const partes = key.split(' ')
+      if (partes.length < 2) return false
+
+      const [dia, mesString] = partes
+      return(
+        dia === diaHoy &&
+        mesString.toLowerCase().startsWith(mesHoy.toLowerCase())
+      )
+    })
+
+    if (buscar){
+      const diaTurnos = turnos[buscar]
+      Object.keys(diaTurnos).forEach(horaKey => {
+        const turno = diaTurnos[horaKey]
+        turnosHoy.push({
+          fecha:buscar,
+          horaKey,
+          ...turno
+        })
+      })
+    }
+    return turnosHoy
+  }
+  catch {
+    console.log('se rompio')
+    return turnosHoy
+  }
+}
 }

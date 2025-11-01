@@ -11,23 +11,24 @@ import { CommonModule } from '@angular/common';
 export class AdminComponent {
 
   turnos:any[] = []
+  hoy = new Date()
+
+  hoy2 = this.hoy.toDateString()
+
+  hoyNumero = this.hoy2.slice(8,10)
+
+  hoyMes = this.hoy2.slice(4,7)
+
   constructor(private controlador:ControladorR){}
 
 
   async ngOnInit(){
-    this.agarrar()
+    this.test()
   }
 
-  async agarrar(){
-    this.turnos = await this.controlador.getTurnosAdmin();
-
-    for (const turno of this.turnos) {
-      turno.Nombre = await this.controlador.getNombre(turno.userId);
-      turno.Apellido = await this.controlador.getApellido(turno.userId)
-      turno.Email = await this.controlador.getEmail(turno.userId)
-      turno.Telefono = await this.controlador.getTelefono(turno.userId)
-
-    }
+  async test(){
+    this.turnos = await this.controlador.turnosAdminV2()
+    console.log(this.turnos)
   }
 
   async obtenerUsuario(argumento:any){
