@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { getDatabase, ref, push, set } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
+import { ControladorR } from '../../database';
 
 
 @Component({
@@ -13,16 +14,16 @@ import { getAuth } from 'firebase/auth';
   templateUrl: './modal-tipo-turno.component.html', // referencia al HTML
   styleUrls: ['./modal-tipo-turno.component.css']
 })
-export class ModalTipoTurnoComponent {
 
+  export class ModalTipoTurnoComponent {
+    tipoTurno: string = 'Primera consulta';
+    mascota: string = 'Sin definir';
 
-  tipoTurno: string = 'Primera consulta';
-  mascota: string = 'Sin definir';
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<ModalTipoTurnoComponent>
-  ) {}
+    constructor(
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private dialogRef: MatDialogRef<ModalTipoTurnoComponent>,
+      private controlador:ControladorR
+    ) {}
 
 
   confirmar() {
@@ -55,3 +56,4 @@ export class ModalTipoTurnoComponent {
     this.dialogRef.close();
   }
 }
+
