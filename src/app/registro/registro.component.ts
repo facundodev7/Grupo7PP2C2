@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -24,7 +25,7 @@ export class RegistroComponent {
   confir: string = '';
   
 
-  constructor(private controlador: ControladorR) {}
+  constructor(private controlador: ControladorR, private ruta: Router) {}
 
   async registro() {
 
@@ -79,6 +80,11 @@ export class RegistroComponent {
     } else {
       console.error("Error al registrar:", resultado.message);
     }
+  }
+
+
+     irA(arg:string){
+    this.ruta.navigate([arg])
   }
   
 }
