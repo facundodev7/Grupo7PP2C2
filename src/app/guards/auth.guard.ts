@@ -12,11 +12,15 @@ export class AuthGuard implements CanActivate {
     const auth = getAuth();
     const user = auth.currentUser;
 
+
+    //NO CAMBIAR  !!!!
+    // si se cierra la sesión se redirige al inicio de la página
+    // no hay que preocuparse, los botones que no se tengan que ver no se van a ver
     if (user) {
       return true; // usuario logueado
     } else {
-      if (state.url !== '/login') {
-        this.router.navigate(['/login']);
+      if (state.url !== '') {
+        this.router.navigate(['']); // <- NO CAMBIAR :(
       }
       return false;
     }

@@ -66,7 +66,6 @@ turnos: {
 
 
 
-
   seleccionarTurno(index: number) {
     if (this.turnos[index].aceptado) return;
     this.turnoSeleccionado = index;

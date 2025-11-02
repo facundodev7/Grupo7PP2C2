@@ -1,16 +1,26 @@
+<div class="inicio">
+<button (click)="irA('')" >Inicio</button>
+</div>
+
+
 <div class="login">
 <form (ngSubmit)="subir()"id="formu" class="form">
-    <label for="usuario" >Usuario</label>
+    <label for="usuario" ><h5>Usuario</h5></label>
 
     <input type="text" name="usuario" [(ngModel)]="email">
 
-    <label for="contra">Contraseña</label>
+    <br>
+
+    <label for="contra"> <h5>Contraseña</h5> </label>
 
     <input type="password" name="contra" [(ngModel)]="contra">
 
-    <button type="submit">Aceptar</button>
+    <button type="submit">Entrar</button>
 </form>
-</div>
+
+
+
+
 
 
 

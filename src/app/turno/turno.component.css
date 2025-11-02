@@ -48,23 +48,25 @@ button{
 
 
 
-button.completo {
+
+
+.completo {
   background: #f78536;
   border-radius: 50%;
 }
 
 
-.semi {
+.incompleto {
   position: relative;
 }
 
-.semi:after {
+.incompleto:after {
   content: '•';
   color: #f78536;
   font-size: 1.4em;
   position: absolute;
-  right: -4px;
-  top: -4px;
+  right: 15px;
+  top: -10px;
 }
 
 
@@ -116,7 +118,7 @@ button.completo {
 }
 
 .today {
-  background: #cde;
+  background: #cde !important;
   color: rgb(0, 0, 0);
 }
 

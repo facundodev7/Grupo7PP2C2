@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalTurnoComponent } from '../modal-turno/modal-turno.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
+import { getDatabase, ref, get  } from 'firebase/database';
 
 
 
@@ -22,15 +23,17 @@ export class TurnoComponent implements OnInit{
   ];
 
     currentDate = new Date();
-  currentMonth = this.currentDate.getMonth();
-  currentYear = this.currentDate.getFullYear();
-  calendarDays: { number: number; class: string }[] = [];
+    currentMonth = this.currentDate.getMonth();
+    currentYear = this.currentDate.getFullYear();
+    calendarDays: { number: number; class: string }[] = [];
 
-  ngOnInit() {
-    this.renderCalendar();
+
+  async ngOnInit() {
+    await this.renderCalendar();
   }
 
-  renderCalendar() {
+  // ---------------- CALENDARIO ---------------- //
+  async renderCalendar() {
     const year = this.currentYear;
     const month = this.currentMonth;
 
@@ -64,8 +67,13 @@ export class TurnoComponent implements OnInit{
     }
 
     this.calendarDays = days;
+
+    // cargar estados desde Firebase
+    await this.cargarEstadoDias();
   }
 
+
+   // ---------------- CAMBIAR MES ---------------- //
   prevMonth() {
     this.currentMonth--;
     if (this.currentMonth < 0) {
@@ -83,6 +91,36 @@ export class TurnoComponent implements OnInit{
     }
     this.renderCalendar();
   }
+
+  // ---------------- CARGAR ESTADO DESDE FIREBASE ---------------- //
+  async cargarEstadoDias() {
+    const db = getDatabase();
+    const turnosRef = ref(db, 'turnos/');
+    const snapshot = await get(turnosRef);
+
+    if (!snapshot.exists()) return;
+
+    const turnosPorFecha = snapshot.val(); // { "8 Octubre 2025": {...}, "9 Octubre 2025": {...}, ... }
+
+    for (let day of this.calendarDays) {
+      // evita pintar los días fuera del mes actual
+      if (day.class.includes('last-month') || day.class.includes('next-month')) continue;
+
+      const fecha = `${day.number} ${this.monthNames[this.currentMonth]} ${this.currentYear}`;
+      const turnosDia = turnosPorFecha[fecha];
+
+      if (turnosDia) {
+        const cantidad = Object.keys(turnosDia).length;
+
+        if (cantidad >= 19 && day.class != "today") {
+          day.class = 'completo';
+        } else if (cantidad > 0 && day.class != "today") {
+          day.class = 'incompleto';
+        }
+      }
+    }
+  }
+
 
    abrirModalAdmin(day: number) {
     const fecha = `${day} ${this.monthNames[this.currentMonth]} ${this.currentYear}`;
