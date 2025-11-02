@@ -23,7 +23,48 @@ export class AdminComponent {
 
 
   async ngOnInit(){
-    this.test()
+    this.test().then(()=> {
+      this.agregarDatos()
+    })
+
+    switch(this.hoyMes){
+      case 'Jan':
+        this.hoyMes = 'Enero'
+        break;
+      case 'Feb':
+        this.hoyMes = 'Febrero'
+        break;
+      case 'Mar':
+        this.hoyMes = 'Marzo'
+        break;
+      case 'Apr':
+        this.hoyMes = 'Abril'
+        break;
+      case 'May':
+        this.hoyMes = 'Mayo'
+        break;
+      case 'Jun':
+        this.hoyMes = 'Junio'
+        break;
+      case 'Jul':
+        this.hoyMes = 'Julio'
+        break;
+      case 'Aug':
+        this.hoyMes = 'Agosto'
+        break;
+      case 'Sep':
+        this.hoyMes = 'Septiembre'
+        break;
+      case 'Oct':
+        this.hoyMes  = 'Octubre'
+        break;
+      case 'Nov':
+        this.hoyMes = 'Noviembre'
+        break;
+      case 'Dec':
+        this.hoyMes = 'Diciembre'
+        break;
+  }
   }
 
   async test(){
@@ -33,6 +74,17 @@ export class AdminComponent {
 
   async obtenerUsuario(argumento:any){
     return await this.controlador.getNombre(argumento)
+  }
+
+  async agregarDatos(){ //trae los datos de usuario de los turnos
+    let i = 0
+    for (let usuario of this.turnos){
+      usuario.nombre = await this.controlador.getNombre(usuario.usuario)
+      usuario.apellido = await this.controlador.getApellido(usuario.usuario)
+      usuario.telefono = await this.controlador.getTelefono(usuario.usuario)
+      usuario.email = await this.controlador.getEmail(usuario.usuario)
+      usuario.numero =  ++i 
+    }
   }
 
 }
