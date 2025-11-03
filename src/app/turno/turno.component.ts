@@ -2,8 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalTurnoComponent } from '../modal-turno/modal-turno.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
 import { getDatabase, ref, get  } from 'firebase/database';
+import { Router } from '@angular/router';
 
 
 
@@ -15,7 +15,7 @@ import { getDatabase, ref, get  } from 'firebase/database';
 })
 export class TurnoComponent implements OnInit{
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private ruta: Router) {}
 
   monthNames = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -153,7 +153,9 @@ export class TurnoComponent implements OnInit{
 }
 
 
-
+  irA(arg:string){
+    this.ruta.navigate([arg])
+  }
 
 
 

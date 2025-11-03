@@ -1,13 +1,17 @@
 <body>
-    <div class="top">
-        <div class="title">
-            <h1>Patitas Felices</h1>
-        </div>
-        <div class="usuario">
+
+
+    <div class="inicio">
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+<div class="usuario">
             <img src="assets/user.png" id="userP" *ngIf="correo">
             <small >{{correo}}</small>
         </div>
-    </div>
+
+</div>
 
     <div class="nav">
         <button (click)="irA('quienes')">¿ Quienes somos ?</button>
@@ -19,7 +23,45 @@
         <button (click)="irA('admin')" *ngIf="admin">Admin opciones</button>
         <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
-    <div class="divImage">
-        <img src="assets/photo1.jpg" id="perro1" >
-    </div>
+
+    <div class="contenido">
+
+        <div class="grilla-info">
+
+            <div class="info">
+            <h4>Título de la info 1</h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+            </div>
+
+
+            <div class="info">
+                <h4>Título de la info 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+            </div>
+        
+        </div>
+
+        <div class="grilla-info">
+
+            <div class="info">
+            <h4>Título de la info 3</h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+            </div>
+
+
+            <div class="info">
+                <h4>Título de la info 4</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+            </div>
+
+        </div>
+
+
+</div>
+        
+
+
+
+
+   
 </body>

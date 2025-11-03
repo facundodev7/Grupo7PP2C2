@@ -1,21 +1,41 @@
 
-
-
 * {
-    color:black;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: rgb(27, 27, 27);
+
+
+  padding-bottom: 10%;
 }
 
-h1 {
-    color: white;
+.inicio{
+    
+    background-color: rgb(255, 218, 241);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.img-top{
+    text-align: center;
+    margin-left: 14%;
+}
+
+.logo{
+    width: 25%;
+    border-radius: 30px;
+    min-width: 100px;
 }
 
 .usuario small {
-    color: white;
+    color: rgb(88, 88, 88);
 }
 
 .top {
@@ -34,8 +54,9 @@ h1 {
 
 
 .usuario{
-    padding: 5%;
-    max-width: 10%;
+    padding: 10px;
+    border-radius: 20px;
+    width: 22%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,16 +79,18 @@ h1 {
     display: flex;
     justify-content: center;
     justify-self: center;
+
+    background-color: rgb(59, 214, 139); 
+    box-shadow: 20px 10px 20px rgba(0, 0, 0, .3);
+    margin: 1% 5% 1% 5%;
+    padding: 2%;
+    border-radius: 30px;
+    min-width: 95%;
 }
 
-.nav p {
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 25%;
-}
 
-button {
-    color: black;
+.nav button {
+    color: rgb(47, 47, 47);
     border-radius: 20px;
     padding: 13px;
     border: none;
@@ -75,7 +98,42 @@ button {
     margin-right: 5px;
 }
 
+.nav button:hover{
+    
+    /* background-color: rgb(255, 152, 152); */
+    background-color: rgb(224, 222, 108);
+}
+
+.contenido{
+    min-height: 400px;
+    background-color: rgb(255, 218, 241);
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
+    margin: 2% 3% 0% 3%;
+    border-radius: 30px;
+    padding-bottom: 8%;
+}
+
+.grilla-info{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.info{
+    color: black ;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    margin: 3% 3% 0% 3%;
+    padding: 1%;
+}
+
+.info p{
+    color: rgb(69, 69, 69);
+}
+
 #userP{
     width: 30%;
     height: 8%;
 }
+

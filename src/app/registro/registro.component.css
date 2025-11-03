@@ -39,6 +39,20 @@ form{
     flex-direction: column;
 }
 
+h4{
+    color: rgb(68, 68, 68);
+}
+
+.img-top{
+    text-align: center;
+    padding-right: 5%;
+}
+
+.logo{
+    width: 20%;
+    border-radius: 30px;
+}
+
 .login{
     margin-top: 5%;
     display: flex;
@@ -50,9 +64,9 @@ form{
 
 .registrarse{
     background-color: rgb(255, 218, 241);
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
     border-radius: 20px;
     padding: 30px;
-    margin-top: 5%;
     margin-bottom: 10%;
     width: fit-content;
     height: fit-content;
@@ -79,7 +93,7 @@ form{
     height: fit-content;
 
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: start;
     flex-direction: row;
 }
