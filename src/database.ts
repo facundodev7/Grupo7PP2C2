@@ -2,11 +2,9 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { getDatabase, ref, update, get, child, set, push } from "firebase/database";
-import {ref as refStorage, getStorage, uploadString, getDownloadURL} from "firebase/storage"
-import { Route, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -60,7 +58,6 @@ export class ControladorR {
     
   }
 
-
 //---------------------------------------------------------------
   // Registrarse
   async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string, rol: any) {
@@ -111,6 +108,9 @@ async login(arg1:any,arg2:any){
       window.alert('Login fallido')
     }
   }
+
+
+  // write -------------------------------------------------------------------------------
 
   writeUserId(userId:any) {
       const reference = ref(db, 'users/' + userId);
@@ -163,9 +163,32 @@ async login(arg1:any,arg2:any){
     })
   }
 
+
+  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
+    const refMascota = ref(db, `users/${userId}/mascotas`)
+    const nuevaMascota = push(refMascota)
+
+    set(nuevaMascota, {
+      nombre:arg1,
+      animal:arg2,
+      domicilio:arg3,
+      telefono:arg4,
+      primeraVez:arg5,
+      motivo:arg6,
+    })
+    window.alert('Mascota subida')
+    this.ruta.navigate([''])
+  }
+
+
+
+  // get -----------------------------------------------------------------------------
+
+
   getCurrentUid(){
     return this.userSubject.value?.uid ?? null
   }
+
   
   async getEmail(userId:any){
     const reference = ref(db, 'users/' + userId);
@@ -235,22 +258,39 @@ async login(arg1:any,arg2:any){
   }
   }
 
-  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
-    const refMascota = ref(db, `users/${userId}/mascotas`)
-    const nuevaMascota = push(refMascota)
 
-    set(nuevaMascota, {
-      nombre:arg1,
-      animal:arg2,
-      domicilio:arg3,
-      telefono:arg4,
-      primeraVez:arg5,
-      motivo:arg6,
-    })
-    window.alert('Mascota subida')
-    this.ruta.navigate([''])
+  // ojo mascotas solo devuelve: id, animal y nombre (los otros campos son innecesarios)
+  async getMascotas(userId: any) {
+  const reference = ref(db, 'users/' + userId + '/mascotas');
+
+  try {
+    const snapshot = await get(reference);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+
+      // Convertimos el objeto en un array con los campos deseados
+      const mascotasArray = Object.entries(data).map(([id, mascota]: [string, any]) => ({
+        id,                       
+        nombre: mascota.nombre,   
+        animal: mascota.animal    
+      }));
+
+      console.log(mascotasArray);
+
+      return mascotasArray;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error al obtener mascotas:', error);
+    return [];
   }
+}
 
+
+
+  
   async getRol(userId:any){
     const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
@@ -268,6 +308,9 @@ async login(arg1:any,arg2:any){
     return null;
   }
   }
+
+
+  // turnos ---------------------------------------------------------------------------
   
   async reservarTurno(mes:string, fecha:string, hora:string, userId:any){
     const db = getDatabase();

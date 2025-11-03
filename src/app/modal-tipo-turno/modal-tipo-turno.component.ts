@@ -15,15 +15,29 @@ import { ControladorR } from '../../database';
   styleUrls: ['./modal-tipo-turno.component.css']
 })
 
+
+
+
   export class ModalTipoTurnoComponent {
     tipoTurno: string = 'Primera consulta';
     mascota: string = 'Sin definir';
+    mascotas: any[] = [];
 
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
       private dialogRef: MatDialogRef<ModalTipoTurnoComponent>,
       private controlador:ControladorR
     ) {}
+
+
+async ngOnInit() {
+  const uid = this.controlador.getCurrentUid();
+
+  if (uid) {
+    this.mascotas = await this.controlador.getMascotas(uid);
+  }
+}
+
 
 
   confirmar() {

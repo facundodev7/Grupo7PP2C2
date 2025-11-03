@@ -18,6 +18,46 @@ button{
   cursor: pointer;
 }
 
+
+.inicio{
+    background-color: rgb(255, 218, 241);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.inicio button{
+    margin: 0px;
+    background-color: white;
+    color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+}
+
+.inicio button:hover{
+    
+    background-color: rgb(255, 152, 152);
+}
+
+.img-top{
+    text-align: center;
+    padding-right: 5%;
+}
+
+.logo{
+    width: 20%;
+    border-radius: 30px;
+}
+
+
 .titulo{
   margin-bottom: 2%;
   padding: 1%;
@@ -34,9 +74,9 @@ button{
 }
 
 .calendar {
-  background: #2b4450;
-  border-radius: 4px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+  background: rgb(59, 214, 139);
+  border-radius: 20px;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
   height: fit-content;
   perspective: 1000;
   transition: .9s;
@@ -44,10 +84,8 @@ button{
   width: 100%;
   padding-bottom: 20px;
   margin-bottom: 15%;
+  margin-top: 10%;
 }
-
-
-
 
 
 .completo {
@@ -62,7 +100,7 @@ button{
 
 .incompleto:after {
   content: '•';
-  color: #f78536;
+  color: #ff832b;
   font-size: 1.4em;
   position: absolute;
   right: 15px;
@@ -72,7 +110,7 @@ button{
 
 
 .mes{
-    color: rgb(255, 255, 255);
+    color: rgb(149, 149, 149);
     font-size: 40px;
 }
 
@@ -85,20 +123,24 @@ button{
 }
 
 .mes-actual h1 {
-  color: #dfebed;
-  font-size: 1.4em;
-  font-weight: 300;
+  color: rgb(85, 85, 85) !important;
+  font-size: 28px;
+  font-weight: 500;
 }
 
 .dias-semana {
   text-align: center;
-  margin: 10px 0;
+  margin: 20px 0;
   list-style: none;
-  color: #dfebed;
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
-  padding: 30px 40px;
+  font-weight: 300;
+  padding: 10px 40px;
+  
+}
+
+li{
+color: #4f4f4f !important;
 }
 
 
@@ -112,23 +154,28 @@ button{
 
 
 .dias button {
+  
   padding: 8px;
   border-radius: 6px;
   font-size: 20px;
 }
 
 .today {
-  background: #cde !important;
+  background: rgb(255, 218, 241) !important;
   color: rgb(0, 0, 0);
 }
 
 
 .last-month, .next-month {
-  opacity: .3;
+  opacity: .4;
   cursor:default;
 }
 
-button:not(.last-month, .next-month):hover {
-
+.dias button:not(.last-month, .next-month, .today):hover {
   font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.dias button:not(.last-month, .next-month, .today) {
+  color: rgb(114, 114, 114);
 }

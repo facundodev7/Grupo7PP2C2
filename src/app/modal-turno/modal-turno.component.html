@@ -1,6 +1,13 @@
 <div class="horarios">
-  <h2><strong>{{ data.fecha }}</strong></h2>
-  <p>Horarios disponibles</p>
+  <div class="superior">
+    <div>
+           <h2><strong>{{ data.fecha }}</strong></h2>
+          <p>Horarios disponibles</p>
+    </div>
+        <img src="assets/patitas-felices.png" class="logo" >
+
+  </div>
+ 
 
   <div class="tabla-horarios">
     <div class="renglon-hora" *ngFor="let turno of turnos; let i = index">
