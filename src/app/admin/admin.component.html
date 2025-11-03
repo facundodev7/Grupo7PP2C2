@@ -1,0 +1,21 @@
+<body>
+    <div class="main">
+        <h1>Turnos seleccionados por usuarios para</h1>
+        <h2>{{hoyNumero || "cargando"}} {{hoyMes || "cargando"}}</h2>
+        <br>
+        <div *ngFor="let turno of turnos">
+            <div class="turno">
+        <li>Turno {{turno.numero || "cargando"}}</li>
+        <li>Hora: {{turno.hora || "cargando"}}</li>
+        <li>Mascota: {{turno.mascota || "cargando"}}</li>
+        <li>Tipo: {{turno.tipo || "cargando"}}</li>
+        Solicitado por:
+        <li>{{turno.nombre || "cargando"}} {{turno.apellido || "cargando"}}</li>
+        <li>Telefono: {{turno.telefono || "cargando"}} Correo: {{turno.email || "cargando"}}</li>
+            </div>
+            <br>
+        </div>
+
+        </div>
+
+</body>

@@ -1,0 +1,30 @@
+<div class="inicio">
+<button (click)="irA('')" >Inicio</button>
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+</div>
+
+
+<div class="login">
+<form (ngSubmit)="subir()"id="formu" class="form">
+    <label for="usuario" ><h5>Usuario</h5></label>
+
+    <input type="text" name="usuario" [(ngModel)]="email">
+
+    <br>
+
+    <label for="contra"> <h5>Contraseña</h5> </label>
+
+    <input type="password" name="contra" [(ngModel)]="contra">
+
+    <button type="submit">Entrar</button>
+</form>
+
+
+
+
+
+
+

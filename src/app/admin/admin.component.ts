@@ -1,0 +1,90 @@
+import { Component, OnInit } from '@angular/core';
+import { ControladorR } from '../../database';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-admin',
+  imports: [CommonModule],
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.css'
+})
+export class AdminComponent {
+
+  turnos:any[] = []
+  hoy = new Date()
+
+  hoy2 = this.hoy.toDateString()
+
+  hoyNumero = this.hoy2.slice(8,10)
+
+  hoyMes = this.hoy2.slice(4,7)
+
+  constructor(private controlador:ControladorR){}
+
+
+  async ngOnInit(){
+    this.test().then(()=> {
+      this.agregarDatos()
+    })
+
+    switch(this.hoyMes){
+      case 'Jan':
+        this.hoyMes = 'Enero'
+        break;
+      case 'Feb':
+        this.hoyMes = 'Febrero'
+        break;
+      case 'Mar':
+        this.hoyMes = 'Marzo'
+        break;
+      case 'Apr':
+        this.hoyMes = 'Abril'
+        break;
+      case 'May':
+        this.hoyMes = 'Mayo'
+        break;
+      case 'Jun':
+        this.hoyMes = 'Junio'
+        break;
+      case 'Jul':
+        this.hoyMes = 'Julio'
+        break;
+      case 'Aug':
+        this.hoyMes = 'Agosto'
+        break;
+      case 'Sep':
+        this.hoyMes = 'Septiembre'
+        break;
+      case 'Oct':
+        this.hoyMes  = 'Octubre'
+        break;
+      case 'Nov':
+        this.hoyMes = 'Noviembre'
+        break;
+      case 'Dec':
+        this.hoyMes = 'Diciembre'
+        break;
+  }
+  }
+
+  async test(){
+    this.turnos = await this.controlador.turnosAdminV2()
+    console.log(this.turnos)
+  }
+
+  async obtenerUsuario(argumento:any){
+    return await this.controlador.getNombre(argumento)
+  }
+
+  async agregarDatos(){ //trae los datos de usuario de los turnos
+    let i = 0
+    for (let usuario of this.turnos){
+      usuario.nombre = await this.controlador.getNombre(usuario.usuario)
+      usuario.apellido = await this.controlador.getApellido(usuario.usuario)
+      usuario.telefono = await this.controlador.getTelefono(usuario.usuario)
+      usuario.email = await this.controlador.getEmail(usuario.usuario)
+      usuario.numero =  ++i 
+    }
+  }
+
+}

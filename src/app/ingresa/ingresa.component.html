@@ -1,0 +1,48 @@
+<!-- HEADER -->
+<div class="inicio">
+  <div class="img-top" (click)="irA('')">
+    <img src="assets/patitas-felices.png" class="logo">
+  </div>
+  <div class="usuario">
+    <img src="assets/user.png" id="userP" *ngIf="correo">
+    <small>{{correo}}</small>
+  </div>
+</div>
+
+
+
+
+<div class="contenido">
+  <div class="formulario">
+    <h2>🐾 Ingresá tu Mascota</h2>
+
+
+    <label>Foto de la Mascota</label>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)">
+
+    <div *ngIf="fileName" class="file-info">
+      📸 <strong>{{ fileName }}</strong>
+    </div>
+
+    <div *ngIf="previewUrl" class="preview">
+      <img [src]="previewUrl" alt="Vista previa" class="preview-img">
+    </div>
+
+
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="animal.Nombre" placeholder="Ej: Firulais">
+
+    <label>Animal</label>
+    <select [(ngModel)]="animal.Animal">
+      <option selected disabled>Seleccioná una opción</option>
+      <option>Perro</option>
+      <option>Gato</option>
+      <option>Otro</option>
+    </select>
+
+
+
+
+    <button class="enviar" (click)="enviar()">Enviar</button>
+  </div>
+</div>

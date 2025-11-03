@@ -1,0 +1,50 @@
+
+<div class="inicio">
+<button (click)="irA('')" >Inicio</button>
+
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+</div>
+
+
+
+<div class="login">
+    <div class="registrarse">
+
+        <h4>No tenes cuenta? </h4>
+        <h4>Puedes registrarte aquí</h4>
+
+<form id="formu" (ngSubmit)="registro()">
+
+    <label for="nombre"><h5>Nombre</h5></label>
+
+    <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required class="texto" maxlength="10">
+
+    <label for="apellido"><h5>Apellido</h5></label>
+
+    <input type="text" id="apellido" [(ngModel)]="apellido" name="apellido" required class="texto" maxlength="10">
+
+    <label for="email"><h5>Email</h5></label>
+
+    <input type="email" id="email" [(ngModel)]="email" name="email" required class="texto" maxlength="20">
+
+    <label for="telefono"><h5>Teléfono</h5></label>
+
+    <input type="text" id="telefono" [(ngModel)]="telefono" name="telefono" required class="texto" maxlength="20">
+
+    <label for="password"><h5>Contraseña</h5></label>
+  
+    <input type="password" id="contraS" [(ngModel)]="password" name="password" required class="texto" maxlength="15">
+
+    <label for="confir"><h5>Confirmación de contraseña</h5></label>
+
+    <input type="password" id="contraConfir" [(ngModel)]="confir" name="confir" required class="texto" maxlength="15">  
+
+    <button type="submit">Registrarse</button>
+</form>
+
+</div>
+
+

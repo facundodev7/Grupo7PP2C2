@@ -1,0 +1,38 @@
+<div class="horarios">
+  <div class="superior">
+    <div>
+           <h2><strong>{{ data.fecha }}</strong></h2>
+          <p>Horarios disponibles</p>
+    </div>
+        <img src="assets/patitas-felices.png" class="logo" >
+
+  </div>
+ 
+
+  <div class="tabla-horarios">
+    <div class="renglon-hora" *ngFor="let turno of turnos; let i = index">
+      <div class="hora">{{ turno.hora }}</div>
+      <div class="disponibilidad">
+        <button
+            *ngIf="!turno.aceptado"
+            [class.seleccionado]="turnoSeleccionado === i"
+            (click)="seleccionarTurno(i)"
+            [disabled]="tieneTurnoAceptado()"
+          >
+            {{ turnoSeleccionado === i ? 'Aceptado ' : 'Disponible' }}
+          </button>
+        <span *ngIf="turno.aceptado">No disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button (click)="abrirTipoTurno()" [disabled]="turnoSeleccionado === null">Continuar</button>
+    <!--<button (click)="confirmar()" [disabled]="turnoSeleccionado === null">Aceptar</button>-->
+    <button (click)="cerrar()">Cerrar</button>
+  </div>
+</div>
+
+
+
+

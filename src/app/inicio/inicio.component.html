@@ -1,0 +1,64 @@
+<body>
+
+  <div class="inicio">
+    <div class="img-top">
+      <img src="assets/patitas-felices.png" class="logo">
+    </div>
+
+    <div class="usuario">
+      <img src="assets/user.png" id="userP" *ngIf="correo">
+      <small>{{correo}}</small>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button (click)="irA('quienes')">¿ Quienes somos ?</button>
+    <button (click)="irA('contacto')">Contacto</button>
+    <button *ngIf="correo && !admin" (click)="irA('ingresarM')">Ingresa tu mascota</button>
+    <button *ngIf="correo && !admin" (click)="irA('turno')">Agenda un turno</button>
+    <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
+    <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
+    <button (click)="irA('admin')" *ngIf="admin">Admin opciones</button>
+    <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
+  </div>
+
+  <div class="contenido">
+    <div class="grilla-info">
+      <div class="info">
+        <h4>Título de la info 1</h4>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+      </div>
+
+      <div class="info">
+        <h4>Título de la info 2</h4>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+      </div>
+    </div>
+
+    <div class="grilla-info">
+      <div class="info">
+        <h4>Título de la info 3</h4>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+      </div>
+
+      <div class="info">
+        <h4>Título de la info 4</h4>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 MODAL DE CONTACTO 🔹 -->
+  <div class="modal" *ngIf="mostrarContacto">
+    <div class="modal-content">
+      <span class="close" (click)="mostrarContacto = false">&times;</span>
+      <h3>📞 Contacto Patitas Felices</h3>
+      <p><strong>Teléfono fijo:</strong> 4228-0998</p>
+      <p><strong>Celular:</strong> +54 11 6798 2205</p>
+      <p><strong>Email:</strong> <a href="mailto:info@PatitasFelices.ar">info&#64;PatitasFelices.ar</a></p>
+      <p><strong>Dirección:</strong> Av. Siempre Viva 123, Buenos Aires</p>
+      <p><strong>Horario:</strong> Lunes a Viernes, 9 a 18 hs</p>
+    </div>
+  </div>
+
+</body>
