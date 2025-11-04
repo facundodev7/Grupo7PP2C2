@@ -1,21 +1,36 @@
 <body>
+    <div class="inicio">
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+<div class="usuario">
+            <img src="assets/user.png" id="userP" *ngIf="correo">
+            <small >{{correo}}</small>
+        </div>
+</div>
     <div class="main">
         <h1>Turnos seleccionados por usuarios para</h1>
-        <h2>{{hoyNumero || "cargando"}} {{hoyMes || "cargando"}}</h2>
-        <br>
+        <h2>{{hoyNumero}} {{hoyMes}}</h2>
         <div *ngFor="let turno of turnos">
-            <div class="turno">
-        <li>Turno {{turno.numero || "cargando"}}</li>
-        <li>Hora: {{turno.hora || "cargando"}}</li>
-        <li>Mascota: {{turno.mascota || "cargando"}}</li>
-        <li>Tipo: {{turno.tipo || "cargando"}}</li>
-        Solicitado por:
-        <li>{{turno.nombre || "cargando"}} {{turno.apellido || "cargando"}}</li>
-        <li>Telefono: {{turno.telefono || "cargando"}} Correo: {{turno.email || "cargando"}}</li>
+         <ng-container *ngIf="turno.numero && turno.hora && turno.mascota && turno.tipo && turno.nombre && turno.apellido; else cargando">
+            <div class="turno"> 
+        <li>Turno {{turno.numero}}</li>
+        <li>Hora: {{turno.hora}}</li>
+        <li>Mascota: {{turno.mascota}}</li>
+        <li>Tipo: {{turno.tipo}}</li>
+        <p>Solicitado por:</p>
+        <li>{{turno.nombre}} {{turno.apellido}}</li>
+        <li>Telefono: {{turno.telefono}}</li>
+        <li>Correo: {{turno.email}}</li>
+        <p>{{manianaNumero}} {{manianaMes}}</p>
             </div>
-            <br>
+        </ng-container>
+          <ng-template #cargando>
+            <div class="contenedorG">
+            <mat-spinner color="primary" diameter="100"></mat-spinner>
+            </div>
+        </ng-template>
         </div>
-
         </div>
-
 </body>

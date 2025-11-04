@@ -1,11 +1,119 @@
-* {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+*{
+    color: black;
 }
 
-.main {
- display: flex;
- justify-content: center;
- align-items: center;
-    
+h1, h2 {
+    background-color: rgb(32, 160, 0);
 }
+
+.main { /* centrar */
+ max-width: fit-content;
+ list-style-position: inside;
+ margin-left: auto;
+ margin-right: auto;
+ background-color: rgb(32, 160, 0);
+ padding: 2%;
+ border-radius: 5%;
+}
+
+.main li { /* centrar */
+ background-color: rgb(32, 161, 0);
+ padding-left: 1%;
+}
+
+.main p {
+    margin: 0px;
+    background-color: rgb(32, 160, 0);
+    padding: 1%;
+}
+
+.turno {
+    font-size: 3vh;
+}
+
+.contenedorG {
+    display: flex;
+    background-color:rgb(32, 160, 0);
+    justify-content: center;
+    align-items: center;
+}
+mat-spinner {
+    padding: 0px;
+    margin: 0px;
+    background-color:rgb(32, 160, 0);
+}
+
+
+body {
+  padding-bottom: 10%;
+}
+
+.inicio{
+    
+    background-color: rgb(255, 218, 241);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.img-top{
+    text-align: center;
+    margin-left: 14%;
+}
+
+.logo{
+    width: 25%;
+    border-radius: 30px;
+    min-width: 100px;
+}
+
+.usuario small {
+    color: rgb(88, 88, 88);
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
+    background-color: green;
+    width: 100%;
+    min-height: 160px;
+}
+.title{
+    padding: 5%;
+    margin-left: 30%;
+}
+
+
+.usuario{
+    padding: 10px;
+    border-radius: 20px;
+    width: 22%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+.divImage {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#perro1 {
+    max-width: 50vw;
+    max-height: 50vh;
+}
+
+
+
+

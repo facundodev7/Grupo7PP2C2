@@ -1,25 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { ControladorR } from '../../database';
 import { CommonModule } from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { Router, RouterLink, RouterModule } from '@angular/router';
+
+var hoy = new Date()
+var hoyT
+var hoyMesS:string
+var hoyNumeroO:string
+hoyT = hoy.toDateString()
+hoyMesS = hoyT.slice(4,7)
+hoyNumeroO = hoyT.slice(8,10)
+
+var maniana = hoy
+var manianaMesS:string
+var manianaNumeroO:string
+maniana.setDate(hoy.getDate() + 1)
+manianaMesS = maniana.toDateString().slice(4,7)
+manianaNumeroO = maniana.toDateString().slice(8,10)
+
+
+
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
 
-  turnos:any[] = []
-  hoy = new Date()
+  turnos = new Array
+  hoyNumero = hoyNumeroO
+  hoyMes = hoyMesS
+  manianaNumero = manianaNumeroO
+  manianaMes = manianaMesS
 
-  hoy2 = this.hoy.toDateString()
 
-  hoyNumero = this.hoy2.slice(8,10)
+  correo = ''
 
-  hoyMes = this.hoy2.slice(4,7)
-
-  constructor(private controlador:ControladorR){}
+  constructor(private controlador:ControladorR,private ruta:Router){}
 
 
   async ngOnInit(){
@@ -65,7 +85,47 @@ export class AdminComponent {
         this.hoyMes = 'Diciembre'
         break;
   }
+  switch (this.manianaMes) {
+  case 'Jan':
+    this.manianaMes = 'Enero';
+    break;
+  case 'Feb':
+    this.manianaMes = 'Febrero';
+    break;
+  case 'Mar':
+    this.manianaMes = 'Marzo';
+    break;
+  case 'Apr':
+    this.manianaMes = 'Abril';
+    break;
+  case 'May':
+    this.manianaMes = 'Mayo';
+    break;
+  case 'Jun':
+    this.manianaMes = 'Junio';
+    break;
+  case 'Jul':
+    this.manianaMes = 'Julio';
+    break;
+  case 'Aug':
+    this.manianaMes = 'Agosto';
+    break;
+  case 'Sep':
+    this.manianaMes = 'Septiembre';
+    break;
+  case 'Oct':
+    this.manianaMes = 'Octubre';
+    break;
+  case 'Nov':
+    this.manianaMes = 'Noviembre';
+    break;
+  case 'Dec':
+    this.manianaMes = 'Diciembre';
+    break;
+}
   }
+
+  
 
   async test(){
     this.turnos = await this.controlador.turnosAdminV2()
@@ -85,6 +145,10 @@ export class AdminComponent {
       usuario.email = await this.controlador.getEmail(usuario.usuario)
       usuario.numero =  ++i 
     }
+  }
+
+  irA(arg:string){
+    this.ruta.navigate([arg])
   }
 
 }
