@@ -9,9 +9,13 @@
             <small >{{correo}}</small>
         </div>
 </div>
-    <div class="main">
+<div class="contenedoreS">
+    <button class="lado">Cargar turnos anteriores</button>
+<div class="lado" *ngIf="ladoIzquierdo">hola</div>
+    <div class="main" *ngIf="medio">
         <h1>Turnos seleccionados por usuarios para</h1>
         <h2>{{hoyNumero}} {{hoyMes}}</h2>
+
         <div *ngFor="let turno of turnos">
          <ng-container *ngIf="turno.numero && turno.hora && turno.mascota && turno.tipo && turno.nombre && turno.apellido; else cargando">
             <div class="turno"> 
@@ -32,5 +36,30 @@
             </div>
         </ng-template>
         </div>
+        <h1>Turnos seleccionados por usuarios para</h1>
+        <h2>{{manianaNumero}} {{manianaMes}}</h2>
+        <div *ngFor="let turno of turnosM">
+         <ng-container *ngIf="turno.numero && turno.hora && turno.mascota && turno.tipo && turno.nombre && turno.apellido; else cargando">
+            <div class="turno"> 
+        <p>---</p>
+        <li class="turno">Turno {{turno.numero}}</li>
+        <li>Hora: {{turno.hora}}</li>
+        <li>Mascota: {{turno.mascota}}</li>
+        <li>Tipo: {{turno.tipo}}</li>
+        <p>Solicitado por:</p>
+        <li>{{turno.nombre}} {{turno.apellido}}</li>
+        <li>Telefono: {{turno.telefono}}</li>
+        <li>Correo: {{turno.email}}</li>
+            </div>
+        </ng-container>
+          <ng-template #cargando>
+            <div class="contenedorG">
+            <mat-spinner color="primary" diameter="100"></mat-spinner>
+            </div>
+        </ng-template>
+        </div>
+        </div>
+        <button class="lado">Cargar turnos futuros</button>
+        <div class="lado" *ngIf="ladoDerecho">hola2</div>
         </div>
 </body>

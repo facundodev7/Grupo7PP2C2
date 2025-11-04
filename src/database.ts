@@ -99,13 +99,11 @@ async login(arg1:any,arg2:any){
       const uid = userCredential.user?.uid;
 
       if (uid){
-        window.alert('Login exitoso')
         this.ruta.navigate([''])
       }
 
     }
     catch(error:any){
-      window.alert('Login fallido')
     }
   }
 
@@ -176,7 +174,6 @@ async login(arg1:any,arg2:any){
       primeraVez:arg5,
       motivo:arg6,
     })
-    window.alert('Mascota subida')
     this.ruta.navigate([''])
   }
 
@@ -402,7 +399,7 @@ async getTurnosAdmin(){
 
 }
 
-async turnosAdminV2(){
+async turnosAdminHoy(){
   const db = getDatabase();
   const reference = ref(db, 'turnos');
 
@@ -449,6 +446,58 @@ async turnosAdminV2(){
   catch {
     console.log('se rompio')
     return turnosHoy
+  }
+}
+
+async turnosAdminManiana(){
+  const db = getDatabase();
+  const reference = ref(db, 'turnos');
+
+  var maniana = new Date()
+
+  maniana.setDate(maniana.getDate() + 1)
+
+  var manianaMes = maniana.toDateString().slice(4,7)
+  var manianaNumero = maniana.getDate().toString()
+
+  var stringAbuscar = ''
+
+  var turnosManiana: any[] = []
+
+  stringAbuscar = manianaNumero + " " + manianaMes
+  console.log(stringAbuscar)
+
+  try {
+    const snapshot = await get(reference)
+    const turnos = snapshot.val()
+    
+    const buscar = Object.keys(turnos).find(key => {
+      const partes = key.split(' ')
+      if (partes.length < 2) return false
+
+      const [dia, mesString] = partes
+      return(
+        dia === manianaNumero &&
+        mesString.toLowerCase().startsWith(manianaMes.toLowerCase())
+      )
+    })
+
+    if (buscar){
+      const diaTurnos = turnos[buscar]
+      Object.keys(diaTurnos).forEach(horaKey => {
+        const turno = diaTurnos[horaKey]
+        turnosManiana.push({
+          fecha:buscar,
+          horaKey,
+          ...turno
+        })
+      })
+    }
+    return turnosManiana
+  }
+  catch {
+    console.log('se rompio')
+    return turnosManiana
   }
 }
 }

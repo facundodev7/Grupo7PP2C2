@@ -85,3 +85,7 @@ button:hover{
     
     background-color: rgb(255, 152, 152);
 }
+
+p {
+    margin-top: 10%;
+}

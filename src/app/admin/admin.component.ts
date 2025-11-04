@@ -31,10 +31,15 @@ manianaNumeroO = maniana.toDateString().slice(8,10)
 export class AdminComponent {
 
   turnos = new Array
+  turnosM = new Array
   hoyNumero = hoyNumeroO
   hoyMes = hoyMesS
   manianaNumero = manianaNumeroO
   manianaMes = manianaMesS
+
+  ladoIzquierdo = false
+  ladoDerecho = false
+  medio = true
 
 
   correo = ''
@@ -43,8 +48,9 @@ export class AdminComponent {
 
 
   async ngOnInit(){
-    this.test().then(()=> {
-      this.agregarDatos()
+    this.cargar().then(()=> {
+      this.agregarDatos(this.turnos)
+      this.agregarDatos(this.turnosM)
     })
 
     switch(this.hoyMes){
@@ -125,10 +131,9 @@ export class AdminComponent {
 }
   }
 
-  
-
-  async test(){
-    this.turnos = await this.controlador.turnosAdminV2()
+  async cargar(){
+    this.turnos = await this.controlador.turnosAdminHoy()
+    this.turnosM = await this.controlador.turnosAdminManiana()
     console.log(this.turnos)
   }
 
@@ -136,9 +141,9 @@ export class AdminComponent {
     return await this.controlador.getNombre(argumento)
   }
 
-  async agregarDatos(){ //trae los datos de usuario de los turnos
+  async agregarDatos(arg:any){ //trae los datos de usuario de los turnos
     let i = 0
-    for (let usuario of this.turnos){
+    for (let usuario of arg){
       usuario.nombre = await this.controlador.getNombre(usuario.usuario)
       usuario.apellido = await this.controlador.getApellido(usuario.usuario)
       usuario.telefono = await this.controlador.getTelefono(usuario.usuario)
