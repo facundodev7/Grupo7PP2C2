@@ -10,8 +10,12 @@
         </div>
 </div>
 <div class="contenedoreS">
-    <button class="lado">Cargar turnos anteriores</button>
-<div class="lado" *ngIf="ladoIzquierdo">hola</div>
+    <button (click)="cargarAyer()" class="lado">Cargar turnos anteriores</button>
+<div class="lado" *ngIf="ladoIzquierdo">
+    <div *ngFor="let turno of turnosA">
+        <li>Turno: {{turno.hora}}</li>
+    </div>
+</div>
     <div class="main" *ngIf="medio">
         <h1>Turnos seleccionados por usuarios para</h1>
         <h2>{{hoyNumero}} {{hoyMes}}</h2>

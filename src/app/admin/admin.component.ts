@@ -32,6 +32,7 @@ export class AdminComponent {
 
   turnos = new Array
   turnosM = new Array
+  turnosA = new Array
   hoyNumero = hoyNumeroO
   hoyMes = hoyMesS
   manianaNumero = manianaNumeroO
@@ -135,6 +136,11 @@ export class AdminComponent {
     this.turnos = await this.controlador.turnosAdminHoy()
     this.turnosM = await this.controlador.turnosAdminManiana()
     console.log(this.turnos)
+  }
+
+  async cargarAyer(){
+    this.ladoIzquierdo = true
+    this.turnosA = await this.controlador.turnosAdminAyer()
   }
 
   async obtenerUsuario(argumento:any){
