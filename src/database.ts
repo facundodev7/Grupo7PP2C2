@@ -82,7 +82,8 @@ export class ControladorR {
       // redirigir al login o a la página principal
       this.ruta.navigate(['']);
       return { success: true, uid };
-    } catch (error: any) {
+    } catch (error: any) { 
+      alert('Error al registrarse')
       console.error("Error registrando usuario:", error);
       return { success: false, message: error.message };
     }
@@ -104,6 +105,14 @@ async login(arg1:any,arg2:any){
 
     }
     catch(error:any){
+
+      if (!arg1)
+      {alert('Ingrese un usuario')}
+      
+      if(!arg2)
+      {alert('Ingrese una contraseña')}
+
+      alert('Error al iniciar sesión')
     }
   }
 

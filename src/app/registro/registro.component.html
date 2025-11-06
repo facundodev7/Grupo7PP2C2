@@ -34,15 +34,19 @@
 
     <input type="text" id="telefono" [(ngModel)]="telefono" name="telefono" required class="texto" maxlength="20">
 
-    <label for="password"><h5>Contraseña</h5></label>
+    <label for="password"><h5>Contraseña *</h5></label>
   
-    <input type="password" id="contraS" [(ngModel)]="password" name="password" required class="texto" maxlength="15">
+    <input type="password" id="contraS" [(ngModel)]="password" name="password" required class="texto" maxlength="15" minlength="6">
 
     <label for="confir"><h5>Confirmación de contraseña</h5></label>
 
-    <input type="password" id="contraConfir" [(ngModel)]="confir" name="confir" required class="texto" maxlength="15">  
+    <input type="password" id="contraConfir" [(ngModel)]="confir" name="confir" required class="texto" maxlength="15" minlength="6">  
 
     <button type="submit">Registrarse</button>
+
+    <br>
+
+    <small>* Minimo seis carateres</small>
 </form>
 
 </div>

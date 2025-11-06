@@ -19,7 +19,9 @@
         <button *ngIf="correo && !admin" (click)="irA('turno')">Agenda un turno</button>
         <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
         <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
-        <button (click)="irA('admin-panel')" *ngIf="admin">Panel de Administrador</button>
+        <button (click)="irA('admin')" *ngIf="admin">Turnos</button>
+        <button (click)="irA('admin-usuarios')" *ngIf="admin">Usuarios</button>
+        <button (click)="irA('admin-articulos')" *ngIf="admin">Articulos</button>
         <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
 
