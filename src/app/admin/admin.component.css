@@ -12,12 +12,12 @@
  box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
  border-radius: 20px;
  padding: 2%;
- border-radius: 5%;
 }
 
 .main li { /* centrar */
  padding-left: 1%;
 }
+
 
 .main p {
     margin: 0px;
@@ -26,6 +26,9 @@
 
 .turno {
     font-size: 3vh;
+    max-width: fit-content;
+    list-style-position: inside;
+    
 }
 
 .contenedorG {

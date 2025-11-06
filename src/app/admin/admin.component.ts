@@ -139,8 +139,11 @@ export class AdminComponent {
   }
 
   async cargarAyer(){
-    this.ladoIzquierdo = true
     this.turnosA = await this.controlador.turnosAdminAyer()
+    this.agregarDatos(this.turnosA)
+    this.ladoIzquierdo = !this.ladoIzquierdo
+    this.medio = !this.medio
+
   }
 
   async obtenerUsuario(argumento:any){

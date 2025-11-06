@@ -508,6 +508,7 @@ async turnosAdminAyer(){
 
   const datos = snapshot.val()
   const hoy = new Date()
+  hoy.setHours(0, 0, 0, 0);
 
   const parseDate = (str:string):Date | null => {
     const meses:any = {
@@ -525,10 +526,22 @@ async turnosAdminAyer(){
     if (isNaN(dia) || mes === undefined || isNaN(anio)) return null;
     return new Date(anio, mes, dia);
   }
-  const turnosAyer = Object.keys(datos).filter(fechaStr => {
-    const fecha = parseDate(fechaStr)
-    return fecha && fecha < hoy;
-  })
+
+  const turnosAyer: any[] = []
+  const turno = Object.keys(datos).forEach(fechaStr => {
+    const fecha = parseDate(fechaStr);
+    if (fecha && fecha < hoy) {
+      const turnosDia = datos[fechaStr];
+      Object.keys(turnosDia).forEach(horaKey => {
+        const turno = turnosDia[horaKey];
+        turnosAyer.push({
+          fecha: fechaStr,
+          hora: horaKey,
+          ...turno
+        });
+      });
+    }
+  });
   console.log(turnosAyer)
   return turnosAyer
 }

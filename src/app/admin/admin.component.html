@@ -10,10 +10,19 @@
         </div>
 </div>
 <div class="contenedoreS">
-    <button (click)="cargarAyer()" class="lado">Cargar turnos anteriores</button>
-<div class="lado" *ngIf="ladoIzquierdo">
-    <div *ngFor="let turno of turnosA">
-        <li>Turno: {{turno.hora}}</li>
+    <button (click)="cargarAyer()" class="lado" *ngIf="ladoIzquierdo || medio">Cargar turnos anteriores</button>
+<div class="main" *ngIf="ladoIzquierdo">
+       <h1>Turnos anteriores</h1>
+
+    <div *ngFor="let turno of turnosA" class="turno"> 
+        <li>Turno {{turno.numero}}</li>
+        <li>Hora: {{turno.hora}}</li>
+        <li>Mascota: {{turno.mascota}}</li>
+        <li>Tipo: {{turno.tipo}}</li>
+        <p>Solicitado por:</p>
+        <li>{{turno.nombre || "Sin nombre"}} {{turno.apellido || "Sin apellido"}}</li>
+        <li>Teléfono: {{turno.telefono}}</li>
+        <li>Correo: {{turno.email}}</li>
     </div>
 </div>
     <div class="main" *ngIf="medio">
@@ -31,7 +40,6 @@
         <li>{{turno.nombre}} {{turno.apellido}}</li>
         <li>Telefono: {{turno.telefono}}</li>
         <li>Correo: {{turno.email}}</li>
-        <p>{{manianaNumero}} {{manianaMes}}</p>
             </div>
         </ng-container>
           <ng-template #cargando>
