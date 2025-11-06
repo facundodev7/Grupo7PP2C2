@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControladorR } from '../../database';
+import { ControladorR } from '../../../database';
 import { CommonModule } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Router, RouterLink, RouterModule } from '@angular/router';
