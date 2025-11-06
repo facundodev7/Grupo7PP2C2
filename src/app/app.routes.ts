@@ -8,7 +8,10 @@ import { IngresaComponent } from './ingresa/ingresa.component';
 import { TurnoComponent } from './turno/turno.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin-panel/admin/admin.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminArticulosComponent } from './admin-panel/admin-articulos/admin-articulos.component';
+import { AdminUsuariosComponent } from './admin-panel/admin-usuarios/admin-usuarios.component';
 
 const routeConfig: Routes = [
   {
@@ -48,12 +51,33 @@ const routeConfig: Routes = [
     title:'Saca un turno',
     canActivate: [AuthGuard]
   },
+
+  // ------  Admin ------------
   {
     path:'admin',
     component:AdminComponent,
     title:'Administrador',
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin-panel',
+    component:AdminPanelComponent,
+    title:'Panel de administrador',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin-articulos',
+    component:AdminArticulosComponent,
+    title:'Articulos (Administrador)',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin-usuarios',
+    component:AdminUsuariosComponent,
+    title:'Usuarios (Administrador)',
+    canActivate: [AuthGuard]
   }
+
 
 ];
 

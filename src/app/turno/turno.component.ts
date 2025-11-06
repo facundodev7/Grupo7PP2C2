@@ -1,9 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalTurnoComponent } from '../modal-turno/modal-turno.component';
+import { ModalTurnoComponent } from './modal-turno/modal-turno.component';
 import { MatDialog } from '@angular/material/dialog';
 import { getDatabase, ref, get  } from 'firebase/database';
 import { Router } from '@angular/router';
+import { ControladorR } from '../../database';
 
 
 
@@ -15,7 +16,12 @@ import { Router } from '@angular/router';
 })
 export class TurnoComponent implements OnInit{
 
-  constructor(private dialog: MatDialog, private ruta: Router) {}
+  correo:any
+
+  constructor(
+    private dialog: MatDialog,
+    private ruta: Router,
+    private controlador: ControladorR ) {}
 
   monthNames = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -29,6 +35,15 @@ export class TurnoComponent implements OnInit{
 
 
   async ngOnInit() {
+    this.controlador.user$.subscribe(async (user) =>{
+      if (user){
+        this.correo = await this.controlador.getEmail(user.uid);
+      } else {
+        this.correo = null;
+      }
+    })
+  
+
     await this.renderCalendar();
   }
 

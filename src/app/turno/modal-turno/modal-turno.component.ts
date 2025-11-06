@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog  } from '@angular/material/dia
 import { CommonModule } from '@angular/common';
 import { ModalTipoTurnoComponent } from '../modal-tipo-turno/modal-tipo-turno.component';
 import { getDatabase, ref, get } from 'firebase/database';
-import { ControladorR } from '../../database';
+import { ControladorR } from '../../../database';
 
 
 

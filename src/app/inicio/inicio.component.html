@@ -1,10 +1,11 @@
 <body>
-    <div class="inicio">
-<div class="img-top">
-    <img src="assets/patitas-felices.png" class="logo" >
-</div>
+    
+<div class="inicio">
+        <div class="img-top">
+            <img src="assets/patitas-felices.png" class="logo" >
+        </div>
 
-<div class="usuario">
+        <div class="usuario">
             <img src="assets/user.png" id="userP" *ngIf="correo">
             <small >{{correo}}HOLA SOY UN TEST</small>
         </div>
@@ -18,7 +19,7 @@
         <button *ngIf="correo && !admin" (click)="irA('turno')">Agenda un turno</button>
         <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
         <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
-        <button (click)="irA('admin')" *ngIf="admin">Admin opciones</button>
+        <button (click)="irA('admin-panel')" *ngIf="admin">Panel de Administrador</button>
         <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
 

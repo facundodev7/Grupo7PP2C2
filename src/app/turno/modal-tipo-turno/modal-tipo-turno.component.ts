@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { getDatabase, ref, push, set } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
-import { ControladorR } from '../../database';
+import { ControladorR } from '../../../database';
 
 
 @Component({
