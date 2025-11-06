@@ -8,10 +8,9 @@ import { IngresaComponent } from './ingresa/ingresa.component';
 import { TurnoComponent } from './turno/turno.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AdminComponent } from './admin-panel/admin/admin.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { AdminArticulosComponent } from './admin-panel/admin-articulos/admin-articulos.component';
-import { AdminUsuariosComponent } from './admin-panel/admin-usuarios/admin-usuarios.component';
+import { AdminComponent } from './admin-admin/admin/admin.component';
+import { AdminArticulosComponent } from './admin-admin/admin-articulos/admin-articulos.component';
+import { AdminUsuariosComponent } from './admin-admin/admin-usuarios/admin-usuarios.component';
 
 const routeConfig: Routes = [
   {
@@ -57,12 +56,6 @@ const routeConfig: Routes = [
     path:'admin',
     component:AdminComponent,
     title:'Administrador',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin-panel',
-    component:AdminPanelComponent,
-    title:'Panel de administrador',
     canActivate: [AuthGuard]
   },
   {

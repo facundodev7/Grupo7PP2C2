@@ -31,40 +31,48 @@ export class RegistroComponent {
 
     let rol = 0;
 
+    if(!this.nombre && !this.apellido && !this.email && !this.password && !this.confir)
+    {
+      alert('Error al registrarse');
+    }
+    else{
+
     if (!this.nombre) {
-      console.log("Debe completar el nombre");
+      alert("Debe completar el nombre");
       return;
     }
 
     if (!this.apellido) {
-      console.log("Debe completar el apellido");
+      alert("Debe completar el apellido");
       return;
     }
 
     if (!this.email) {
-      console.log("Debe completar email");
+      alert("Debe completar email");
       return;
     }
 
     if (!this.telefono) {
-      console.log("Debe completar el teléfono");
+      alert("Debe completar el teléfono");
       return;
     }
 
     if (!this.password) {
-      console.log("Debe completar la contraseña");
+      alert("Debe completar la contraseña");
       return;
     }
 
     if (!this.confir ) {
-      console.log("Debe completar la confirmación de la contraseña");
+      alert("Debe completar la confirmación de la contraseña");
       return;
     }
 
      if (this.password !== this.confir) {
-      console.log("Las contraseñas no coinciden");
+      alert("Las contraseñas no coinciden");
       return;
     }
+
+  }
 
     if(this.email == 'admin@admin.com')
     {
@@ -78,6 +86,7 @@ export class RegistroComponent {
     if (resultado.success)  {
       console.log("Usuario registrado con UID:", resultado.uid);
     } else {
+      alert('Error al registrarse');
       console.error("Error al registrar:", resultado.message);
     }
   }
