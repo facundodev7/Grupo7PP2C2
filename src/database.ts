@@ -106,13 +106,19 @@ async login(arg1:any,arg2:any){
     }
     catch(error:any){
 
-      if (!arg1)
-      {alert('Ingrese un usuario')}
-      
-      if(!arg2)
+      if(!arg1 && !arg2)
+      {
+        {alert('Ingrese todos los campos')}
+      }
+      else{
+        if (!arg1)
+      {alert('Ingrese un usuario')} 
+      else if(!arg2)
       {alert('Ingrese una contraseña')}
-
-      alert('Error al iniciar sesión')
+      else
+      {{alert('Error al iniciar sesión')}}
+      }
+        
     }
   }
 
@@ -184,6 +190,23 @@ async login(arg1:any,arg2:any){
       motivo:arg6,
     })
     this.ruta.navigate([''])
+  }
+
+
+
+
+  agregarArticulo( arg1?:any, arg2?:any){
+    const direccion = ref(db, `articulos`);
+    const nuevoArticulo = push(direccion);
+
+    update(nuevoArticulo, {
+      titulo:arg1,
+      texto:arg2,
+      fecha:new Date()
+    })
+
+    this.ruta.navigate(['']);
+    alert('Artículo publicado con exito')
   }
 
 

@@ -1,5 +1,5 @@
 * {
-    color: rgb(116, 116, 116);
+    color: rgb(94, 93, 93);
     padding: 0px;
     margin: 0px;
 }
@@ -88,4 +88,8 @@ button:hover{
 
 p {
     margin-top: 10%;
+}
+
+.registro{
+    cursor: pointer;
 }

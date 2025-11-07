@@ -18,6 +18,7 @@ export class LoginComponent {
 
   async subir(){
     await this.controlador.login(this.email,this.contra)
+    
   }
 
    irA(arg:string){
