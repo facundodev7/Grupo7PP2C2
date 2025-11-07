@@ -10,12 +10,14 @@
         </div>
 </div>
 <div class="contenedoreS">
-    <button (click)="cargarAyer()" class="lado" *ngIf="ladoIzquierdo || medio">Cargar turnos anteriores</button>
+    <button (click)="cargarAyer()" class="lado" *ngIf="btnI">Cargar turnos anteriores</button>
+    <button (click)="volver(ladoIzquierdo)" *ngIf="ladoIzquierdo" class="lado">Volver</button>
 <div class="main" *ngIf="ladoIzquierdo">
        <h1>Turnos anteriores</h1>
 
     <div *ngFor="let turno of turnosA" class="turno"> 
         <li>Turno {{turno.numero}}</li>
+        <li>{{turno.fecha}}</li>
         <li>Hora: {{turno.hora}}</li>
         <li>Mascota: {{turno.mascota}}</li>
         <li>Tipo: {{turno.tipo}}</li>
@@ -23,14 +25,17 @@
         <li>{{turno.nombre || "Sin nombre"}} {{turno.apellido || "Sin apellido"}}</li>
         <li>Teléfono: {{turno.telefono}}</li>
         <li>Correo: {{turno.email}}</li>
+        <Button (click)="borrarTurno(turno.fecha, turno.hora)" class="borrarBtn">Borrar Turno</Button>
     </div>
+
 </div>
+        <button (click)="volver(ladoDerecho)" *ngIf="ladoIzquierdo" class="lado">Volver</button>
     <div class="main" *ngIf="medio">
         <h1>Turnos seleccionados por usuarios para</h1>
         <h2>{{hoyNumero}} {{hoyMes}}</h2>
 
         <div *ngFor="let turno of turnos">
-         <ng-container *ngIf="turno.numero && turno.hora && turno.mascota && turno.tipo && turno.nombre && turno.apellido; else cargando">
+         <ng-container *ngIf="turno.numero; else cargando">
             <div class="turno"> 
         <li>Turno {{turno.numero}}</li>
         <li>Hora: {{turno.hora}}</li>
@@ -40,6 +45,7 @@
         <li>{{turno.nombre}} {{turno.apellido}}</li>
         <li>Telefono: {{turno.telefono}}</li>
         <li>Correo: {{turno.email}}</li>
+        <li><Button (click)="borrarTurno(turno.fecha, turno.hora)" class="borrarBtn">Borrar Turno</Button></li>
             </div>
         </ng-container>
           <ng-template #cargando>
@@ -51,7 +57,7 @@
         <h1>Turnos seleccionados por usuarios para</h1>
         <h2>{{manianaNumero}} {{manianaMes}}</h2>
         <div *ngFor="let turno of turnosM">
-         <ng-container *ngIf="turno.numero && turno.hora && turno.mascota && turno.tipo && turno.nombre && turno.apellido; else cargando">
+         <ng-container *ngIf="turno.numero; else cargando">
             <div class="turno"> 
         <p>---</p>
         <li class="turno">Turno {{turno.numero}}</li>
@@ -62,6 +68,7 @@
         <li>{{turno.nombre}} {{turno.apellido}}</li>
         <li>Telefono: {{turno.telefono}}</li>
         <li>Correo: {{turno.email}}</li>
+        <li><Button (click)="borrarTurno(turno.fecha, turno.hora)" class="borrarBtn">Borrar turno</Button></li>
             </div>
         </ng-container>
           <ng-template #cargando>
@@ -71,7 +78,23 @@
         </ng-template>
         </div>
         </div>
-        <button class="lado">Cargar turnos futuros</button>
-        <div class="lado" *ngIf="ladoDerecho">hola2</div>
+        <button (click)="cargarFuturo()" class="lado" *ngIf="btnD">Cargar turnos futuros</button>
+        <button (click)="volver(ladoDerecho)" *ngIf="ladoDerecho" class="lado">Volver</button>
+<div class="main"  *ngIf="ladoDerecho">
+    <h1>Turnos futuros</h1>
+    <div *ngFor="let turno of turnosF" class="turno"> 
+        <li>Turno {{turno.numero}}</li>
+        <li>{{turno.fecha}}</li>
+        <li>Hora: {{turno.hora}}</li>
+        <li>Mascota: {{turno.mascota}}</li>
+        <li>Tipo: {{turno.tipo}}</li>
+        <p>Solicitado por:</p>
+        <li>{{turno.nombre || "Sin nombre"}} {{turno.apellido || "Sin apellido"}}</li>
+        <li>Teléfono: {{turno.telefono}}</li>
+        <li>Correo: {{turno.email}}</li>
+        <Button (click)="borrarTurno(turno.fecha, turno.hora)" class="borrarBtn">Borrar Turno</Button>
+    </div>
+</div>
+        <button (click)="volver(ladoDerecho)" *ngIf="ladoDerecho" class="lado">Volver</button>
         </div>
 </body>

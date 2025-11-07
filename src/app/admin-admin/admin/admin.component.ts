@@ -33,11 +33,14 @@ export class AdminComponent {
   turnos = new Array
   turnosM = new Array
   turnosA = new Array
+  turnosF = new Array
   hoyNumero = hoyNumeroO
   hoyMes = hoyMesS
   manianaNumero = manianaNumeroO
   manianaMes = manianaMesS
 
+  btnI = true
+  btnD = true
   ladoIzquierdo = false
   ladoDerecho = false
   medio = true
@@ -132,6 +135,24 @@ export class AdminComponent {
 }
   }
 
+  async borrarTurno(arg1:any, arg2:any){
+    await this.controlador.borrarTurno(arg1, arg2).then(()=> {
+      this.cargar().then(async ()=>{
+        this.agregarDatos(this.turnos)
+        this.agregarDatos(this.turnosM)
+        
+        if (this.ladoIzquierdo == true){
+            this.turnosA = await this.controlador.turnosAdminAyer()
+            this.agregarDatos(this.turnosA)
+        }
+        if (this.ladoDerecho == true){
+            this.turnosF = await this.controlador.turnosAdminAyer()
+            this.agregarDatos(this.turnosF)
+        }
+      })
+    })
+  }
+
   async cargar(){
     this.turnos = await this.controlador.turnosAdminHoy()
     this.turnosM = await this.controlador.turnosAdminManiana()
@@ -142,8 +163,28 @@ export class AdminComponent {
     this.turnosA = await this.controlador.turnosAdminAyer()
     this.agregarDatos(this.turnosA)
     this.ladoIzquierdo = !this.ladoIzquierdo
+    this.btnI = !this.btnI
+    this.btnD = !this.btnD
     this.medio = !this.medio
 
+  }
+
+  async cargarFuturo(){
+    this.turnosF = await this.controlador.turnosAdminFuturo()
+    this.agregarDatos(this.turnosF)
+    this.ladoDerecho = !this.ladoDerecho
+    this.btnI = !this.btnI
+    this.btnD = !this.btnD
+    this.medio = !this.medio
+  }
+
+  async volver(arg:any){
+    arg = !arg
+    this.medio = true
+    this.ladoIzquierdo = false
+    this.ladoDerecho = false
+    this.btnI = true
+    this.btnD = true
   }
 
   async obtenerUsuario(argumento:any){

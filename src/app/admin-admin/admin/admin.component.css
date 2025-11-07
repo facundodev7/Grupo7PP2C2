@@ -28,7 +28,7 @@
     font-size: 3vh;
     max-width: fit-content;
     list-style-position: inside;
-    
+    margin-top: 10%;
 }
 
 .contenedorG {
@@ -129,8 +129,6 @@ body {
     max-width: fit-content;
 }
 
-
-
 p {
     margin: 0px;
     padding: 0px;
@@ -138,3 +136,11 @@ p {
     align-self: center;
     justify-content: center;
 }
+
+.borrarBtn {
+    font-size: 3vh;
+    background-color: rgb(200, 0, 0);
+    color: white;
+    border-radius: 20px;
+}
+
