@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ControladorR } from '../../../database';
+import { Articulo } from '../../models/Articulos';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-articulos',
-  imports: [],
+  imports: [ReactiveFormsModule,RouterModule, FormsModule],
   templateUrl: './admin-articulos.component.html',
   styleUrl: './admin-articulos.component.css'
 })
 export class AdminArticulosComponent {
 
   correo:any
+  articulo = new Articulo('','')
 
    constructor(private ruta:Router, private controlador: ControladorR){}
 
@@ -25,6 +29,10 @@ export class AdminArticulosComponent {
       }
     })
   }
+
+   enviar(){
+    this.controlador.agregarArticulo( this.articulo.Titulo, this.articulo.Texto);
+    }
 
 
      irA(arg:string){

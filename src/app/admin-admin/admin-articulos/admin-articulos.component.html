@@ -12,3 +12,20 @@
     </div>
 
 </div>
+
+<form (ngSubmit)="enviar()">
+<div class="container">
+    <div class="carga">
+        <h4>Carga de Artículos</h4>
+
+        <input type="text" placeholder="Ingrese el título del articulo ..." class="titulo" maxlength="55" [(ngModel)]="articulo.Titulo" name="titulo">
+
+        <textarea class="texto" placeholder="Ingrese el texto del artículo ..." spellcheck="true" [(ngModel)]="articulo.Texto" name="texto"></textarea>
+
+        <button type="submit">Publicar</button>
+
+    </div>
+
+</div>
+
+</form>
