@@ -1,28 +1,21 @@
-<h1>Componente Ingresar Mascota</h1>
-
-<div>
-    <title>Tu Mascota</title>
-    
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
 </div>
-
-
-
 <div class="container">
-    <div class="imagen">
-        <img src="assets/Fondo.png" alt="">
-    </div>    
-
-    <form (ngSubmit)="enviar()">
+    <form (ngSubmit)="enviar()">       
         <div class="formulario"> 
             <div class="box-1">
+                <div class="titulo">
+                    <h2> Ingresa tu mascota</h2>
+                </div>
                 <div class="mb-3">
                     <label for="Foto de la Mascota">Foto de la Mascota</label>
                     <input  type="file" id="Foto de la Mascota" name="Fotode la mascota" placeholder="Foto de tu mascota">
                 </div>
 
                 <div class="mb-3">
-                    <label for="nombre" >Nombre</label>
-                    <input id="nombre" name="nombre" placeholder="nombre" type="text" [(ngModel)]="animal.Nombre">
+                    <label for="nombre" >Nombre </label>
+                    <input id="nombre" name="nombre" placeholder="Nombre" type="text" [(ngModel)]="animal.Nombre">
                 </div>
 
                 <!--  Animal  --> 
@@ -39,18 +32,18 @@
                 </div>
                     
                 
-
+                <!-- 
                 <div class="mb-3">
                     <label for="Domicilio">Domicilio</label>
-                    <input id="Domicilio" name="domicilio" placeholder="Domicilio" type="text" [(ngModel)]="animal.Domicilio">
-
-                </div>
+                    <input id="Domicilio" name="domicilio" placeholder="Domicilio" type="text" [(ngModel)]="animal.Domicilio"> 
+                </div> -->
+                <!-- 
                 <div class="mb-3">
                     <label for="Telefono">Telefono</label>
                     <input id="Telefono" name="telefono" placeholder="Telefono" maxlength="10" type="number" [(ngModel)]="animal.Telefono">
-                </div>
+                </div> -->
 
-
+<!-- 
                 <div class="mb-3">
                     <label for="primeraVez"  class="form-label">Primera Vez</label>
                     <div class="form-floating">
@@ -60,18 +53,20 @@
                         </select>
                     </div>
 
-                </div>
-
+                </div>-->
+                <!-- 
                 <div class="mb-3">
                     <label for="Motivo">Motivo de la consulta</label>
                     <textarea cols="40" rows="5"  name="motivo" id="Motivo" maxlength="200" placeholder="Motivo de la consulta" [(ngModel)]="animal.Motivo"></textarea>
-                </div>
-            
+                </div>-->
 
+                <div>
+                    <button type="submit">Subir</button>
+                </div>
+                
 
             </div>
         </div>
-<button type="submit">HOLA</button>
     </form>
 </div>
 
