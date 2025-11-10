@@ -26,6 +26,7 @@
     </div>
 
   <div class="contenido">
+    <ng-container *ngIf="articulos && articulos.length > 0; else cargando">
   <ng-container *ngFor="let art of articulos; let index = index" class="">
     <div class="grilla-info" *ngIf="index % 2 === 0">
       <div class="info" *ngFor="let item of articulos.slice(index, index + 2)">
@@ -36,6 +37,12 @@
       </div>
     </div>
   </ng-container>
+  </ng-container>
+    <ng-template #cargando>
+      <div class="contenedorG">
+        <mat-spinner color="primary" diameter="300"></mat-spinner>
+      </div>
+        </ng-template>
 </div>
 
         

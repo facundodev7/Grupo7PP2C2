@@ -146,5 +146,11 @@ small{ color: rgb(85, 85, 85);
     height: 8%;
 }
 
-
+.contenedorG {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
 

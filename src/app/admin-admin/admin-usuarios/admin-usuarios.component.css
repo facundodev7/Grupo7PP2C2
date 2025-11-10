@@ -1,5 +1,6 @@
 * {
-    color: rgb(116, 116, 116);
+    color: rgb(0, 0, 0);
+    font-size: 1.1em;
     padding: 0px;
     margin: 0px;
 }
@@ -90,7 +91,7 @@ p {
     display: flex;
     justify-content: center;
     justify-self: center;
-
+    color: black;
     background-color: rgb(59, 214, 139); 
     box-shadow: 20px 10px 20px rgba(0, 0, 0, .3);
     margin: 1% 5% 1% 5%;
@@ -114,4 +115,42 @@ p {
     background-color: rgb(224, 222, 108);
 }
 
+.line {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(59, 64, 214); 
+    box-shadow: 20px 10px 20px rgba(0, 0, 0, .3);
+    margin: 1% 5% 1% 5%;
+    padding: 2%;
+    border-radius: 30px;
+    min-width: 95%;
+}
+
+.grilla{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    align-items: start;
+    justify-content: center;
+    flex-direction:column;
+}
+
+.info{
+    font-size: 1.1em;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(59, 64, 214); 
+    box-shadow: 20px 10px 20px rgba(0, 0, 0, .3);
+    padding: 1rem;
+    border-radius: 30px;
+}
+
+.mascotaS {
+    font-size: 0.9em;
+    color: white;
+}
 
