@@ -13,3 +13,37 @@
     </div>
 
 </div>
+
+    <div class="nav">
+        <div class="grilla">
+        <ng-container *ngFor="let usuario of usuarios">
+            <div class="info">
+                {{usuario.nombre}} {{usuario.apellido}}
+                <br>
+                <br>
+                {{usuario.correo}}
+                <br>
+                {{usuario.telefono}}
+                <br>
+                <br>
+                <button (click)="mostrarMascotas(usuario)">Mascotas de {{usuario.nombre}}</button>
+                <div *ngIf="usuario.mostrar">
+                    <ng-container *ngIf="usuario.mascotas; else noMascotas">
+                    <div *ngFor="let mascota of usuario.MascotasArray" class="mascotaS">
+                        <br>
+                        Nombre: {{mascota.nombre}}
+                        <br>
+                        Raza: {{mascota.animal}}
+                        Motivo: {{mascota.motivo}}
+                        <br>
+                        ¿Primera vez?:{{mascota.primeraVez || 'No definido'}}
+                    </div>
+                    </ng-container>
+                    <ng-template #noMascotas class="mascotaS">
+                        <p style="color: white; font-size: 0.9em;">Sin mascotas registradas</p>
+                    </ng-template>
+                </div>
+            </div>
+        </ng-container>
+        </div>
+    </div>

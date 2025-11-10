@@ -5,13 +5,14 @@ import { ControladorR } from '../../database';
 import { currentUserId } from '../../database';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })

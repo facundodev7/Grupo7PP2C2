@@ -122,7 +122,6 @@ async login(arg1:any,arg2:any){
     }
   }
 
-
   // write -------------------------------------------------------------------------------
 
   writeUserId(userId:any) {
@@ -233,15 +232,9 @@ async login(arg1:any,arg2:any){
     {
       alert('Ingrese contenido al articulo !')
     }
-
-    
-    
   }
 
-
-
   // get -----------------------------------------------------------------------------
-
 
   getCurrentUid(){
     return this.userSubject.value?.uid ?? null
@@ -316,7 +309,6 @@ async login(arg1:any,arg2:any){
   }
   }
 
-
   // ojo mascotas solo devuelve: id, animal y nombre (los otros campos son innecesarios)
   async getMascotas(userId: any) {
   const reference = ref(db, 'users/' + userId + '/mascotas');
@@ -345,8 +337,6 @@ async login(arg1:any,arg2:any){
     return [];
   }
 }
-
-
 
 async getArticulos() {
   const reference = ref(db, 'articulos');
@@ -381,11 +371,6 @@ async getArticulos() {
   }
 }
 
-
-
-
-
-  
   async getRol(userId:any){
     const db = getDatabase();
     const reference = ref(db, 'users/' + userId);
@@ -404,6 +389,29 @@ async getArticulos() {
   }
   }
 
+  async getUsers(){
+    const db = getDatabase();
+    const reference = ref(db, 'users');
+    const snapshot = await get(reference)
+
+    const data = snapshot.val()
+    const usuarios: any[] = []
+
+    if(!data) return []
+
+    if(data){
+      Object.keys(data).forEach(uid =>{
+        const user = data[uid]
+        usuarios.push({
+          uid,
+          ...user
+        });
+      });
+    }
+
+    return usuarios
+    
+  }
 
   // turnos ---------------------------------------------------------------------------
   
@@ -706,5 +714,4 @@ async borrarTurno(fecha:any,hora:any){
     console.log('No se borro nada')
   }
 }
-
 }
