@@ -11,6 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AdminComponent } from './admin-admin/admin/admin.component';
 import { AdminArticulosComponent } from './admin-admin/admin-articulos/admin-articulos.component';
 import { AdminUsuariosComponent } from './admin-admin/admin-usuarios/admin-usuarios.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routeConfig: Routes = [
   {
@@ -48,6 +49,12 @@ const routeConfig: Routes = [
     path:'turno',
     component:TurnoComponent,
     title:'Saca un turno',
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'usuario',
+    component:UsuarioComponent,
+    title:'Datos de usuario',
     canActivate: [AuthGuard]
   },
 

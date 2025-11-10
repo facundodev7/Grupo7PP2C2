@@ -167,6 +167,23 @@ async login(arg1:any,arg2:any){
     })
   }
 
+
+  writeCalle(userId:any, calle:any){
+    const reference = ref(db, 'users/' + userId);
+
+    update(reference, {
+      calle:calle
+    })
+  }
+
+  writeNumero(userId:any, numero:any){
+    const reference = ref(db, 'users/' + userId);
+
+    update(reference, {
+      numero:numero
+    })
+  }
+
   writeRol(userId:any, rol:any){
     const db = getDatabase();
     const reference = ref(db, 'users/' + userId);

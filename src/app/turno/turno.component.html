@@ -5,10 +5,10 @@
     <img src="assets/patitas-felices.png" class="logo" >
 </div>
 
-<div class="usuario">
-            <img src="assets/user.png" id="userP">
+<button class="usuario" (click)="irA('usuario')">
+            <img src="assets/user.png" id="userP" *ngIf="correo">
             <small >{{correo}}</small>
-    </div>
+        </button>
 
 </div>
 

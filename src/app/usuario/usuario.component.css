@@ -1,0 +1,143 @@
+* {
+  color: rgb(105, 105, 105);
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+
+button{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}
+
+small{ color: rgb(85, 85, 85);
+        font-size: 10px;
+    text-align: end;}
+
+h5{
+    color: rgb(60, 60, 60);
+    margin-top: 2%;
+}
+
+
+.inicio{
+    background: rgb(59, 214, 139);
+    /* background-color: rgb(255, 218, 241); */
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.inicio button{
+    margin: 0px;
+    background-color: white;
+    color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+}
+
+.inicio button:hover{
+    background-color: rgb(224, 222, 108);
+    /* background-color: rgb(255, 152, 152); */
+}
+
+.img-top{
+    text-align: center;
+    padding-left: 8%;
+}
+
+.logo{
+    width: 25%;
+    border-radius: 30px;
+    min-width: 100px;
+}
+
+.usuario{
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 10px;
+    border-radius: 20px;
+    width: 22%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#userP{
+    width: 30%;
+    height: 80%;
+}
+
+
+.titulo{
+  margin-bottom: 2%;
+  padding: 1%;
+}
+
+
+/* --------------- fin top ------------------------ */
+
+.container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+.datos-container{
+  background-color: rgb(255, 218, 241);
+  border-radius: 20px;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
+  height: fit-content;
+  transition: .9s;
+  width: 100%;
+  padding: 5% 10% 10% 10%;
+  margin-bottom: 15%;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.datos{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    margin-bottom: 5%;
+    border: solid 1px;
+    border-radius: 20px;
+    border-color: rgb(255, 143, 143);
+    padding: 5%;
+
+}
+
+
+.dato{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 1%;
+    min-width: 50%;
+    text-align: start;
+    margin-top: 2%;
+}

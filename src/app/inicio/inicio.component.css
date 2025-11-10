@@ -36,9 +36,6 @@ small{ color: rgb(85, 85, 85);
     min-width: 100px;
 }
 
-.usuario small {
-    color: rgb(88, 88, 88);
-}
 
 .top {
     display: flex;
@@ -56,6 +53,8 @@ small{ color: rgb(85, 85, 85);
 
 
 .usuario{
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
     padding: 10px;
     border-radius: 20px;
     width: 22%;
