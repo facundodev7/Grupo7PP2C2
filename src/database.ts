@@ -194,19 +194,31 @@ async login(arg1:any,arg2:any){
 
 
 
-
-  agregarArticulo( arg1?:any, arg2?:any){
+//agregar articulo
+  agregarArticulo( arg1?:any, arg2?:any, arg3?:any){
     const direccion = ref(db, `articulos`);
     const nuevoArticulo = push(direccion);
 
-    update(nuevoArticulo, {
+    if(arg1 && arg2)
+    {
+      update(nuevoArticulo, {
       titulo:arg1,
       texto:arg2,
+      imagen:arg3,
       fecha:new Date()
     })
 
     this.ruta.navigate(['']);
     alert('Artículo publicado con exito')
+
+    }
+    else
+    {
+      alert('Ingrese contenido al articulo !')
+    }
+
+    
+    
   }
 
 
@@ -316,6 +328,43 @@ async login(arg1:any,arg2:any){
     return [];
   }
 }
+
+
+
+async getArticulos() {
+  const reference = ref(db, 'articulos');
+
+  try {
+    const snapshot = await get(reference);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+
+     const articulosArray = Object.entries(data).map(([id, valores]: any) => ({
+        id,
+        titulo: valores.titulo,
+        texto: valores.texto,
+        imagen: valores.imagen,
+        fecha: valores.fecha
+      }));
+
+      //del mas nuevo al mas viejo
+      let nuevos = articulosArray.reverse();
+
+        //los últimos 4
+        const ultimos = nuevos.slice(-4);
+
+        return ultimos;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error al obtener los articulos:', error);
+    return [];
+  }
+}
+
+
 
 
 

@@ -25,37 +25,18 @@
         <button *ngIf="correo" (click)="out()">Cerrar Sesión</button>
     </div>
 
-    <div class="contenido">
-
-        <div class="grilla-info">
-
-            <div class="info">
-            <h4>Título de la info 1</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
-            </div>
-
-            <div class="info">
-                <h4>Título de la info 2</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
-            </div>
-        
-        </div>
-
-        <div class="grilla-info">
-
-            <div class="info">
-            <h4>Título de la info 3</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
-            </div>
-
-
-            <div class="info">
-                <h4>Título de la info 4</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum illum in veniam explicabo repellat, minus atque quidem doloremque at. Maiores nemo assumenda magni sunt ut necessitatibus, voluptatum beatae quibusdam sapiente!</p>
-            </div>
-
-        </div>
-
+  <div class="contenido">
+  <ng-container *ngFor="let art of articulos; let index = index" class="">
+    <div class="grilla-info" *ngIf="index % 2 === 0">
+      <div class="info" *ngFor="let item of articulos.slice(index, index + 2)">
+        <img *ngIf="item.imagen" [src]="item.imagen" alt="Imagen del artículo" >
+        <h4>{{ item.titulo }}</h4>
+        <p>{{ item.texto }}</p>
+        <small>{{ item.fecha?.slice(0, 10) }}</small>
+      </div>
+    </div>
+  </ng-container>
 </div>
+
         
 </body>

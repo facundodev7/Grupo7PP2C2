@@ -22,6 +22,7 @@ export class InicioComponent {
   correo:any
   rol: any;
   admin: boolean = false;
+  articulos: any[] = [];
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -57,6 +58,15 @@ export class InicioComponent {
          
       }
     })
+
+    //ver articulos
+
+   this.articulos = await this.controlador.getArticulos();
+
   }
 
+
+
+
+  
 }

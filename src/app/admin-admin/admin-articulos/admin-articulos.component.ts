@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 export class AdminArticulosComponent {
 
   correo:any
-  articulo = new Articulo('','')
+  articulo = new Articulo('','','')
 
    constructor(private ruta:Router, private controlador: ControladorR){}
 
@@ -31,7 +31,7 @@ export class AdminArticulosComponent {
   }
 
    enviar(){
-    this.controlador.agregarArticulo( this.articulo.Titulo, this.articulo.Texto);
+    this.controlador.agregarArticulo( this.articulo.Titulo, this.articulo.Texto, this.articulo.Imagen);
     }
 
 
