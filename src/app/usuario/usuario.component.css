@@ -137,7 +137,9 @@ h5{
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     padding: 1%;
-    min-width: 50%;
+    padding-left: 2%;
+    min-width: 100%;
+    width: fit-content;
     text-align: start;
     margin-top: 2%;
 }
