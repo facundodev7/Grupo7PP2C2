@@ -1,49 +1,51 @@
-
 <div class="inicio">
+  <button (click)="irA('')">Inicio</button>
 
-    <button (click)="irA('')" >Inicio</button>
+  <div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" (click)="irA('')"/>
+  </div>
 
-    <div class="img-top">
-        <img src="assets/patitas-felices.png" class="logo" > 
-    </div>
-
-   <button class="usuario" (click)="irA('usuario')">
-            <img src="assets/user.png" id="userP" *ngIf="correo">
-            <small >{{correo}}</small>
-        </button>
-
+  <button class="usuario" (click)="irA('usuario')">
+    <img src="assets/user.png" id="userP" *ngIf="correo" />
+    <small>{{ correo }}</small>
+  </button>
 </div>
 
-    <div class="nav">
-        <div class="grilla">
-        <ng-container *ngFor="let usuario of usuarios">
-            <div class="info">
-                {{usuario.nombre}} {{usuario.apellido}}
-                <br>
-                <br>
-                {{usuario.correo}}
-                <br>
-                {{usuario.telefono}}
-                <br>
-                <br>
-                <button (click)="mostrarMascotas(usuario)">Mascotas de {{usuario.nombre}}</button>
-                <div *ngIf="usuario.mostrar">
-                    <ng-container *ngIf="usuario.mascotas; else noMascotas">
-                    <div *ngFor="let mascota of usuario.MascotasArray" class="mascotaS">
-                        <br>
-                        Nombre: {{mascota.nombre}}
-                        <br>
-                        Raza: {{mascota.animal}}
-                        Motivo: {{mascota.motivo}}
-                        <br>
-                        ¿Primera vez?:{{mascota.primeraVez || 'No definido'}}
-                    </div>
-                    </ng-container>
-                    <ng-template #noMascotas class="mascotaS">
-                        <p style="color: white; font-size: 0.9em;">Sin mascotas registradas</p>
-                    </ng-template>
-                </div>
+<div class="nav">
+  <div class="grilla">
+    <ng-container *ngFor="let usuario of usuarios">
+      <div class="info">
+        <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+        <p class="dato"><b>Correo:</b> {{ usuario.correo }}</p>
+        <p class="dato"><b>Teléfono:</b> {{ usuario.telefono }}</p>
+
+        <button class="ver-mascotas" (click)="mostrarMascotas(usuario)">
+          Ver mascotas de {{ usuario.nombre }}
+        </button>
+
+        <div *ngIf="usuario.mostrar" class="mascotas-container">
+          <ng-container *ngIf="usuario.MascotasArray?.length; else noMascotas">
+            <div
+              *ngFor="let mascota of usuario.MascotasArray"
+              class="mascota-card"
+            >
+              <h3>{{ mascota.nombre }}</h3>
+              <p><b>Raza:</b> {{ mascota.animal }}</p>
+              <p>
+                <b>Motivo:</b> {{ mascota.motivo || 'No especificado' }}
+              </p>
+              <p>
+                <b>¿Primera vez?:</b>
+                {{ mascota.primeraVez || 'No definido' }}
+              </p>
             </div>
-        </ng-container>
+          </ng-container>
+
+          <ng-template #noMascotas>
+            <p class="sin-mascotas">Sin mascotas registradas</p>
+          </ng-template>
         </div>
-    </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
