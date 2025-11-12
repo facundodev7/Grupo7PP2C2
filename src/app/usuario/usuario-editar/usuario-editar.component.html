@@ -1,0 +1,76 @@
+<div class="inicio">
+<button (click)="irA('')" >Inicio</button>
+
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+<button class="usuario" (click)="irA('usuario')">
+            <img src="assets/user.png" id="userP" *ngIf="correo">
+            <small >{{correo}}</small>
+        </button>
+
+</div>
+
+
+<div class="container">
+
+    <div class="datos-container">
+
+        <h4>Editar usuario</h4>
+
+    <div class="datos">
+
+        <h5>Nombre</h5>
+        <input class="dato" type="text" [(ngModel)]="nombre" maxlength="50" required>
+           
+
+
+        <h5>Apellido</h5>
+        <input class="dato" type="text" [(ngModel)]="apellido" maxlength="50" required>
+            
+    </div>
+
+        <h4>Editar contacto</h4>
+
+    <div class="datos">
+
+        <h5>Email <small>*no editable</small></h5>
+        <div class="dato">
+            {{ correo }}
+        </div>
+
+        <h5>Teléfono</h5>
+        <input class="dato" type="text" [(ngModel)]="telefono" maxlength="30" required>
+
+    </div>
+
+        <h4>Editar dirección</h4>
+
+       <div class="datos" >
+        <h5>Calle</h5>
+        <input class="dato" [(ngModel)]="calle" placeholder="{{  calle && calle.trim() !== '' ? calle : 'Sin calle' }}" maxlength="70">
+
+
+        <h5>Número</h5>
+            <input class="dato" [(ngModel)]="numero" placeholder="{{  numero && numero.trim() !== '' ? numero : 'Sin numeración' }}" maxlength="8" >
+            
+
+     </div> 
+
+
+   
+
+
+        <button class="guardar" (click)="guardar()" >Guardar</button>
+   
+  
+
+  
+
+
+
+    </div>
+
+</div>
+

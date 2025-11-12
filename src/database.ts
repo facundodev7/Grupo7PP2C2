@@ -309,6 +309,41 @@ async login(arg1:any,arg2:any){
   }
   }
 
+  async getCalle(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `calle`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
+
+  async getNumero(userId:any){
+    const reference = ref(db, 'users/' + userId);
+
+      try {
+        const snapshot = await get(child(reference, `numero`));
+          if (snapshot.exists()) {
+            return snapshot.val();
+          }
+          else {
+            return null;
+          }
+      }
+    catch (error) {
+    return null;
+  }
+  }
+
   // ojo mascotas solo devuelve: id, animal y nombre (los otros campos son innecesarios)
   async getMascotas(userId: any) {
   const reference = ref(db, 'users/' + userId + '/mascotas');
@@ -412,6 +447,21 @@ async getArticulos() {
     return usuarios
     
   }
+
+
+  //eliminar mascota
+    async borrarMascota(userId: string, mascotaId: string) {
+      const db = getDatabase();
+      const reference = ref(db, `users/${userId}/mascotas/${mascotaId}`);
+
+      try {
+        await remove(reference);
+        console.log('Mascota eliminada:', mascotaId);
+      } catch (error) {
+        console.error('Error al eliminar mascota:', error);
+      }
+    }
+
 
   // turnos ---------------------------------------------------------------------------
   
@@ -714,4 +764,7 @@ async borrarTurno(fecha:any,hora:any){
     console.log('No se borro nada')
   }
 }
+
+
+
 }

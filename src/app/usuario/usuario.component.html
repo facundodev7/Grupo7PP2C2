@@ -66,7 +66,7 @@
 
     <div *ngIf="mascotas.length > 0; else sinMascotas" class="datos">
   <div *ngFor="let m of mascotas" class="dato">
-    {{ m.nombre }} ({{ m.animal }})
+    {{ m.nombre }} ({{ m.animal }})  <button (click)="eliminarMascota(m.id)">Eliminar</button>
   </div>
     </div>
 
@@ -79,6 +79,7 @@
     </ng-template>
 
 
+    <button (click)="irA('usuario-editar')">Editar usuario</button>
 
    
   

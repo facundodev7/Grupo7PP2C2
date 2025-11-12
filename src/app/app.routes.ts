@@ -12,6 +12,7 @@ import { AdminComponent } from './admin-admin/admin/admin.component';
 import { AdminArticulosComponent } from './admin-admin/admin-articulos/admin-articulos.component';
 import { AdminUsuariosComponent } from './admin-admin/admin-usuarios/admin-usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { UsuarioEditarComponent } from './usuario/usuario-editar/usuario-editar.component';
 
 const routeConfig: Routes = [
   {
@@ -55,6 +56,12 @@ const routeConfig: Routes = [
     path:'usuario',
     component:UsuarioComponent,
     title:'Datos de usuario',
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'usuario-editar',
+    component:UsuarioEditarComponent,
+    title:'Editar datos de usuario',
     canActivate: [AuthGuard]
   },
 

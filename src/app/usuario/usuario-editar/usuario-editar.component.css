@@ -72,7 +72,7 @@ h5{
 
 .usuario{
     border: none;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0) !important;
     padding: 10px;
     border-radius: 20px;
     width: 22%;
@@ -125,9 +125,7 @@ h5{
     justify-content: start;
     flex-direction: column;
     margin-bottom: 5%;
-    /* border: solid 1px; */
     border-radius: 20px;
-    /* border-color: rgb(255, 143, 143); */
     padding: 3% 5% 5% 5%;
     background-color: rgb(255, 197, 232);
 
@@ -136,6 +134,8 @@ h5{
 
 .dato{
     background-color: rgb(255, 255, 255);
+    border: solid 1px;
+    border-color: rgba(255, 255, 255, 0);
     border-radius: 20px;
     padding: 1%;
     padding-left: 2%;
@@ -143,27 +143,18 @@ h5{
     width: fit-content;
     text-align: start;
     margin-top: 2%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.dato button{
-  margin: 0px !important;
-  background-color:  rgb(255, 152, 152) !important;
-  font-size: 15px !important;
-}
-
-.dato button:hover{
-  background-color: rgb(255, 88, 88) !important;
-  color: rgb(255, 255, 255);
+.dato:hover{
+    border: solid 1px;
+    border-color: rgb(255, 36, 36);
 }
 
 .datos-container h4{
   margin-bottom: 2%;
 }
 
-.datos-container button{
+.guardar{
     margin-top: 5%;
     background-color: white;
     color: black;
@@ -171,9 +162,9 @@ h5{
     border-radius: 20px;
     border: none;
     font-size: 18px;
-
 }
 
-.datos-container button:hover{
+.guardar:hover{
   background-color: rgb(255, 152, 152);
 }
+
