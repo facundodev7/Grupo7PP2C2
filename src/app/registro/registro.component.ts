@@ -28,68 +28,85 @@ export class RegistroComponent {
   constructor(private controlador: ControladorR, private ruta: Router) {}
 
   async registro() {
+  let rol = 0;
 
-    let rol = 0;
-
-    if(!this.nombre && !this.apellido && !this.email && !this.password && !this.confir)
-    {
-      alert('Error al registrarse');
-    }
-    else{
-
-    if (!this.nombre) {
-      alert("Debe completar el nombre");
-      return;
-    }
-
-    if (!this.apellido) {
-      alert("Debe completar el apellido");
-      return;
-    }
-
-    if (!this.email) {
-      alert("Debe completar email");
-      return;
-    }
-
-    if (!this.telefono) {
-      alert("Debe completar el teléfono");
-      return;
-    }
-
-    if (!this.password) {
-      alert("Debe completar la contraseña");
-      return;
-    }
-
-    if (!this.confir ) {
-      alert("Debe completar la confirmación de la contraseña");
-      return;
-    }
-
-     if (this.password !== this.confir) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-
+  // Verificar campos vacíos
+  if (!this.nombre && !this.apellido && !this.email && !this.password && !this.confir) {
+    alert('Error al registrarse');
+    return;
   }
 
-    if(this.email == 'admin@admin.com')
-    {
-      rol = 1; // 1 es admin
-    }
-    else{
-      rol = 5; // 5 es usuario normal
-    }
-
-    const resultado = await this.controlador.registroUsuario(this.nombre, this.apellido, this.email, this.telefono, this.password, rol);
-    if (resultado.success)  {
-      console.log("Usuario registrado con UID:", resultado.uid);
-    } else {
-      alert('Error al registrarse');
-      console.error("Error al registrar:", resultado.message);
-    }
+  // Validaciones individuales
+  if (!this.nombre) {
+    alert("Debe completar el nombre");
+    return;
   }
+  if (!this.apellido) {
+    alert("Debe completar el apellido");
+    return;
+  }
+  if (!this.email) {
+    alert("Debe completar el email");
+    return;
+  }
+
+  // Validar formato de email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(this.email)) {
+    alert("El correo electrónico no tiene un formato válido");
+    return;
+  }
+
+  if (!this.telefono) {
+    alert("Debe completar el teléfono");
+    return;
+  }
+  if (!this.password) {
+    alert("Debe completar la contraseña");
+    return;
+  }
+
+  // Validar longitud mínima de contraseña
+  if (this.password.length < 6) {
+    alert("La contraseña debe tener al menos 6 caracteres");
+    return;
+  }
+
+  if (!this.confir) {
+    alert("Debe completar la confirmación de la contraseña");
+    return;
+  }
+
+  if (this.password !== this.confir) {
+    alert("Las contraseñas no coinciden");
+    return;
+  }
+
+  // Asignar rol según el email
+  if (this.email === 'admin@admin.com') {
+    rol = 1; // 1 es admin
+  } else {
+    rol = 5; // 5 es usuario normal
+  }
+
+  // Registrar usuario
+  const resultado = await this.controlador.registroUsuario(
+    this.nombre,
+    this.apellido,
+    this.email,
+    this.telefono,
+    this.password,
+    rol
+  );
+
+  if (resultado.success) {
+    console.log("Usuario registrado con UID:", resultado.uid);
+  } else {
+    alert('Error al registrarse');
+    console.error("Error al registrar:", resultado.message);
+  }
+}
+
 
 
      irA(arg:string){

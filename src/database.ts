@@ -60,34 +60,69 @@ export class ControladorR {
 
 //---------------------------------------------------------------
   // Registrarse
-  async registroUsuario(nombre: string, apellido: string, email: string, telefono: string, password: string, rol: any) {
-    const auth = getAuth();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const uid = userCredential.user?.uid;
+  async registroUsuario(
+  nombre: string,
+  apellido: string,
+  email: string,
+  telefono: string,
+  password: string,
+  rol: any
+) {
+  const auth = getAuth();
 
-      if (uid) {
-        // Guardar UID 
-        this.writeUserId(uid);
-        currentUserId = uid;
-        // guardar resto de datos
-        this.writeEmail(uid, email);
-        this.writeNombre(uid,nombre);
-        this.writeApellido(uid,apellido);
-        this.writeTelefono(uid,telefono);
-        this.writeRol(uid,rol);
-        
-      }
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user?.uid;
 
-      // redirigir al login o a la página principal
-      this.ruta.navigate(['']);
-      return { success: true, uid };
-    } catch (error: any) { 
-      alert('Error al registrarse')
-      console.error("Error registrando usuario:", error);
-      return { success: false, message: error.message };
+    if (uid) {
+      // Guardar UID 
+      this.writeUserId(uid);
+      currentUserId = uid;
+
+      // Guardar resto de datos
+      this.writeEmail(uid, email);
+      this.writeNombre(uid, nombre);
+      this.writeApellido(uid, apellido);
+      this.writeTelefono(uid, telefono);
+      this.writeRol(uid, rol);
     }
+
+    // Redirigir al login o página principal
+    this.ruta.navigate(['']);
+    return { success: true, uid };
+
+  } catch (error: any) {
+    console.error("Error registrando usuario:", error);
+
+    let mensaje = 'Error al registrarse';
+
+    // Detectar códigos de error de Firebase
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        mensaje = 'El correo electrónico ya está registrado.';
+        break;
+      case 'auth/invalid-email':
+        mensaje = 'El correo electrónico no es válido.';
+        break;
+      case 'auth/weak-password':
+        mensaje = 'La contraseña es demasiado débil. Debe tener al menos 6 caracteres.';
+        break;
+      case 'auth/missing-email':
+        mensaje = 'Debe ingresar un correo electrónico.';
+        break;
+      case 'auth/missing-password':
+        mensaje = 'Debe ingresar una contraseña.';
+        break;
+      default:
+        mensaje = 'Ocurrió un error inesperado. Intente nuevamente.';
+        break;
+    }
+
+    alert(mensaje);
+    return { success: false, message: mensaje };
   }
+}
+
 
 
 //-------------------------------------------------
