@@ -24,6 +24,7 @@ export class InicioComponent {
   rol: any;
   admin: boolean = false;
   articulos: any[] = [];
+  mostrarContacto = false; 
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -34,8 +35,13 @@ export class InicioComponent {
     this.correo = await this.controlador.getEmail(await this.controlador.getCurrentUid())
   }
 
-  irA(arg:string){
-    this.ruta.navigate([arg])
+  irA(arg: string) {
+    if (arg === 'contacto') {
+      this.mostrarContacto = true;
+    } else {
+      this.mostrarContacto = false;
+      this.ruta.navigate([arg]);
+    }
   }
 
   out(){

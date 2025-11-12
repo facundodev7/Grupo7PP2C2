@@ -193,18 +193,15 @@ async login(arg1:any,arg2:any){
   }
 
 
-  agregarMascota(userId:any, arg1?:any, arg2?:any, arg3?:any, arg4?:any, arg5?:any, arg6?:any){
+  agregarMascota(userId:any, arg1?:any, arg2?:any){
     const refMascota = ref(db, `users/${userId}/mascotas`)
     const nuevaMascota = push(refMascota)
 
     set(nuevaMascota, {
       nombre:arg1,
       animal:arg2,
-      domicilio:arg3,
-      telefono:arg4,
-      primeraVez:arg5,
-      motivo:arg6,
     })
+    window.alert('Mascota subida')
     this.ruta.navigate([''])
   }
 

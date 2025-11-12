@@ -153,3 +153,66 @@ small{ color: rgb(85, 85, 85);
     
 }
 
+/* ===== MODAL CONTACTO (CORREGIDO) ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  color: #000 !important; /* 🔥 Fuerza texto negro */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 🔥 Fuerza el color negro en todo el contenido del modal */
+.modal-content * {
+  color: #000 !important;
+}
+
+.modal-content a {
+  color: #0066cc !important;
+  text-decoration: none;
+}
+
+.modal-content a:hover {
+  text-decoration: underline;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000 !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
