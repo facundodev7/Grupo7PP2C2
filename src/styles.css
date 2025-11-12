@@ -4,8 +4,121 @@
     margin: 0%;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 218, 241);
+}
+
+/* Reinicio básico */
+
+
 body {
+    font-family: 'Exo 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+}
 
-background-color: rgb(24, 26, 27);
+/* Pie de página */
+.pie {
+    background: hwb(120 28% 11%);
+    color: #6efa61bd;
+    padding-top: 20px;
+     
+}
 
+/* Logo */
+img {
+    width: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logotipo {
+    font-size: 18px;
+    color: white;
+}
+
+/* Redes sociales */
+.redes a {
+    font-size: 23px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.fb {
+    background: #13c713;
+}
+
+.tw {
+    background: #13c713;
+}
+
+.in {
+    background: #13c713;
+    background: 
+}
+
+.li {
+    background: #13c713;
+    background:
+}
+
+.yt {
+    background: #13c713;
+    background: 
+}
+
+.redes a {
+    padding: 8px;
+    border-radius: 50%;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.redes a:hover {
+    transform: scale(1.1);
+}
+
+/* Encabezado del pie */
+.encabezado-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Secciones del footer */
+.seccion-pie {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 100px;
+}
+
+.seccion-pie div {
+    displa}
+
+  .pie {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.derechos {
+    background-color: #13c713;
+    text-align: center;
+    p:#ffffff
+}
+
+.href {
+    background-color: antiquewhite;
 }
