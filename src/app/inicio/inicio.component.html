@@ -14,7 +14,32 @@
       <p><strong>Horario:</strong> Lunes a Viernes, 9 a 18 hs</p>
     </div>
   </div>
-  <!-- FIN MODAL -->
+
+    <!-- MODAL QUIENES SOMOS -->
+  <div class="modal" *ngIf="mostrarQuienes">
+    <div class="modal-content">
+      <span class="close" (click)="mostrarQuienes = false">&times;</span>
+      <h3>🐾 ¿Quiénes Somos?</h3>
+      <h3>🐾 ¿Quiénes Somos?</h3>
+      <p>
+        En <strong>Patitas Felices</strong> somos una clínica veterinaria dedicada a la
+        salud y el bienestar de tus mascotas. Brindamos atención profesional, cercana y
+        transparente, con enfoque preventivo y diagnóstico oportuno.
+      </p>
+
+      <p><strong>Nuestros servicios principales:</strong></p>
+      <ul>
+        <li>Consultas clínicas y controles preventivos</li>
+        <li>Vacunación y desparasitación</li>
+        <li>Cirugías (programadas y de urgencia)</li>
+        <li>Estudios: laboratorio, ecografías y radiografías</li>
+        <li>Odontología y limpiezas</li>
+        <li>Nutrición y planes de salud</li>
+      </ul>
+
+    </div>
+  </div>
+
 
   <div class="inicio">
     <div class="img-top">

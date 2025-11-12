@@ -25,6 +25,8 @@ export class InicioComponent {
   admin: boolean = false;
   articulos: any[] = [];
   mostrarContacto = false; 
+  mostrarQuienes = false;
+
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -36,13 +38,26 @@ export class InicioComponent {
   }
 
   irA(arg: string) {
+    // Mostrar el modal de contacto
     if (arg === 'contacto') {
       this.mostrarContacto = true;
-    } else {
-      this.mostrarContacto = false;
-      this.ruta.navigate([arg]);
+      this.mostrarQuienes = false;
+      return;
     }
+
+    // Mostrar el modal de "quiénes somos"
+    if (arg === 'quienes') {
+      this.mostrarQuienes = true;
+      this.mostrarContacto = false;
+      return;
+    }
+
+    // Navegar normalmente
+    this.mostrarContacto = false;
+    this.mostrarQuienes = false;
+    this.ruta.navigate([arg]);
   }
+
 
   out(){
     this.controlador.singOut()

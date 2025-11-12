@@ -214,5 +214,17 @@ small{ color: rgb(85, 85, 85);
 }
 
 
+/* === MODAL QUIENES SOMOS === */
+.modal-content h3 {
+  color: rgb(59, 214, 139);
+}
+
+.modal-content em {
+  display: block;
+  margin-top: 15px;
+  color: rgb(59, 214, 139);
+  font-style: italic;
+  font-weight: bold;
+}
 
 
