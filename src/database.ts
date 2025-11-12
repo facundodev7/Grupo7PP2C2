@@ -797,6 +797,22 @@ async borrarTurno(fecha:any,hora:any){
   }
 }
 
+async getNombreMascota(userId: string, mascotaId: string) {
+  const db = getDatabase();
+  const reference = ref(db, `users/${userId}/mascotas/${mascotaId}/nombre`);
+
+  try {
+    const snapshot = await get(reference);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return 'Sin nombre';
+    }
+  } catch (error) {
+    console.error('Error obteniendo nombre de mascota:', error);
+    return 'Sin nombre';
+  }
+}
 
 
 }

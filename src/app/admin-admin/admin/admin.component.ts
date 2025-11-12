@@ -191,16 +191,23 @@ export class AdminComponent {
     return await this.controlador.getNombre(argumento)
   }
 
-  async agregarDatos(arg:any){ //trae los datos de usuario de los turnos
-    let i = 0
-    for (let usuario of arg){
-      usuario.nombre = await this.controlador.getNombre(usuario.usuario)
-      usuario.apellido = await this.controlador.getApellido(usuario.usuario)
-      usuario.telefono = await this.controlador.getTelefono(usuario.usuario)
-      usuario.email = await this.controlador.getEmail(usuario.usuario)
-      usuario.numero =  ++i 
+  async agregarDatos(arg:any){ 
+  let i = 0;
+  for (let turno of arg) {
+    turno.nombre = await this.controlador.getNombre(turno.usuario);
+    turno.apellido = await this.controlador.getApellido(turno.usuario);
+    turno.telefono = await this.controlador.getTelefono(turno.usuario);
+    turno.email = await this.controlador.getEmail(turno.usuario);
+
+    // 🔹 Agregamos el nombre de la mascota si existe ID
+    if (turno.mascota) {
+      turno.mascota = await this.controlador.getNombreMascota(turno.usuario, turno.mascota);
     }
+
+    turno.numero = ++i;
   }
+}
+
 
   irA(arg:string){
     this.ruta.navigate([arg])
