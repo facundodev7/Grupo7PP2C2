@@ -19,7 +19,7 @@ export class IngresaComponent {
   admin: boolean = false;
 
   constructor(private controlador: ControladorR, private router: Router) {
-    console.log('✅ Se cargó ingresa.component.ts correctamente');
+    
   }
 
   irA(ruta: string) {
