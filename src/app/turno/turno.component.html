@@ -1,1 +1,49 @@
-<h1>Componente Sacar Turno</h1>
+<div class="inicio">
+<button (click)="irA('')" >Inicio</button>
+
+<div class="img-top">
+    <img src="assets/patitas-felices.png" class="logo" >
+</div>
+
+<button class="usuario" (click)="irA('usuario')">
+            <img src="assets/user.png" id="userP" *ngIf="correo">
+            <small >{{correo}}</small>
+        </button>
+
+</div>
+
+
+    <div class="container">
+      <div class="calendar">
+          <div class="mes-actual">
+            <button class="mes" (click)="prevMonth()"><</button>
+            <h1 >{{ monthNames[currentMonth] }} {{ currentYear }}</h1>
+            <button class="mes" (click)="nextMonth()">></button>
+          </div>
+
+          
+            <ul class="dias-semana">
+              <li>LUN</li>
+              <li>MAR</li>
+              <li>MIE</li>
+              <li>JUE</li>
+              <li>VIE</li>
+              <li>SAB</li>
+              <li>DOM</li> 
+            </ul>
+
+            <div class="dias">
+      <button *ngFor="let day of calendarDays"
+            [ngClass]="day.class" (click)="abrirModal(day.number, $event)">{{ day.number }}</button>
+    </div>
+
+
+        </div>
+</div>
+
+
+
+
+ 
+ 
+    

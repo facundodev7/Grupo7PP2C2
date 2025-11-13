@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -22,51 +23,94 @@ export class RegistroComponent {
   telefono: string = '';
   password: string = '';
   confir: string = '';
+  
 
-  constructor(private controlador: ControladorR) {}
+  constructor(private controlador: ControladorR, private ruta: Router) {}
 
   async registro() {
-    if (!this.nombre) {
-      console.log("Debe completar el nombre");
-      return;
-    }
+  let rol = 0;
 
-    if (!this.apellido) {
-      console.log("Debe completar el apellido");
-      return;
-    }
+  // Verificar campos vacíos
+  if (!this.nombre && !this.apellido && !this.email && !this.password && !this.confir) {
+    alert('Error al registrarse');
+    return;
+  }
 
-    if (!this.email) {
-      console.log("Debe completar email");
-      return;
-    }
+  // Validaciones individuales
+  if (!this.nombre) {
+    alert("Debe completar el nombre");
+    return;
+  }
+  if (!this.apellido) {
+    alert("Debe completar el apellido");
+    return;
+  }
+  if (!this.email) {
+    alert("Debe completar el email");
+    return;
+  }
 
-    if (!this.telefono) {
-      console.log("Debe completar el teléfono");
-      return;
-    }
+  // Validar formato de email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(this.email)) {
+    alert("El correo electrónico no tiene un formato válido");
+    return;
+  }
 
-    if (!this.password) {
-      console.log("Debe completar la contraseña");
-      return;
-    }
+  if (!this.telefono) {
+    alert("Debe completar el teléfono");
+    return;
+  }
+  if (!this.password) {
+    alert("Debe completar la contraseña");
+    return;
+  }
 
-    if (!this.confir ) {
-      console.log("Debe completar la confirmación de la contraseña");
-      return;
-    }
+  // Validar longitud mínima de contraseña
+  if (this.password.length < 6) {
+    alert("La contraseña debe tener al menos 6 caracteres");
+    return;
+  }
 
-     if (this.password !== this.confir) {
-      console.log("Las contraseñas no coinciden");
-      return;
-    }
+  if (!this.confir) {
+    alert("Debe completar la confirmación de la contraseña");
+    return;
+  }
 
-    const resultado = await this.controlador.registroUsuario(this.nombre, this.apellido, this.email, this.telefono, this.password);
-    if (resultado.success)  {
-      console.log("Usuario registrado con UID:", resultado.uid);
-    } else {
-      console.error("Error al registrar:", resultado.message);
-    }
+  if (this.password !== this.confir) {
+    alert("Las contraseñas no coinciden");
+    return;
+  }
+
+  // Asignar rol según el email
+  if (this.email === 'admin@admin.com') {
+    rol = 1; // 1 es admin
+  } else {
+    rol = 5; // 5 es usuario normal
+  }
+
+  // Registrar usuario
+  const resultado = await this.controlador.registroUsuario(
+    this.nombre,
+    this.apellido,
+    this.email,
+    this.telefono,
+    this.password,
+    rol
+  );
+
+  if (resultado.success) {
+    console.log("Usuario registrado con UID:", resultado.uid);
+  } else {
+    alert('Error al registrarse');
+    console.error("Error al registrar:", resultado.message);
+  }
+}
+
+
+
+     irA(arg:string){
+    this.ruta.navigate([arg])
   }
   
 }

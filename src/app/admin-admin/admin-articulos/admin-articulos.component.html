@@ -1,0 +1,34 @@
+<div class="inicio">
+
+    <button (click)="irA('')" >Inicio</button>
+
+    <div class="img-top">
+        <img src="assets/patitas-felices.png" class="logo" >
+    </div>
+
+      <button class="usuario" (click)="irA('usuario')">
+            <img src="assets/user.png" id="userP" >
+            <small >{{correo}}</small>
+        </button>
+
+
+</div>
+
+<form (ngSubmit)="enviar()">
+<div class="container">
+    <div class="carga">
+        <h4>Carga de Artículos</h4>
+
+        <input type="text" placeholder="Ingrese url de la imagen ..." class="titulo"  [(ngModel)]="articulo.Imagen" name="titulo">
+
+        <input type="text" placeholder="Ingrese el título del articulo ..." class="titulo" maxlength="70" [(ngModel)]="articulo.Titulo" name="titulo">
+
+        <textarea class="texto" placeholder="Ingrese el texto del artículo ..." spellcheck="true" [(ngModel)]="articulo.Texto" name="texto"></textarea>
+
+        <button type="submit">Publicar</button>
+
+    </div>
+
+</div>
+
+</form>

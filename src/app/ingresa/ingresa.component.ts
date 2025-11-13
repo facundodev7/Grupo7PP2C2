@@ -3,22 +3,43 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Animal } from '../models/Animales';
 import { ControladorR } from '../../database';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ingresa',
-  imports: [ReactiveFormsModule,RouterModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
   templateUrl: './ingresa.component.html',
-  styleUrl: './ingresa.component.css'
+  styleUrls: ['./ingresa.component.css']
 })
 export class IngresaComponent {
 
+  animal = new Animal('', '');
+  correo: string = '';
+  admin: boolean = false;
 
-  animal = new Animal('','','',0,'','')
-
-  constructor(private controlador:ControladorR){
+  constructor(private controlador: ControladorR, private router: Router) {
+    
   }
 
-  enviar(){
-    this.controlador.agregarMascota(this.controlador.getCurrentUid(), this.animal.Nombre, this.animal.Animal, this.animal.Domicilio, this.animal.Telefono, this.animal.PrimeraVez, this.animal.Motivo)
-    }
+  irA(ruta: string) {
+    console.log(`➡️ Navegando a ${ruta}`);
+    this.router.navigate([`/${ruta}`]);
   }
+
+  out() {
+    console.log('🚪 Cerrando sesión...');
+    this.correo = '';
+    this.admin = false;
+    this.router.navigate(['/login']);
+  }
+
+  enviar() {
+    console.log('📨 Enviando mascota:', this.animal);
+    this.controlador.agregarMascota(
+      this.controlador.getCurrentUid(),
+      this.animal.Nombre,
+      this.animal.Animal,
+    );
+  }
+}

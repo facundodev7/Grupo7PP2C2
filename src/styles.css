@@ -1,11 +1,116 @@
-*{
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    margin: 0%;
+/* Reinicio básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
+    font-family: 'Exo 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+}
 
-background-color: rgb(24, 26, 27);
+/* Pie de página */
+.pie {
+    background: rgb(59, 214, 139);;
+    color: rgb(59, 214, 139);;
+    padding-top: 20px;
+     
+}
 
+/* Logo */
+img {
+    width: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logotipo {
+    font-size: 18px;
+    color: white;
+}
+
+/* Redes sociales */
+.redes a {
+    font-size: 23px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.fb {
+    background: #13c713;
+}
+
+.tw {
+    background: #13c713;
+}
+
+.in {
+    background: #13c713;
+}
+
+.li {
+    background: #13c713;
+
+}
+
+.yt {
+    background: #13c713;
+    
+}
+
+.redes a {
+    padding: 8px;
+    border-radius: 50%;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.redes a:hover {
+    transform: scale(1.1);
+}
+
+/* Encabezado del pie */
+.encabezado-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+/* Secciones del footer */
+.seccion-pie {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+  .pie {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.derechos {
+    background-color: #13c713;
+    text-align: center;
+}
+
+.derechos p {
+  color:#ffffff;
+  padding: 0px;
+  margin: 0px
+}
+
+.href {
+    background-color: antiquewhite;
 }

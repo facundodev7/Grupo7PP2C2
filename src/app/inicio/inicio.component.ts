@@ -5,13 +5,14 @@ import { ControladorR } from '../../database';
 import { currentUserId } from '../../database';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
@@ -20,6 +21,12 @@ export class InicioComponent {
 
   user$!: Observable<any>;
   correo:any
+  rol: any;
+  admin: boolean = false;
+  articulos: any[] = [];
+  mostrarContacto = false; 
+  mostrarQuienes = false;
+
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -30,9 +37,27 @@ export class InicioComponent {
     this.correo = await this.controlador.getEmail(await this.controlador.getCurrentUid())
   }
 
-  irA(arg:string){
-    this.ruta.navigate([arg])
+  irA(arg: string) {
+    // Mostrar el modal de contacto
+    if (arg === 'contacto') {
+      this.mostrarContacto = true;
+      this.mostrarQuienes = false;
+      return;
+    }
+
+    // Mostrar el modal de "quiénes somos"
+    if (arg === 'quienes') {
+      this.mostrarQuienes = true;
+      this.mostrarContacto = false;
+      return;
+    }
+
+    // Navegar normalmente
+    this.mostrarContacto = false;
+    this.mostrarQuienes = false;
+    this.ruta.navigate([arg]);
   }
+
 
   out(){
     this.controlador.singOut()
@@ -42,10 +67,28 @@ export class InicioComponent {
     this.controlador.user$.subscribe(async (user) =>{
       if (user){
         this.correo = await this.controlador.getEmail(user.uid)
+        this.rol = await this.controlador.getRol(user.uid);
+        this.admin = this.rol == 1;
       } else {
-        this.correo = null
+        this.correo = null;
+        this.rol = null;
+        this.admin = false;
+      }
+
+      if(this.rol == 5)
+      {
+         
       }
     })
+
+    //ver articulos
+
+   this.articulos = await this.controlador.getArticulos();
+
   }
 
+
+
+
+  
 }

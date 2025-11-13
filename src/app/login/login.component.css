@@ -1,3 +1,95 @@
-input, button{
+* {
+    color: rgb(94, 93, 93);
+    padding: 0px;
+    margin: 0px;
+}
+
+input{
+    color: white;
     color: black;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+}
+
+button {
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+}
+
+label{
+    margin-bottom: 10px;
+}
+
+button:hover{
+    
+    background-color: rgb(224, 222, 108);
+}
+
+.img-top{
+    text-align: center;
+    padding-right: 5%;
+}
+
+.logo{
+    width: 20%;
+    border-radius: 30px;
+}
+
+.form{
+    background-color: rgb(59, 214, 139);
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 4%;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-bottom: 10%;
+}
+
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    
+}
+
+.inicio{
+    background-color: rgb(255, 218, 241);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.inicio button{
+    margin: 0px;
+}
+
+.inicio button:hover{
+    
+    background-color: rgb(255, 152, 152);
+}
+
+p {
+    margin-top: 10%;
+}
+
+.registro{
+    cursor: pointer;
 }

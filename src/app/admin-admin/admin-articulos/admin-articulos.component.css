@@ -1,0 +1,165 @@
+* {
+    color: rgb(82, 82, 82);
+    padding: 0px;
+    margin: 0px;
+}
+
+small{ color: rgb(85, 85, 85);
+        font-size: 10px;
+    text-align: end;}
+
+input{
+    color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+}
+
+button {
+    background-color: white;
+    color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+}
+
+label{
+    margin-bottom: 10px;
+}
+
+
+.usuario{
+    border: none;
+    background-color: rgba(255, 255, 255, 0) !important;
+    padding: 10px;
+    border-radius: 20px;
+    width: 22%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#userP{
+    width: 30%;
+    height: 80%;
+}
+
+
+.img-top{
+    text-align: center;
+    margin-left: 8%;
+}
+
+.logo{
+    width: 25%;
+    border-radius: 30px;
+    min-width: 100px;
+}
+
+.inicio{
+    
+    background-color: rgb(255, 218, 241);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.inicio button{
+    margin: 0px;
+}
+
+.inicio button:hover{
+    
+    background-color: rgb(255, 152, 152);
+}
+
+p {
+    margin-top: 10%;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+
+    background-color: rgb(59, 214, 139); 
+    box-shadow: 20px 10px 20px rgba(0, 0, 0, .3);
+    margin: 1% 5% 1% 5%;
+    padding: 2%;
+    border-radius: 30px;
+    min-width: 95%;
+}
+
+
+.nav button {
+    color: rgb(47, 47, 47);
+    border-radius: 20px;
+    padding: 13px;
+    border: none;
+    margin-right: 5px;
+    margin-right: 5px;
+}
+
+.nav button:hover{   
+    /* background-color: rgb(255, 152, 152); */
+    background-color: rgb(224, 222, 108);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+.carga{
+  background: rgb(59, 214, 139);
+  border-radius: 20px;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, .3);
+  height: fit-content;
+  transition: .9s;
+  width: 100%;
+  padding: 5% 10% 10% 10%;
+  margin-bottom: 15%;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.titulo{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.texto{
+    border: none;
+    border-radius: 20px;
+    padding: 2%;
+    margin-top: 5%;
+    min-height: 300px;
+    min-width: 100%;
+    text-align:initial;
+    resize:none;
+}
+
+.carga button{
+    margin-top: 10%;
+}
+
+.carga button:hover{
+    background-color: rgb(224, 222, 108);
+}
+
+
