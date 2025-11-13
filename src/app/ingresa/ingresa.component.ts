@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-ingresa',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule, RouterModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
   templateUrl: './ingresa.component.html',
   styleUrls: ['./ingresa.component.css']
 })
@@ -21,30 +21,6 @@ export class IngresaComponent {
   constructor(private controlador: ControladorR, private router: Router) {
     console.log('✅ Se cargó ingresa.component.ts correctamente');
   }
-
-  fileName: string | null = null;
-  previewUrl: string | null = null;
-
-
-  onFileSelected(event: any) {
-  const file = event.target.files[0];
-  console.log('📂 Evento change disparado:', event); // 👈
-  if (file) {
-    this.fileName = file.name;
-    console.log('📸 Archivo seleccionado:', this.fileName);
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result;
-      if (typeof result === 'string') {
-        this.previewUrl = result; // 👈 forzamos a string
-      }
-    };
-
-    reader.readAsDataURL(file);
-  }
-}
-
-
 
   irA(ruta: string) {
     console.log(`➡️ Navegando a ${ruta}`);
