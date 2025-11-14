@@ -40,6 +40,33 @@
   </div>
 
 
+   <!-- MODAL MIS TURNOS -->
+  <div class="modal mis-turnos-modal" *ngIf="mostrarMisTurnos">
+    <div class="modal-content mis-turnos">
+      <span class="close" (click)="mostrarMisTurnos = false">&times;</span>
+      <h3>Mis turnos</h3>
+      
+      <div *ngIf="misTurnos.length > 0; else sinTurnos" class="turnos-usuario">
+
+        <div *ngFor="let t of misTurnos" class="el-turno">
+          <p><strong>Fecha:</strong> {{ t.fecha }}</p>
+          <p><strong>Hora:</strong> {{ t.hora }}</p>
+          <p><strong>Tipo:</strong> {{ t.tipo }}</p>
+          <p><strong>Mascota:</strong> {{ t.mascota }}</p>
+        </div>
+
+      </div>
+
+      <ng-template #sinTurnos>
+        <p>No tenés turnos registrados.</p>
+      </ng-template>
+   
+
+    </div>
+  </div>
+
+
+
   <div class="inicio">
     <div class="img-top">
       <img src="assets/patitas-felices.png" class="logo" />
@@ -56,6 +83,7 @@
     <button (click)="irA('contacto')">Contacto</button>
     <button *ngIf="correo && !admin" (click)="irA('ingresarM')">Ingresa tu mascota</button>
     <button *ngIf="correo && !admin" (click)="irA('turno')">Agenda un turno</button>
+    <button (click)="irA('mis-turnos')" *ngIf="correo" >Mis turnos</button>
     <button (click)="irA('login')" *ngIf="!correo">Iniciar sesión</button>
     <button (click)="irA('regis')" *ngIf="!correo">Registrarse</button>
     <button (click)="irA('admin')" *ngIf="admin">Turnos</button>

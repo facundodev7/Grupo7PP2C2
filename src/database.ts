@@ -405,6 +405,68 @@ async login(arg1:any,arg2:any){
   }
 }
 
+
+
+
+
+async getMisTurnos(userId: string) {
+  if (!userId || typeof userId !== 'string') {
+    console.error('userId inválido:', userId);
+    return [];
+  }
+
+  const reference = ref(db, `users/${userId}/mis-turnos`);
+  const snapshot = await get(reference);
+
+  if (!snapshot.exists()) return [];
+
+  const data = snapshot.val();
+  const hoy = new Date();
+
+  const turnos = Object.entries(data).map(([id, turno]: [string, any]) => {
+    // modificar fecha a como newDate
+    const fechaParseada = this.parsearFecha(turno.fecha);
+    return {
+      id,
+      fecha: turno.fecha,
+      hora: turno.hora,
+      tipo: turno.tipo,
+      mascota: turno.mascota,
+      fechaDate: fechaParseada
+    };
+  });
+
+  // solo los de mas adelante muestra aca
+  const turnosFuturos = turnos.filter(t => t.fechaDate > hoy);
+
+  return turnosFuturos;
+}
+
+
+
+
+
+private parsearFecha(fechaStr: string): Date {
+  // Ejemplo recibido: "12 Noviembre 2025"
+  const meses: any = {
+    Enero: 0, Febrero: 1, Marzo: 2, Abril: 3, Mayo: 4, Junio: 5,
+    Julio: 6, Agosto: 7, Septiembre: 8, Octubre: 9, Noviembre: 10, Diciembre: 11
+  };
+
+  const partes = fechaStr.split(" ");
+  const dia = parseInt(partes[0], 10);
+  const mes = meses[partes[1]];
+  const año = parseInt(partes[2], 10);
+
+  return new Date(año, mes, dia);
+}
+
+
+
+
+
+
+
 async getArticulos() {
   const reference = ref(db, 'articulos');
 
@@ -479,6 +541,23 @@ async getArticulos() {
     return usuarios
     
   }
+
+  async getNombreMascota(userId: string, mascotaId: string) {
+  const db = getDatabase();
+  const reference = ref(db, `users/${userId}/mascotas/${mascotaId}/nombre`);
+
+  try {
+    const snapshot = await get(reference);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return 'Sin nombre';
+    }
+  } catch (error) {
+    console.error('Error obteniendo nombre de mascota:', error);
+    return 'Sin nombre';
+  }
+}
 
 
   //eliminar mascota
@@ -797,22 +876,7 @@ async borrarTurno(fecha:any,hora:any){
   }
 }
 
-async getNombreMascota(userId: string, mascotaId: string) {
-  const db = getDatabase();
-  const reference = ref(db, `users/${userId}/mascotas/${mascotaId}/nombre`);
 
-  try {
-    const snapshot = await get(reference);
-    if (snapshot.exists()) {
-      return snapshot.val();
-    } else {
-      return 'Sin nombre';
-    }
-  } catch (error) {
-    console.error('Error obteniendo nombre de mascota:', error);
-    return 'Sin nombre';
-  }
-}
 
 
 }

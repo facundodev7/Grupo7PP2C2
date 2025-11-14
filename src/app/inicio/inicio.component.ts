@@ -26,7 +26,9 @@ export class InicioComponent {
   articulos: any[] = [];
   mostrarContacto = false; 
   mostrarQuienes = false;
+  mostrarMisTurnos = false;
 
+  misTurnos:any[] = [];
 
   constructor(private ruta:Router, private controlador:ControladorR)
   {
@@ -42,6 +44,7 @@ export class InicioComponent {
     if (arg === 'contacto') {
       this.mostrarContacto = true;
       this.mostrarQuienes = false;
+      this.mostrarMisTurnos = false;
       return;
     }
 
@@ -49,12 +52,22 @@ export class InicioComponent {
     if (arg === 'quienes') {
       this.mostrarQuienes = true;
       this.mostrarContacto = false;
+      this.mostrarMisTurnos = false;
+      return;
+    }
+
+    // Mostrar el modal de "mis turnos"
+    if (arg === 'mis-turnos') {
+      this.mostrarQuienes = false;
+      this.mostrarContacto = false;
+      this.mostrarMisTurnos = true;
       return;
     }
 
     // Navegar normalmente
     this.mostrarContacto = false;
     this.mostrarQuienes = false;
+    this.mostrarMisTurnos = false;
     this.ruta.navigate([arg]);
   }
 
@@ -64,6 +77,8 @@ export class InicioComponent {
   }
 
   async ngOnInit(){
+    const uid = this.controlador.getCurrentUid();
+
     this.controlador.user$.subscribe(async (user) =>{
       if (user){
         this.correo = await this.controlador.getEmail(user.uid)
@@ -85,7 +100,16 @@ export class InicioComponent {
 
    this.articulos = await this.controlador.getArticulos();
 
+   if (!uid) {
+  this.misTurnos = [];
+  return; 
+    }
+
+   this.misTurnos = await this.controlador.getMisTurnos(uid);
+
+
   }
+
 
 
 

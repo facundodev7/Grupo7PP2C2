@@ -232,3 +232,29 @@ small{ color: rgb(85, 85, 85);
 }
 
 
+/* modal mis turnos */
+
+.mis-turnos{
+  background-color: rgb(255, 218, 241);
+}
+
+.turnos-usuario{
+  overflow-y: auto;
+  max-height: 200px;
+  margin-right: 2%;
+  margin-top: 5%;
+}
+
+.el-turno{
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
+.el-turno p{
+  margin: 0px;
+}
+
+

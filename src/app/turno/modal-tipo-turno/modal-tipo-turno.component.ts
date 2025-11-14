@@ -44,9 +44,11 @@ async ngOnInit() {
     const db = getDatabase();
     const auth = getAuth();
     const user = auth.currentUser;
+    const uid = user?.uid;
+   
 
     const turno = {
-      usuario: user ? user.uid : 'sin_usuario',
+      usuario: uid ?? 'sin_usuario',
       fechaOriginal: this.data.fechaTurno,
       hora: this.data.horaTurno,
       tipo: this.tipoTurno,
@@ -55,10 +57,24 @@ async ngOnInit() {
     };
 
     // Guardar por fecha y hora
-    const turnoRef = ref(db, `turnos/${this.data.fechaTurno}/${this.data.horaTurno}`);
-    set(turnoRef, turno)
+    const turnoRefGlobal = ref(db, `turnos/${this.data.fechaTurno}/${this.data.horaTurno}`);
+
+    // 2. Guardar dentro del usuario en users/{uid}/mis-turnos/{fecha-hora}
+    const claveTurno = `${this.data.fechaTurno}_${this.data.horaTurno}`;
+    const turnoRefUsuario = ref(db, `users/${uid}/mis-turnos/${claveTurno}`);
+
+
+    Promise.all([
+    set(turnoRefGlobal, turno),
+    set(turnoRefUsuario, {
+      fecha: this.data.fechaTurno,
+      hora: this.data.horaTurno,
+      tipo: this.tipoTurno,
+      mascota: this.mascota
+    })
+  ])
       .then(() => {
-        console.log('Turno guardado correctamente:', turno);
+        alert('Turno agendado correctamente, para el día '+this.data.fechaTurno+' a las '+this.data.horaTurno+' Hs');
         this.dialogRef.close();
       })
       .catch((err) => {
