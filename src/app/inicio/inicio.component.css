@@ -11,6 +11,10 @@ small{ color: rgb(85, 85, 85);
         font-size: 10px;
     text-align: end;}
 
+.pagina{
+  margin-bottom: 20%;
+}
+
 .inicio{
     
     background-color: rgb(255, 218, 241);
