@@ -18,6 +18,24 @@
   justify-content: start;
   flex-direction: row;
 }
+button{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}
+.inicio button{
+    margin: 0px;
+    background-color: white;
+    color: black;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+}
+.inicio button:hover{
+    
+    background-color: rgb(255, 152, 152);
+}
 
 .img-top {
   text-align: center;
