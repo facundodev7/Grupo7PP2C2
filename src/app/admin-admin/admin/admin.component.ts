@@ -30,14 +30,11 @@ manianaNumeroO = maniana.toDateString().slice(8,10)
 })
 export class AdminComponent {
 
+  // Arrays para almacenar turnos de hoy, mañana, ayer y futuro, y flags para controlar vistas
   turnos = new Array
   turnosM = new Array
   turnosA = new Array
   turnosF = new Array
-  hoyNumero = hoyNumeroO
-  hoyMes = hoyMesS
-  manianaNumero = manianaNumeroO
-  manianaMes = manianaMesS
 
   btnI = true
   btnD = true
@@ -45,11 +42,19 @@ export class AdminComponent {
   ladoDerecho = false
   medio = true
 
+  hoyNumero = hoyNumeroO
+  hoyMes = hoyMesS
+  manianaNumero = manianaNumeroO
+  manianaMes = manianaMesS
+
+  
+
 
   correo = ''
 
   constructor(private controlador:ControladorR,private ruta:Router){}
 
+// Al iniciar el componente carga datos iniciales y convierte los meses a formato en español
 
   async ngOnInit(){
     this.cargar().then(()=> {
@@ -135,6 +140,7 @@ export class AdminComponent {
 }
   }
 
+  // Elimina un turno y recarga la información dependiendo de qué sección esté activa
   async borrarTurno(arg1:any, arg2:any){
     await this.controlador.borrarTurno(arg1, arg2).then(()=> {
       this.cargar().then(async ()=>{
@@ -153,11 +159,14 @@ export class AdminComponent {
     })
   }
 
+  // Carga los turnos de hoy y mañana desde la base de datos
+
   async cargar(){
     this.turnos = await this.controlador.turnosAdminHoy()
     this.turnosM = await this.controlador.turnosAdminManiana()
     console.log(this.turnos)
   }
+  // Muestra los turnos de ayer y cambia la interfaz hacia el panel izquierdo
 
   async cargarAyer(){
     this.turnosA = await this.controlador.turnosAdminAyer()
@@ -169,6 +178,8 @@ export class AdminComponent {
 
   }
 
+  // Muestra los turnos futuros y activa la vista del panel derecho
+
   async cargarFuturo(){
     this.turnosF = await this.controlador.turnosAdminFuturo()
     this.agregarDatos(this.turnosF)
@@ -177,6 +188,9 @@ export class AdminComponent {
     this.btnD = !this.btnD
     this.medio = !this.medio
   }
+
+  // Restaura la vista principal ocultando los paneles laterales
+
 
   async volver(arg:any){
     arg = !arg
@@ -191,6 +205,7 @@ export class AdminComponent {
     return await this.controlador.getNombre(argumento)
   }
 
+  // solicitud de cada turno de nombre, apellido, teléfono, correo y nombre de mascota con funcion getNombreMascota
   async agregarDatos(arg:any){ 
   let i = 0;
   for (let turno of arg) {
