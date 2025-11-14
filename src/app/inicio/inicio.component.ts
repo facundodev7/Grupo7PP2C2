@@ -110,9 +110,20 @@ export class InicioComponent {
     // ontener nombre de mascota por id
     for (let turno of this.misTurnos) {
       if (turno.mascota) {
-        turno.mascota = await this.controlador.getNombreMascota(uid, turno.mascota);
+        const mascotaId = turno.mascota; // ID original
+
+        const nombreMascota = await this.controlador.getNombreMascota(uid, mascotaId);
+        const tipoMascota = await this.controlador.getTipoMascota(uid, mascotaId);
+
+        turno.mascota = {
+          nombre: nombreMascota,
+          animal: tipoMascota
+        };
       }
     }
+
+
+    
 
 
 

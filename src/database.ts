@@ -551,11 +551,27 @@ async getArticulos() {
     if (snapshot.exists()) {
       return snapshot.val();
     } else {
-      return 'Sin nombre';
+      return 'Sin especificar';
     }
   } catch (error) {
     console.error('Error obteniendo nombre de mascota:', error);
-    return 'Sin nombre';
+    return 'Sin especificar';
+  }
+}
+async getTipoMascota(userId: string, mascotaId: string) {
+  const db = getDatabase();
+  const reference = ref(db, `users/${userId}/mascotas/${mascotaId}/animal`);
+
+  try {
+    const snapshot = await get(reference);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return 'Sin especificar';
+    }
+  } catch (error) {
+    console.error('Error obteniendo tipo de mascota:', error);
+    return 'Sin especificar';
   }
 }
 

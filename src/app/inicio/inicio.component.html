@@ -51,8 +51,10 @@
         <div *ngFor="let t of misTurnos" class="el-turno">
           <p><strong>Fecha:</strong> {{ t.fecha }}</p>
           <p><strong>Hora:</strong> {{ t.hora }}</p>
-          <p><strong>Tipo:</strong> {{ t.tipo }}</p>
-          <p><strong>Mascota:</strong> {{ t.mascota }}</p>
+          <p><strong>Tipo de consulta:</strong> {{ t.tipo }}</p>
+          <p><strong>Mascota:</strong> {{ t.mascota.nombre }}</p>
+          <p><strong>Tipo de mascota:</strong> {{ t.mascota.animal }}</p>
+
         </div>
 
       </div>
