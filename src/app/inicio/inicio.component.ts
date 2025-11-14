@@ -107,6 +107,14 @@ export class InicioComponent {
 
    this.misTurnos = await this.controlador.getMisTurnos(uid);
 
+    // ontener nombre de mascota por id
+    for (let turno of this.misTurnos) {
+      if (turno.mascota) {
+        turno.mascota = await this.controlador.getNombreMascota(uid, turno.mascota);
+      }
+    }
+
+
 
   }
 
