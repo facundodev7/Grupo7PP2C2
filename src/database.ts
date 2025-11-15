@@ -488,7 +488,7 @@ async getArticulos() {
       let nuevos = articulosArray.reverse();
 
         //los últimos 4
-        const ultimos = nuevos.slice(-4);
+        const ultimos = nuevos.slice(0,4);
 
         return ultimos;
     } else {
